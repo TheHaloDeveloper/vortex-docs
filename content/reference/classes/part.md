@@ -3,8 +3,6 @@ title: Part
 description: A primitive rectangular prism
 ---
 
-<link rel="stylesheet" href="/styles/test.css">
-
 <!-- 
 Part
 Revision 1

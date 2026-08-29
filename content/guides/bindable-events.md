@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Bindable Events
 description: Stub
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Instance.new
 description: Stub
 ---
 

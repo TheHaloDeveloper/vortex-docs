@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Client and Server
 description: Stub
 ---
 

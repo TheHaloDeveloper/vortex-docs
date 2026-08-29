@@ -1,5 +1,5 @@
 ---
-title: LocalScript
+title: UserInputService
 description: Stub
 ---
 

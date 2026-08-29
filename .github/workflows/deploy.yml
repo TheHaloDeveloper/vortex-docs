@@ -1,0 +1,11 @@
+name: docs rebuild
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ping deploy hook
+        run: curl -fsS -X POST "${{ secrets.DEPLOY_HOOK }}"

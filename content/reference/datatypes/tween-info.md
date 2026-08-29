@@ -1,5 +1,5 @@
 ---
-title: LocalScript
+title: TweenInfo
 description: Stub
 ---
 

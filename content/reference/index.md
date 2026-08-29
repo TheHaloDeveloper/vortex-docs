@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: API Reference
 description: Stub
 ---
 

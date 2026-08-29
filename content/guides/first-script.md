@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Your First Script
 description: Stub
 ---
 

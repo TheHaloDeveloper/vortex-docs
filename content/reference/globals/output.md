@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Output
 description: Stub
 ---
 

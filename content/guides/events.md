@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Events
 description: Stub
 ---
 

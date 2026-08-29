@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Remote Functions
 description: Stub
 ---
 

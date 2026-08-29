@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Humanoid
 description: Stub
 ---
 

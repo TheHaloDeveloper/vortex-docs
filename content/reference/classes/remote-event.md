@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: RemoteEvent
 description: Stub
 ---
 

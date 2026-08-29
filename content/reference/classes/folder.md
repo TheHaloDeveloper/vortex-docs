@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Folder
 description: Stub
 ---
 

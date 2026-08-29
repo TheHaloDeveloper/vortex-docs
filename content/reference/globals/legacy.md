@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Legacy Globals
 description: Stub
 ---
 

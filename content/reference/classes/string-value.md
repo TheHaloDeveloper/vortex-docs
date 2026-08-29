@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: StringValue
 description: Stub
 ---
 

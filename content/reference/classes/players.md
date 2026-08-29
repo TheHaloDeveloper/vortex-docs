@@ -1,5 +1,5 @@
 ---
-title: Stub
+title: Players
 description: Stub
 ---
 
