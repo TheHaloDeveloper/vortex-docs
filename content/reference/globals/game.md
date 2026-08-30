@@ -1,6 +1,10 @@
 ---
 title: game
-description: Stub
+description: The object holding the hirearchy of the game
 ---
 
-Stub
+## Methods
+
+:GetService(ServiceName:String)
+---
+Gets a service from its name
