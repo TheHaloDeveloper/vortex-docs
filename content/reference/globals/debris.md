@@ -3,7 +3,8 @@ title: Debris
 description: a service that automatically removes parts afte a set time
 ---
 
-FUNCTIONS:
+## FUNCTIONS
+
 :AddItem(Item:Object, Delay:int)
 ---
 The add item functions schedules the debris service to remove the selected item afte a set duration of time
