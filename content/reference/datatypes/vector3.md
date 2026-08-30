@@ -8,10 +8,11 @@ Vector3
 Revision 1
 
 Written by Kindtracker on August 28th, 2026
--->
 
-> [!NOTE] 
-> There will be more things (methods, constructors, properties, etc) in the future. This is based on leaks.
+Revision 2
+
+Written by CNK (Vortex IG. CNK) on Aug 30th, 2026 based on actual code.
+-->
 
 ## Summary
 
@@ -20,9 +21,16 @@ Written by Kindtracker on August 28th, 2026
 Properties of a `Vector3`.
 <br><br>
 
+* [zero](#zero): `Vector3`
+* [one](#one): `Vector3`
+* [xAxis](#xaxis): `Vector3`
+* [yAxis](#yaxis): `Vector3`
+* [zAxis](#zaxis): `Vector3`
 * [X](#x): `Number`
 * [Y](#y): `Number`
 * [Z](#z): `Number`
+* [Magnitude](#magnitude): `Number`
+* [Unit](#unit): `Vector3`
 
 </details>
 
@@ -35,7 +43,74 @@ Constructors of a `Vector3`.
 
 </details>
 
+<details>
+<summary><b>Methods</b></summary>
+Methods of a `Vector3`.
+<br><br>
+
+* [Dot(other: `Vector3`)](#dotother-vector3): `Number`
+* [Cross(other: `Vector3`)](#crossother-vector3): `Vector3`
+* [Lerp(other: `Vector3`, alpha: `Number`)](#lerpother-vector3-alpha-number): `Vector3`
+
+</details>
+
+<details>
+<summary><b>Operators</b></summary>
+Operators supported by `Vector3`.
+<br><br>
+
+* [Vector3 + Vector3](#vector3--vector3): `Vector3`
+* [Vector3 - Vector3](#vector3---vector3): `Vector3`
+* [Vector3 * Vector3 | Number](#vector3--vector3--number--vector3--vector3--number): `Vector3`
+* [Vector3 / Vector3 | Number](#vector3--number--vector3--vector3): `Vector3`
+* [-Vector3](#-vector3): `Vector3`
+* [Vector3 == Vector3](#vector3--vector3-1): `Boolean`
+* [tostring(Vector3)](#tostringvector3): `String`
+
+</details>
+
 ## Properties
+
+
+### zero
+
+> Constant `Vector3`
+>
+> A zero vector (0,0,0).
+
+<br/>
+
+### one
+
+> Constant `Vector3`
+>
+> A ones vector (1,1,1).
+
+<br/>
+
+### xAxis
+
+> Constant `Vector3`
+>
+> A unit vector that points in the +X direction (1,0,0).
+
+<br/>
+
+### yAxis
+
+> Constant `Vector3`
+>
+> A unit vector that points in the +Y direction (0,1,0).
+
+<br/>
+
+### zAxis
+
+> Constant `Vector3`
+>
+> A unit vector that points in the +Z direction (0,0,1).
+
+<br/>
 
 ### X
 
@@ -61,6 +136,22 @@ Constructors of a `Vector3`.
 
 <br/>
 
+### Magnitude
+
+> `Number`
+>
+> The magnitude (aka. length) of the vector.
+
+<br/>
+
+### Unit
+
+> `Vector3`
+>
+> The current vector with a magnitude of 1.
+
+<br/>
+
 ## Constructors
 
 ### new(X: `Number`, Y: `Number`, Z: `Number`)
@@ -68,5 +159,87 @@ Constructors of a `Vector3`.
 > `Vector3` 
 >
 > Returns a new `Vector3` from the given components.
+
+<br/>
+
+## Methods
+
+### Dot(other: `Vector3`)
+
+> `Vector3`
+>
+> Returns the dot product of two vectors. 
+
+<br/>
+
+### Cross(other: `Vector3`)
+
+> `Vector3`
+>
+> Returns the cross product of two vectors. 
+
+### Lerp(other: `Vector3`, alpha: `Number`)
+
+> `Vector3`
+>
+> Returns an interpolated vector between `self` and `other`. 
+> 
+> When alpha is `0.0` it returns `self`; when `alpha` is `0.5` it returns the vector directly between `self` and `other`; when `alpha` is `1.0` it returns `other`.
+
+## Operators
+
+### `Vector3` + `Vector3`
+
+> `Vector3`
+>
+> Adds the components of two vectors.
+
+<br/>
+
+### `Vector3` - `Vector3`
+
+> `Vector3`
+>
+> Subtracts the components of two vectors.
+
+<br/>
+
+### `Vector3` * `Vector3 | Number`
+
+> `Vector3`
+>
+> Multiplies component-wise if both operands are `Vector3`, or scales every component if one operand is a `Number`.
+
+<br/>
+
+### `Vector3` / `Vector3 | Number`
+
+> `Vector3`
+>
+> Divides component-wise if both operands are `Vector3`, or scales every component if the denominator is a `Number`.
+
+<br/>
+
+### -Vector3
+
+> `Vector3`
+>
+> Returns the negation of the vector.
+
+<br/>
+
+### Vector3 == Vector3
+
+> `Boolean`
+>
+> Returns whether two vectors have equal `X`, `Y`, and `Z` components.
+
+<br/>
+
+### tostring(Vector3)
+
+> `String`
+>
+> Formats the vector as `"X, Y, Z"` with 3 decimal places, e.g. `"1.000, 2.000, 3.000"`.
 
 <br/>
