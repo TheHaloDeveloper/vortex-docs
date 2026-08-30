@@ -18,7 +18,6 @@ Properties of a `Tween`.
 
 * [Instance](#instance): `Instance`
 * [PlaybackState](#playbackstate): `Enum.PlaybackState`
-* [Completed](#completed): `Signal`
 
 </details>
 
@@ -30,6 +29,13 @@ Methods of a `Tween`.
 * [Play()](#play): `nil`
 * [Pause()](#pause): `nil`
 * [Cancel()](#cancel): `nil`
+
+</details>
+<details>
+<summary><b>Events</b></summary>
+<br><br>
+
+* [Completed](#completedplaybackstate-enumplaybackstate)
 
 </details>
 
@@ -57,29 +63,6 @@ Methods of a `Tween`.
 
 <br/>
 
-## Signals
-
-### Completed
-
-> `Signal`
->
-> Fires when the tween finishes, whether it completed naturally or was
-> stopped early with [`Cancel()`](#cancel).
->
-> The connected function receives one argument: the resulting
-> `Enum.PlaybackState`, either `Completed` or `Cancelled`.
->
-> ```luau
-> -- Example of the `Completed` signal being used.
-> myTween.Completed:Connect(function(playbackState)
->     if playbackState == Enum.PlaybackState.Completed then
->         print("Tween finished naturally")
->     end
-> end)
-> ```
-
-<br/>
-
 ## Methods
 
 
@@ -99,5 +82,26 @@ Methods of a `Tween`.
 ### Cancel()
 
 > Stops the tween where it is at and resets the tween to the start position.
+
+<br/>
+
+## Events
+
+### .Completed(playbackState: `Enum.PlaybackState`)
+
+> Fires when the tween finishes, whether it completed naturally or was
+> stopped early with [`Cancel()`](#cancel).
+>
+> The connected function receives one argument: the resulting
+> `Enum.PlaybackState`, either `Completed` or `Cancelled`.
+>
+> ```luau
+> -- Example of the `Completed` signal being used.
+> myTween.Completed:Connect(function(playbackState)
+>     if playbackState == Enum.PlaybackState.Completed then
+>         print("Tween finished naturally")
+>     end
+> end)
+> ```
 
 <br/>
