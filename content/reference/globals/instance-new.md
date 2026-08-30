@@ -1,6 +1,10 @@
 ---
 title: Instance.new
-description: Stub
+description: Creates a new instance
 ---
 
-Stub
+## METHODS
+
+Instance.new(ClassName:String)
+---
+returns a new instance of the class specified
