@@ -20,7 +20,7 @@ A LocalScript runs on the client (the player's machine). Use LocalScripts for cl
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 if player then
-  print("Hello, " .. player.Name)
+  print(`Hello, {player.Name}`)
 end
 ```
 
