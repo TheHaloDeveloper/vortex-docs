@@ -32,12 +32,12 @@ None
 
 ## Events
 
-### .OnServerEvent
+### .OnServerEvent(client: `Player`, `...any`)
 
 > Receive an event sent by a client to the server.
 > `Connect` receives the `Player` that called the event as its first argument and then each argument sent by `FireServer`.
 
-## .OnClientEvent
+## .OnClientEvent(`...any`)
 
 > Receive an event sent by a server to a client.
 > `Connect` receives each argument sent by the server.
