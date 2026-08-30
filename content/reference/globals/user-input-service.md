@@ -27,8 +27,8 @@ local UserInputService = game:GetService("UserInputService")
 
 UserInputService.InputBegan:Connect(function()
    if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
-  	 print("Left Shift")
-	 end
+		print("Left Shift")
+	end
 end)
 
 ```
@@ -47,7 +47,7 @@ An Input object which contains information about the users input.
 ```
 ```
 GameProcessedEvent: Boolean
-Whether the Engine observed an action and acted on it. If a button was touched or clicked from this input, GameProcessedEvent will be true.
+Whether the Engine observed this input and acted on it.
 ```
 
 #### Returns
@@ -60,9 +60,18 @@ UserInputService.InputBegan:Connect(function(Input, GameProccessedEvent)
     if GameProccessedEvent then
        print("Game Proccessed Event")
     end
-    
+
+	-- This will fire in any case where the user presses 'R'.
+	-- Even if it was pressed inside the chat window
+	-- or the settings menu.
     if Input.KeyCode == Enum.KeyCode.R then
         print("R")
     end
+
+	-- Usually for gameplay-related inputs, it's common to
+	-- check it hasn't been handled by another part of the Engine.
+	if Input.KeyCode == Enum.KeyCode.R and not GameProccessedEvent then
+		print("R")
+	end
 end)
 ```
