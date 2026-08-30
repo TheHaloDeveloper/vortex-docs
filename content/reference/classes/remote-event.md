@@ -11,7 +11,7 @@ Written by clride on August 30th, 2026
 -->
 
 ## Summary
-A `RemoteEvent` is an Instance that facilitates communication between Client and Server through events.
+A `RemoteEvent` is an Instance that facilitates one-way communication between Client and Server through events.
 
 ## Properties
 None
