@@ -1,6 +1,6 @@
 ---
 title: script
-description: Stub
+description: Holder instance of the current script
 ---
 
 Stub
