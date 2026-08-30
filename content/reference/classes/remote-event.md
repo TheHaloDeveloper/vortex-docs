@@ -18,9 +18,7 @@ None
 
 ## Methods
 ### .FireServer(`...any`)
-> Send any number of arguments over this event to the server.
-
-<br/>
+> Send any number of arguments over this event to the server
 
 ### .FireClient(client: `Player`, `...any`)
 
