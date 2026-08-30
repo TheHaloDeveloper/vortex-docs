@@ -15,7 +15,7 @@ Written by Arbuzyonak on August 30th, 2026
 <details>
 <summary><b>Syntax</b></summary>
 
-`Instance.new(className: string): Instance`
+`Instance.new(className: string, parent: Instance?): Instance`
 
 </details>
 
@@ -44,6 +44,17 @@ part.Position = Vector3.new(0, 10, 0)
 part.Anchored = true
 part.Parent = workspace
 ```
+Or, you can optionally set the parent in the second argument when calling **Instance.new**
+
+```lua
+local part = Instance.new("Part", workspace)
+part.Name = "Platform"
+part.Size = Vector3.new(8, 1, 8)
+part.Position = Vector3.new(0, 10, 0)
+part.Anchored = true
+-- NOT NEEDED: part.Parent = workspace
+```
+If no parent is passed in, nor set later, the Instance's parent defaults to **workspace**
 
 ## Default state
 
