@@ -16,6 +16,7 @@ Written by Arbuzyonak on August 30th, 2026
 <summary><b>Syntax</b></summary>
 
 `Instance.new(className: string): Instance`
+`Instance.new(className: string, Parent): Instance with already existing Parent`
 
 </details>
 
@@ -43,6 +44,16 @@ part.Size = Vector3.new(8, 1, 8)
 part.Position = Vector3.new(0, 10, 0)
 part.Anchored = true
 part.Parent = workspace
+```
+
+But when doing Instance.New in after specifying the class to be created you can set the parent of the class in the Instance.new 
+
+```lua
+local part = Instance.new("Part", Workspace)
+part.Name = "Platform"
+part.Size = Vector3.new(8, 1, 8)
+part.Position = Vector3.new(0, 10, 0)
+part.Anchored = true
 ```
 
 ## Default state
