@@ -4,7 +4,7 @@ description: A service that can be used to smoothly interpolate properties of in
 ---
 
 <!-- 
-Workspace
+TweenService
 
 Written by CNK on August 30th, 2026.
 -->
