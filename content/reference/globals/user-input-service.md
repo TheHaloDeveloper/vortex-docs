@@ -37,7 +37,7 @@ end)
 ### InputBegan
 Fires whenever the Player interacts with an input device.
 ```
-UserInputService.InputBegan(Input: InpitObject, GameProcessedEvent: Boolean)
+UserInputService.InputBegan(Input: InputObject, GameProcessedEvent: Boolean)
 ```
 
 #### Parameters
@@ -49,8 +49,6 @@ An Input object which contains information about the users input.
 GameProcessedEvent: Boolean
 Whether the Engine observed this input and acted on it.
 ```
-
-#### Returns
 
 #### Examples
 ```luau
@@ -73,5 +71,33 @@ UserInputService.InputBegan:Connect(function(Input, GameProccessedEvent)
 	if Input.KeyCode == Enum.KeyCode.R and not GameProccessedEvent then
 		print("R")
 	end
+end)
+```
+### InputEnded
+Fires whenever the Player stops interacting with an Input device.
+```
+UserInputService.InputEnded(Input: InputObject, GameProcessedEvent: Boolean)
+```
+
+#### Parameters
+```
+Input: Input Object
+An Input object which contains information about the users input.
+```
+```
+GameProcessedEvent: Boolean
+Whether the Engine observed an action and acted on it. If a button was touched or clicked from this input, GameProcessedEvent will be true.
+```
+
+#### Examples
+```luau
+local UserInputService = game:GetService("UserInputService")
+
+UserInputService.InputEnded:Connect(function(Input, GameProccessedEvent)
+    if GameProccessedEvent then
+       print("Game Proccessed Event")
+    end
+    
+    print("Input Ended.")
 end)
 ```

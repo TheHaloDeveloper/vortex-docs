@@ -8,6 +8,12 @@ Game
 Revision 1
 
 Written by Kindtracker on August 29th, 2026
+
+---
+
+Revision 2 - ReplicatedStorage and ServerScriptService
+
+Written by LumiMakesStuff (lumi on Vortex) August 30th, 2026
 -->
 
 > [!NOTE]
@@ -55,6 +61,7 @@ Services of `game`.
 ### Workspace
 
 > `Instance`
+> 
 > The Workspace is the root object that holds anything that is currently in the world. [Workspace](/content/reference/classes/workspace.md)
 
 <br/>
@@ -71,7 +78,7 @@ Services of `game`.
 
 > `Instance`
 >
-> Stub. [ReplicatedStorage](/content/reference/classes/replicated-storage.md)
+> ReplicatedStorage contains objects replicated to the Client and Server. When the Server makes a modification, this is replicated to all clients. Any changes made by clients are not replicated to the server. [ReplicatedStorage](/content/reference/classes/replicated-storage.md)
 
 <br/>
 
@@ -87,7 +94,7 @@ Services of `game`.
 
 > `Instance`
 >
-> Stub. [ServerScriptService](/content/reference/classes/server-script-service.md)
+> ServerScriptService contains [Scripts](/content/reference/classes/script.md) that run when the server starts. [ServerScriptService](/content/reference/classes/server-script-service.md)
 
 <br/>
 
@@ -95,6 +102,6 @@ Services of `game`.
 
 > `Instance`
 >
-> lighting is the game service that controls basic rendering and atmospherics. [Lighting](/content/reference/classes/lighting.md)
+> Lighting is the game service that controls basic rendering and atmospherics. [Lighting](/content/reference/classes/lighting.md)
 
 <br/>

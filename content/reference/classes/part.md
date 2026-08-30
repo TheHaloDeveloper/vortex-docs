@@ -49,7 +49,28 @@ Properties of a Part, in the order they appear on Vortex Studio.
 </ul>
 </details>
 
-<!-- In the future, there can be more lists of `features`(?) that a part has, such as events or functions/methods -->
+<details>
+<summary><b>Methods</b></summary>
+Methods of a Part.
+<br><br>
+<ul>
+  
+- :GetAttribute()
+- :WaitForChild()
+- :GetPropertyChangedSignal()
+- :GetAttributeChangedSignal()
+- :GetDescendants()
+- :GetChildren()
+- :Destroy()
+- :Clone()
+- :FindFirstChildOfClass()
+- :SetAttribute()
+- :GetAttributes()
+- :IsA()
+- :FindFirstChild()
+
+</ul>
+</details>
 
 ## Properties
 
