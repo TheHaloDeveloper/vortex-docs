@@ -42,7 +42,7 @@ None
 > `Connect` receives each argument sent by the server.
 
 
-### Example
+## Example
 
 ```luau
 -- server
