@@ -1,6 +1,6 @@
 ---
 title: Humanoid
-description: Stub
+description: A class that enables character-like functionality for `Models`
 ---
 
 Stub
