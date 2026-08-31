@@ -1,34 +1,31 @@
 ---
 title: IntValue
-description: Stub
+description: An Instance that stores a numeric value.
 ---
 
-Stores an Integer value 
+## Summary
 
-# Summary
-[IntValues](https://create.playvortex.io/reference/classes/int-value/) are a very simple way to store an integer outside of a script. You can get/set it's stored integer with `IntValue.Value`.
+`IntValue` stores a number in its `Value` property. It can be created with `Instance.new("IntValue")` and inherits the common [Instance](/reference/classes/instance/) members.
 
-# Properties
+## Properties
 
-## .Name
-  `String` 
-  
-The name of the [IntValue](https://create.playvortex.io/reference/classes/int-value/) , and label in the explorer.
+| Member | Description |
+| --- | --- |
+| `Value: number` | The stored value. |
 
-## .Value
-`Integer`
+## Example
 
-The `Integer` Stored inside [IntValue](https://create.playvortex.io/reference/classes/int-value/)
+```luau
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-# Code Snippet
+local score = Instance.new("IntValue")
+score.Name = "Score"
+score.Value = 0
+score.Parent = ReplicatedStorage
 
-    local newVal = Instance.new("IntValue")
-    newVal.Parent = game.Workspace
+score:GetPropertyChangedSignal("Value"):Connect(function()
+    print("Score:", score.Value)
+end)
 
-	newVal.Value = 9999
-
-	print(newVal.Value)
-
-## Expected Output
-
-    9999
+score.Value = 10
+```

@@ -1,74 +1,31 @@
 ---
 title: PointLight
-description: A spherical light emitting from a single point 
+description: A light that emits in every direction from its parent Part.
 ---
 
-<!-- 
-PointLight
-Revision 1
-
-Written by KingTasaz on August 28th, 2026
--->
-
 ## Summary
-A `pointlight` must be the child of a [`part`](../classes/part.md), and takes the position of its parent as its own.
 
-There is currently no on/off switch for lights, but setting either the color, brightness, or range to 0 will have the desired effect.
-
-<details>
-<summary><b>Properties</b></summary>
-Properties of a Pointlight, in the order they appear on Vortex Studio.
-<br><br>
-<ul>
-<details>
-<summary><b>Appearance</b></summary>
-
-- [Color](#color): [`Color3`](../datatypes/color3.md)
-- [Brightness](#brightness): `Float`
-- [Range](#range): `Float`
-
-</details>
-
-<details>
-<summary><b>Transform</b></summary>
-
-- [Name](#name): `String`
-
-</details>
-
-</ul>
-</details>
+`PointLight` is a supported `Instance.new` target. Parent it to a [Part](/reference/classes/part/) to place the light in the scene.
 
 ## Properties
 
-### Brightness
-> `Float` \
-\
-The emission brightness of the light. Does not affect range.
+| Member | Description |
+| --- | --- |
+| `Color: Color3` | Color of the emitted light. |
+| `Brightness: number` | Intensity of the light. |
+| `Range: number` | Maximum distance reached by the light. |
 
-<br/>
+PointLight also inherits the common [Instance](/reference/classes/instance/) members.
 
-### Color
-> [`Color3`](../datatypes/color3.md) \
-\
-Determines the color of the emitted light.
-Darker colors have the same effect as turning off the light.
+## Example
 
-<br/>
+```luau
+local Workspace = game:GetService("Workspace")
+local lamp = Workspace:WaitForChild("Lamp")
 
-
-### Name
-> `String` \
-\
-The name of the `pointlight`, and its label in the explorer.
-
-<br/>
-
-
-### Range
-> `Float` \
-\
-The maximum (spherical) range that the light can reach.
-This controls the drop-off of the brightness over time, but does not increase the brightness.
-
-<br/>
+local light = Instance.new("PointLight")
+light.Color = Color3.fromRGB(255, 220, 170)
+light.Brightness = 2
+light.Range = 18
+light.Parent = lamp
+```

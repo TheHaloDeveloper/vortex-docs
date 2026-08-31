@@ -1,72 +1,58 @@
 ---
 title: Vector3
-description: A three-dimensional vector
+description: A three-dimensional vector.
 ---
 
-<!-- 
-Vector3
-Revision 1
+`Vector3` stores three numbers and supports the usual vector operations.
 
-Written by Kindtracker on August 28th, 2026
--->
+## Constructor
 
-> [!NOTE] 
-> There will be more things (methods, constructors, properties, etc) in the future. This is based on leaks.
+### Vector3.new(x: `number?`, y: `number?`, z: `number?`): `Vector3`
 
-## Summary
+Missing components default to `0`.
 
-<details>
-<summary><b>Properties</b></summary>
-Properties of a `Vector3`.
-<br><br>
-
-* [X](#x): `Number`
-* [Y](#y): `Number`
-* [Z](#z): `Number`
-
-</details>
-
-<details>
-<summary><b>Constructors</b></summary>
-Constructors of a `Vector3`.
-<br><br>
-
-* [new(X: `Number`, Y: `Number`, Z: `Number`)](#newx-number-y-number-z-number): `Vector3`
-
-</details>
+```luau
+local offset = Vector3.new(0, 4, -2)
+```
 
 ## Properties
 
-### X
+| Property | Type | Description |
+| --- | --- | --- |
+| `X`, `Y`, `Z` | `number` | Vector components. |
+| `Magnitude` | `number` | Length of the vector. |
+| `Unit` | `Vector3` | Vector with the same direction and a length of `1`. A zero vector stays zero. |
 
-> `Number` 
->
-> The X-axis component of the vector.
+## Constants
 
-<br/>
+| Constant | Value |
+| --- | --- |
+| `Vector3.zero` | `Vector3.new(0, 0, 0)` |
+| `Vector3.one` | `Vector3.new(1, 1, 1)` |
+| `Vector3.xAxis` | `Vector3.new(1, 0, 0)` |
+| `Vector3.yAxis` | `Vector3.new(0, 1, 0)` |
+| `Vector3.zAxis` | `Vector3.new(0, 0, 1)` |
 
-### Y
+## Methods
 
-> `Number` 
->
-> The Y-axis component of the vector.
+### Dot(other: `Vector3`): `number`
 
-<br/>
+Returns the dot product.
 
-### Z
+### Cross(other: `Vector3`): `Vector3`
 
-> `Number` 
->
-> The Z-axis component of the vector.
+Returns a vector perpendicular to both operands.
 
-<br/>
+### Lerp(goal: `Vector3`, alpha: `number`): `Vector3`
 
-## Constructors
+Interpolates between this vector and `goal`. An `alpha` of `0` returns the starting vector; `1` returns the goal.
 
-### new(X: `Number`, Y: `Number`, Z: `Number`)
+```luau
+local start = Vector3.new(0, 0, 0)
+local finish = Vector3.new(10, 4, 0)
+local halfway = start:Lerp(finish, 0.5)
+```
 
-> `Vector3` 
->
-> Returns a new `Vector3` from the given components.
+## Operators
 
-<br/>
+`Vector3` supports `+`, `-`, unary `-`, equality, component-wise multiplication and division, multiplication by a number on either side, and division by a number on the right.

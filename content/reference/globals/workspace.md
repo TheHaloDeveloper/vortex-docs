@@ -1,19 +1,15 @@
 ---
 title: workspace
-description: Keyword representing the global Workspace root
+description: Global reference to the Workspace service.
 ---
 
-<!-- 
-workspace
-Revision 1.1
+`workspace` is the scene root. It is the same object returned by `game:GetService("Workspace")`.
 
-Written by mezz-source on August 29th, 2026
--->
+```luau
+local platform = workspace:WaitForChild("Platform")
+platform.Position = Vector3.new(0, 6, 0)
+```
 
-The `workspace` keyword represents game's root [Workspace](/content/reference/classes/workspace.md) service, which contains all physical models, parts, and other [Instances](/content/reference/classes/instance.md) that can exist inside of it.
+Instances may not exist when a script starts. Use `WaitForChild`, `FindFirstChild`, or another tree method when load order is uncertain.
 
-It can be used to index specific [Instances](/content/reference/classes/instance.md) or to collect objects quickly, in respect to the server or client's current understanding.
-
-> [!WARNING]
-> Instances may be unavailable when loading. Make sure instances exist before accessing.
-> Failure to do so may result in runtime errors.
+See [`Workspace`](/reference/classes/workspace/) for its class members and inherited Instance API.

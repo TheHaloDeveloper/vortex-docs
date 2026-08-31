@@ -1,50 +1,23 @@
 ---
 title: EnumItem
-description: An individual item in an enum
+description: One named value in an Enum.
 ---
 
-<!-- 
-EnumItem
-Revision 1
-
-Written by Kindtracker on August 28th, 2026
--->
-
-## Summary
-
-<details>
-<summary><b>Properties</b></summary>
-Properties of an `EnumItem`.
-<br><br>
-
-* [Name](#name): `String`
-* [Value](#value): `Number`
-* [EnumType](#enumtype): `Enum`
-
-</details>
+Enum members such as `Enum.EasingStyle.Quad` are `EnumItem` values.
 
 ## Properties
 
-### Name
+| Property | Type | Description |
+| --- | --- | --- |
+| `Name` | `string` | Item name. |
+| `Value` | `number` | Numeric value. |
+| `EnumType` | [`Enum`](/reference/datatypes/enum/) | Enum that owns the item. |
 
-> `String` 
->
-> The name of the `EnumItem`.
+```luau
+local item = Enum.EasingStyle.Quad
+print(item.Name)       -- Quad
+print(item.Value)      -- 3
+print(item.EnumType)   -- Enum.EasingStyle
+```
 
-<br/>
-
-### Value
-
-> `Number` 
->
-> The integral value assigned to the `EnumItem`.
-
-<br/>
-
-### EnumType
-
-> `Enum` 
->
-> A reference to the parent `Enum` of the `EnumItem`.
-
-<br/>
+Two items compare equal when they have the same name and belong to the same enum. `tostring(item)` returns its full path, such as `Enum.EasingStyle.Quad`.

@@ -1,69 +1,30 @@
 ---
 title: TweenInfo
-description: Information of a tween
+description: Timing and easing settings used to create a Tween.
 ---
 
-## Summary
+## Constructor
 
-<details>
-<summary><b>Properties</b></summary>
-Properties of a `TweenInfo`.
-<br><br>
+### TweenInfo.new(time: `number?`, easingStyle: `Enum.EasingStyle?`, easingDirection: `Enum.EasingDirection?`, repeatCount: `number?`, reverses: `boolean?`, delayTime: `number?`): `TweenInfo`
 
-
-* [Time](#time): `Number`
-* [EasingStyle](https://create.playvortex.io/reference/globals/enum/#easingstyle): `Enum`
-* [EasingDirection](https://create.playvortex.io/reference/globals/enum/#easingdirection): `Enum`
-* [RepeatCount](#repeatcount): `Number`
-* [Reverses](#reverses): `Boolean`
-* [DelayTime](#delaytime): `Number`
-
-</details>
+```luau
+local info = TweenInfo.new(
+    0.5,
+    Enum.EasingStyle.Quad,
+    Enum.EasingDirection.Out,
+    1,
+    true,
+    0.1
+)
+```
 
 ## Properties
 
-### Time
-
-> `Number`
->
-> Duration for the tween, in seconds.
-
-<br/>
-
-### EasingStyle
-
-> `Enum.EasingStyle`
->
-> Easing style for the tween.
-
-<br/> 
-
-### EasingDirection 
-
-> `Enum.EasingDirection`
->
-> Direction in which the tween should execute.
-<br/>
-
-### RepeatCount
-
-> `Number`
->
-> Number of times the tween repeats.
-
-<br/>
-
-### Reverses 
-
-> `Boolean`
->
-> Whether the tween should reverse to the starting value once it reaches its target.
-
-<br/>
-
-### DelayTime 
-
-> `Number`
->
-> Time before the tween begins, in seconds.
-<br/>
+| Property | Default | Description |
+| --- | --- | --- |
+| `Time` | `1` | Duration of one pass, in seconds. |
+| `EasingStyle` | `Enum.EasingStyle.Quad` | Curve used for interpolation. |
+| `EasingDirection` | `Enum.EasingDirection.Out` | Which side of the curve receives easing. |
+| `RepeatCount` | `0` | Additional play cycles. A negative value repeats indefinitely. |
+| `Reverses` | `false` | Plays back toward the starting value after each forward pass. |
+| `DelayTime` | `0` | Delay before interpolation begins, in seconds. |

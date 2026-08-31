@@ -1,39 +1,22 @@
 ---
 title: Your First Script
-description: Learn how to make your first script in Vortex Studio.
+description: Create and place a Part from a server Script.
 ---
 
-<!-- 
-Your first script
-Revision 1
+Create a `Script` in `ServerScriptService`, then replace its source with:
 
-Written by Kindtracker on August 29th, 2026
--->
+```luau
+local Workspace = game:GetService("Workspace")
 
-Let's make Hello world script, create a script in ServerScriptService.
-You will see:
-```lua
-print("Hello, world!")
-```
-Then playtest the game, you will see "Hello, world!" in the output. Now, let's spawn a part in Workspace.
-First we need to get Workspace using the game's service functions
-```lua
-local workspace = game:GetService("Workspace")
-```
-Now we have workspace. Next, we need to create a part
-```lua
 local part = Instance.new("Part")
-```
-We need to put it in Workspace
-```lua
-part.Parent = workspace
-```
-We made a part! Let's change position, size, name, and color of it!
-```lua
 part.Name = "MyPart"
 part.Size = Vector3.new(2, 2, 2)
 part.Position = Vector3.new(0, 10, 0)
 part.Color = Color3.fromRGB(192, 32, 12)
 part.Anchored = false
+part.Parent = Workspace
 ```
-Playtest your game and you will see a part named "MyPart" with a size of `2, 2, 2`, a red color, and not anchored.
+
+Start a playtest. The Script creates an unanchored red Part ten studs above the origin.
+
+`Parent` is assigned last so the Part enters the scene after its other properties are ready.

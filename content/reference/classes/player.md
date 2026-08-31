@@ -1,29 +1,31 @@
 ---
 title: Player
-description: An instance holding information about a connected client.
+description: Represents one connected player.
 ---
 
 ## Summary
 
-Always is a children of the [Players](https://create.playvortex.io/reference/classes/players/) service, and holds information about a connected client.
-
-### Example
-
-```luau
--- client
-
-local Players = game:GetService("Players")
-
-local player = Players.LocalPlayer
-
-print("Hello, ".. player.Name.. "!")
-```
+`Player` Instances are engine-owned children of the [Players](/reference/classes/players/) service. They are not supported `Instance.new` targets.
 
 ## Properties
 
-- `Name` - the player's name;
-- `Parent` - will always be [Players](https://create.playvortex.io/reference/classes/players/).
+| Member | Description |
+| --- | --- |
+| `Character: Model?` | The player's current character, or `nil` when no character is present. |
 
-## Methods
+Player also inherits `Name`, `Parent`, and the other common [Instance](/reference/classes/instance/) members.
 
-- `GetChildren(): { Instance }` - returns a table of every children inside `Player`.
+## Example
+
+```luau
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+if player then
+    print("Hello, " .. player.Name)
+
+    if player.Character then
+        print("Character:", player.Character.Name)
+    end
+end
+```

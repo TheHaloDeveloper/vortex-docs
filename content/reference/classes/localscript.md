@@ -1,32 +1,23 @@
 ---
 title: LocalScript
-description: A script that runs locally for a client.
+description: A Luau script that runs for a client.
 ---
 
 ## Summary
 
-A LocalScript runs on the client (the player's machine). Use LocalScripts for client-only behavior such as UI, camera control, and input handling; do not use them for server-authoritative logic.
+`LocalScript` contains client-side Luau. Use it for input and other behavior that belongs to the local player. Server-authoritative state must still be checked and changed by a server `Script`.
 
-## Typical properties / methods
-
-- `Parent` : Instance — where the script is placed (e.g., a PlayerGui or StarterPlayerScripts).
-- `Disabled` : Boolean — whether the script is currently disabled.
-- `Source` : String — the script source (editor-only / read-only in some tools; not guaranteed to be available at runtime).
+`LocalScript` is a supported `Instance.new` target and inherits the common [Instance](/reference/classes/instance/) members. No additional runtime properties are verified in the current bridge.
 
 ## Example
 
 ```luau
--- Example LocalScript that prints the local player's name
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-if player then
-  print("Hello, " .. player.Name)
-end
+-- LocalScript
+local UserInputService = game:GetService("UserInputService")
+
+UserInputService.InputBegan:Connect(function()
+    if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+        print("Space pressed")
+    end
+end)
 ```
-
-## Notes
-
-- `Players.LocalPlayer` is only available in client / LocalScript contexts; it will be nil in server scripts.
-- LocalScripts do not run in server-only containers such as `ServerScriptService`.
-- Avoid trusting client-side code for security, permissions, or authoritative game state — always verify on the server.
-- Good placements for LocalScripts: `StarterPlayerScripts`, `StarterGui`/`PlayerGui`, `StarterCharacterScripts`, `Backpack` (for tool-local behavior).

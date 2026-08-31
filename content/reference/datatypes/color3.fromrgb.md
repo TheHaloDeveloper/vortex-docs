@@ -1,12 +1,14 @@
-### fromRGB(R: `Number`, G: `Number`, B: `Number`)
+---
+title: Color3.fromRGB
+description: Creates a Color3 from red, green, and blue byte values.
+---
 
+## Color3.fromRGB(red: number, green: number, blue: number): Color3
 
-> `Color3`
->
-> Returns a new `Color3` from the given red, green, and blue values. Each value ranges from `0` to `255`.
->
-> ```lua
-> local color = Color3.fromRGB(255, 0, 0)
-> ```
->
-> The example above creates a red `Color3`.
+Returns a `Color3` from RGB values between `0` and `255`.
+
+```luau
+local red = Color3.fromRGB(255, 0, 0)
+```
+
+The constructor is also documented on [Color3](/reference/datatypes/color3/).

@@ -1,9 +1,19 @@
 ---
 title: ReplicatedStorage
-description: Contains instances that are loaded by both the server and the client.
+description: A shared Instance container available to server and client scripts.
 ---
 
 ## Summary
-ReplicatedStorage is a container for items that should be visible to both the server and the client. Items placed here will automatically get their properties synced from the server.
 
-stub
+`ReplicatedStorage` is an engine-owned service returned by `game:GetService("ReplicatedStorage")`. Use it for Instances that both sides need to find, such as remote endpoints and shared values.
+
+It has no verified class-specific members. Use the inherited [Instance](/reference/classes/instance/) hierarchy methods to access its contents.
+
+## Example
+
+```luau
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local roundEvent = ReplicatedStorage:WaitForChild("RoundEvent")
+
+print(roundEvent.ClassName)
+```

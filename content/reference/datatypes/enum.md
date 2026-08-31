@@ -1,50 +1,34 @@
 ---
 title: Enum
-description: A data type that represents an enum
+description: A named collection of EnumItem values.
 ---
 
-<!-- 
-Enum
-Revision 1
+An enum type such as `Enum.Material` groups related [`EnumItem`](/reference/datatypes/enumitem/) values.
 
-Written by Kindtracker on August 28th, 2026
--->
+## Properties
 
-## Summary
-
-<details>
-<summary><b>Methods</b></summary>
-Methods of an `Enum`.
-<br><br>
-
-* [GetEnumItems()](#getenumitems): `EnumItem[]`
-* [FromName(name: `String`)](#fromnamename-string): `EnumItem`
-* [FromValue(value: `Number`)](#fromvaluevalue-number): `EnumItem`
-
-</details>
+| Property | Type | Description |
+| --- | --- | --- |
+| `Name` | `string` | Name of the enum type. |
 
 ## Methods
 
-### GetEnumItems()
+### GetEnumItems(): `{ EnumItem }`
 
-> `EnumItem[]`
->
-> Returns an array of all `EnumItem` options available for the enum.
+Returns the items in declaration order. The returned array is a copy.
 
-<br/>
+### FromName(name: `string`): `EnumItem?`
 
-### FromName(name: `String`)
+Returns the item with the given name, or `nil`.
 
-> `EnumItem`
->
-> Finds an `EnumItem` by name.
+### FromValue(value: `number`): `EnumItem?`
 
-<br/>
+Returns the item with the given numeric value, or `nil`.
 
-### FromValue(value: `Number`)
+```luau
+local material = Enum.Material:FromName("Metal")
 
-> `EnumItem`
->
-> Finds an `EnumItem` by value.
-
-<br/>
+for _, item in Enum.Material:GetEnumItems() do
+    print(item.Name, item.Value)
+end
+```

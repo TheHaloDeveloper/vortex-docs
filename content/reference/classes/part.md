@@ -1,169 +1,54 @@
 ---
 title: Part
-description: A primitive rectangular prism
+description: A 3D scene object with transform, appearance, physics, and touch members.
 ---
-
-<!-- 
-Part
-Revision 1
-
-Written by KingTasaz on August 28th, 2026
--->
 
 ## Summary
 
-<details>
-<summary><b>Properties</b></summary>
-Properties of a Part, in the order they appear on Vortex Studio.
-<br><br>
-<ul>
-<details>
-<summary><b>Appearance</b></summary>
+`Part` is the main scriptable world object. Create one with `Instance.new("Part")`, set its properties, then parent it to [Workspace](/reference/classes/workspace/) to place it in the scene.
 
-- [Color](#color): [`Color3`](../datatypes/color3.md)
-- [Transparency](#transparency): `Float`
-- [Material](#material): [`Enum.Material`](../datatypes/enumitem.md) <!-- not sure if this should link to enumitem.md or enum.md -->
-- [Cast Shadow](#cast-shadow): `Boolean`
+## Transform properties
 
-</details>
+| Member | Description |
+| --- | --- |
+| `Position: Vector3` | World position. |
+| `Rotation: Vector3` | Euler rotation. `Orientation` is an alias. |
+| `CFrame: CFrame` | Full position and rotation transform. |
+| `Size: Vector3` | Width, height, and depth. |
 
-<details>
-<summary><b>Behaviour</b></summary>
+## Appearance and physics
 
-- [Anchored](#anchored): `Boolean`
-- [CanCollide](#cancollide): `Boolean`
-- [Truss](#truss): `Boolean`
+| Member | Description |
+| --- | --- |
+| `Color: Color3` | Surface color. |
+| `Transparency: number` | Transparency value. The bridge rejects non-finite numbers. |
+| `Anchored: boolean` | Prevents physics from moving the Part when true. |
+| `CanCollide: boolean` | Controls physical collision. |
+| `CastShadow: boolean` | Controls whether the Part casts a shadow. |
 
-</details>
+## Events
 
-<details>
-<summary><b>Transform</b></summary>
+| Member | Description |
+| --- | --- |
+| `Touched: Signal` | Fires when a collision contact begins. |
+| `TouchEnded: Signal` | Fires when a collision contact ends. |
 
-- [Name](#name): `String`
-- [Position](#position): [`Vector3`](../datatypes/vector3.md)
-- [Rotation](#rotation): [`Vector3`](../datatypes/vector3.md)
-- [Size](#size): [`Vector3`](../datatypes/vector3.md)
+Part also inherits the common [Instance](/reference/classes/instance/) members.
 
-</details>
+## Example
 
-</ul>
-</details>
+```luau
+local Workspace = game:GetService("Workspace")
 
-<details>
-<summary><b>Methods</b></summary>
-Methods of a Part.
-<br><br>
-<ul>
-  
-- :GetAttribute()
-- :WaitForChild()
-- :GetPropertyChangedSignal()
-- :GetAttributeChangedSignal()
-- :GetDescendants()
-- :GetChildren()
-- :Destroy()
-- :Clone()
-- :FindFirstChildOfClass()
-- :SetAttribute()
-- :GetAttributes()
-- :IsA()
-- :FindFirstChild()
+local pad = Instance.new("Part")
+pad.Name = "DamagePad"
+pad.Size = Vector3.new(8, 1, 8)
+pad.Position = Vector3.new(0, 2, 0)
+pad.Color = Color3.fromRGB(235, 80, 80)
+pad.Anchored = true
+pad.Parent = Workspace
 
-</ul>
-</details>
-
-## Properties
-
-### Anchored
-> `Boolean` \
-\
-When `true`, the given part will be unable to move via interactions with the environment. \
-When `false`, the part will experience gravity and forces from other parts.
-
-<br/>
-
-
-### CanCollide
-> `Boolean` \
-\
-Determines whether the `part` is given physics collisions, or whether it can phase through other parts. \
-\
-**Note:** A `part` cannot be unanchored while collision is disabled.
-
-<br/>
-
-
-### Cast Shadow
-> `Boolean` \
-\
-Controls whether or not the `part` will cast a shadow.
-This can be used to save performance with part's whose shadows cannot be seen, or for glass parts which realistically would not create a shadow.
-
-<br/>
-
-
-### Color
-> [`Color3`](../datatypes/color3.md) \
-\
-Determines the visible color of the `part`.
-Will also affect the part's [`Material`]() color.
-
-<br/>
-
-
-### Material
-> [`Enum.Material`](../datatypes/enumitem.md) \
-\
-Determines which `Material` type to apply when rendering the `part`.
-Currently this has no effect other than visual.
-
-<br/>
-
-
-### Name
-> `String` \
-\
-The name of the `part`, and its label in the explorer.
-
-<br/>
-
-
-### Position
-> [`Vector3`](../datatypes/vector3.md) \
-\
-The position of the `part`, in World-space.
-
-<br/>
-
-
-### Rotation
-> [`Vector3`](../datatypes/vector3.md) \
-\
-The rotation of the `part` along each axis.
-
-<br/>
-
-
-### Size
-> [`Vector3`](../datatypes/vector3.md) \
-\
-The size of the `part` in each dimension (width, height, depth).
-
-<br/>
-
-
-### Transparency
-> `Float` \
-\
-Sets the `transparency` of the part from `0` (opaque) to `1` (invisible).
-When drawing shadows, all parts are treated as opaque regardless of their `transparency`. Unless it is set to `1`, where the part does not render at all.
-
-<br/>
-
-
-### Truss
-> `Boolean` \
-\
-If a `part` is a truss part, then the `Player` is able to climb the part by walking up to it. It is recommened to keep truss parts anchored, as they otherwise produce unpredictable effects.
-
-<br/>
+pad.Touched:Connect(function(otherPart)
+    print(otherPart.Name, "touched the pad")
+end)
+```

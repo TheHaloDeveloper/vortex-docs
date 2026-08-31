@@ -1,39 +1,29 @@
 ---
 title: Debris
-description: A service that allows removal of instances without yielding
+description: Schedules an Instance to be destroyed later.
 ---
-
-<!--
-Debris
-Revision 1
-
-Written by TheJustDare on August 30th, 2026
--->
 
 ## Summary
 
-<details>
-<summary><b>Syntax</b></summary>
+`Debris` is a service returned by `game:GetService("Debris")`. Use it for temporary Instances when a script should not yield while waiting to remove them.
 
-`Debris:AddItem(instance: Instance, lifetime: number): ()`
+## Methods
 
-</details>
+| Member | Description |
+| --- | --- |
+| `Debris:AddItem(item: Instance, lifetime?: number)` | Calls `Destroy()` after `lifetime` seconds. The default is 10 seconds. Passing `nil` does nothing. |
+| `Debris:SetMaxItems()` | Compatibility method with no effect in the current build. |
 
-## Overview
+## Example
 
-`Debris` is a service that allows removal of instances without yielding for objects that may lose utility after a set period of time.
-
-```lua
+```luau
 local Debris = game:GetService("Debris")
+local Workspace = game:GetService("Workspace")
 
-local part = Instance.new("Part")
-part.Parent = workspace
+local marker = Instance.new("Part")
+marker.Name = "TemporaryMarker"
+marker.Anchored = true
+marker.Parent = Workspace
 
-Debris:AddItem(part, 5)
+Debris:AddItem(marker, 3)
 ```
-
-## Lifetime
-
-The `AddItem()` method won't execute unless a lifetime parameter is given.
-
-The lifetime can be set to any number from positive to negative range.

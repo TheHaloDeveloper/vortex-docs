@@ -1,5 +1,27 @@
-> `Connection`
->
-> An object that represents a connection between a function and an event or signal. A `Connection` is created when a function is connected to an event and can be used to manage that connection.
->
-> Connections can be disconnected when they are no longer needed, preventing the connected function from being called by the event.
+---
+title: Connection
+description: A removable connection between a Signal and a callback.
+---
+
+`Signal:Connect` and `Signal:Once` return a `Connection`.
+
+## Properties
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `Connected` | `boolean` | `true` until the connection is disconnected. |
+
+## Methods
+
+### Disconnect(): `()`
+
+Stops the callback from receiving later events. Calling it again has no effect. `disconnect` is a lowercase alias.
+
+```luau
+local RunService = game:GetService("RunService")
+local connection
+
+connection = RunService.Heartbeat:Connect(function()
+    connection:Disconnect()
+end)
+```

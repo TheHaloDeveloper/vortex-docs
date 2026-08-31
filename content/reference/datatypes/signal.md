@@ -1,75 +1,38 @@
 ---
 title: Signal
-description: An object that runs connected functions in a specific way.
+description: An event with callbacks and coroutine waiting.
 ---
 
-<!--
-Signal
-Revision 1.0
+Signals are exposed by Instances and services. A signal supports up to `512` active connections.
 
-Written by TheJustDare on August 30th, 2026
--->
+## Methods
 
-## Summary
+### Connect(callback: `(...any) -> ()`): [`Connection`](/reference/datatypes/connection/)
 
-<details>
-<summary><b>Methods</b></summary>
+Registers a callback. `connect` is a lowercase alias.
 
-* [Connect()](#connect): `Connection`
-* [ConnectParallel()](#connectparallel): `Connection`
-* [Once()](#once): `Connection`
-* [Wait()](#wait): `any`
-</details>
+### Once(callback: `(...any) -> ()`): [`Connection`](/reference/datatypes/connection/)
 
-## Overview
+Registers a callback that disconnects before its first call.
 
-[Signal](./signal.md) is a data type that is used in user-defined functions, otherwise known as **listeners**, to trigger when something happens in the game. \
- The [Signal](./signal.md) might also happen to pass arguments to each listener depending on which event it is.
+### Wait(): `...any`
 
- ## Methods
+Yields the current coroutine until the next event, then returns the values passed by that event.
 
- ### Connect()
+### Fire(...: `any`): `()`
 
- Connects the given function and creates a new [Connection](./connection.md).
+Runs connected callbacks and resumes waiting coroutines. `fire` is a lowercase alias.
 
- ```lua
-local part = workspace.Part
-part:SetAttribute("Points", 5)
+```luau
+local part = workspace:WaitForChild("Button")
 
-part:GetAttributeChangedSignal("Points"):Connect(function()
-    local newPoints = part:GetAttribute("Points")
-
-    print(newPoints) -- Returns 5
-end)
- ```
-
-<br>
-
-### ConnectParallel()
-
-Unlike [Connect](#connect), `ConnectParallel` runs the connected function on a different CPU thread. This is especially useful for CPU demanding tasks like terrain generation.
-
-<br>
-
-### Once()
-
-Connects the given function and creates a new [Connection](./connection.md). \
-`Once` will run the function only **once**, unlike the other methods.
-
-```lua
-local part = workspace.Part
-part.Name = "Block"
-
-part:GetPropertyChangedSignal("Name"):Once(function()
-    print("The part's name has been changed!") -- This will print only after the first change
+local connection = part.Touched:Connect(function(otherPart)
+    print(otherPart.Name)
 end)
 
-task.wait(1)
-
-part.Name = "Cube"
+task.delay(10, function()
+    connection:Disconnect()
+end)
 ```
 
-### Wait()
-
-Yields the current thread until the `Signal` fires. \
-`Wait()` will return arguments passed by the `Signal`.
+Callbacks run from a snapshot of the connection list, so disconnecting a callback does not disturb the rest of the current dispatch.

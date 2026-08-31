@@ -1,81 +1,69 @@
 ---
 title: Instance
-description: Instance is the base class for all classes in Vortex engine
+description: The base object for services, scene objects, scripts, and networking endpoints.
 ---
-
-<!-- 
-Instance
-Revision 1
-
-Written by Kindtracker on August 28th, 2026
--->
-
-> [!NOTE] 
-> There will be more things (methods, constructors, properties, etc) in the future. This is based on leaks and common sense.
 
 ## Summary
 
-<details>
-<summary><b>Properties</b></summary>
-Properties of a `Instance`.
-<br><br>
-
-* [Name](#name): `String`
-* [Parent](#parent): `Instance`
-
-</details>
-
-<details>
-<summary><b>Methods</b></summary>
-Methods of a `Instance`.
-<br><br>
-
-* [Clone()](#clone): `Instance`
-* [Destroy()](#destroy): `nil`
-* [GetChildren()](#getchildren): `{ Instance }`
-
-</details>
+Every object exposed through the Vortex Instance bridge inherits this API. Instances form a parent-child hierarchy and can carry named attributes.
 
 ## Properties
 
-### Name
+| Member | Description |
+| --- | --- |
+| `Name: string` | The Instance name. |
+| `ClassName: string` | Read-only class name. |
+| `Parent: Instance?` | Parent in the hierarchy. Assign another Instance or `nil`. |
 
-> `String` 
->
-> The name of the `Instance`.
+## Hierarchy methods
 
-<br/>
+| Member | Description |
+| --- | --- |
+| `GetChildren(): {Instance}` | Returns the direct children. |
+| `GetDescendants(): {Instance}` | Returns all descendants. |
+| `FindFirstChild(name: string): Instance?` | Finds a direct child by name. |
+| `WaitForChild(name: string, timeout?: number): Instance?` | Waits for a direct child, polling every 0.05 seconds. Returns `nil` after the optional timeout. |
+| `FindFirstChildOfClass(className: string): Instance?` | Finds a direct child with the given class. |
+| `IsA(className: string): boolean` | Tests the Instance's class identity or ancestry. |
 
-### Parent
+## Properties and attributes
 
-> `String` 
->
-> The name of the `Instance`.
+| Member | Description |
+| --- | --- |
+| `GetPropertyChangedSignal(property: string): Signal` | Returns a signal for changes to a named property. |
+| `SetAttribute(name: string, value: boolean \| number \| string \| nil)` | Sets an attribute. Passing `nil` removes it. |
+| `GetAttribute(name: string): boolean \| number \| string \| nil` | Reads one attribute. |
+| `GetAttributes(): {[string]: boolean \| number \| string}` | Returns the current attributes. |
+| `GetAttributeChangedSignal(name: string): Signal` | Returns a signal for changes to one attribute. |
 
-<br/>
+Attribute values are limited to `nil`, `boolean`, `number`, and `string`.
 
-## Methods
+## Lifecycle
 
-### Clone()
+| Member | Description |
+| --- | --- |
+| `Instance.new(className: string): Instance` | Creates a supported class. |
+| `Clone(): Instance` | Copies a supported Instance. Engine-owned roots cannot be cloned. |
+| `Destroy()` | Destroys the Instance and removes it from the hierarchy. |
 
-> `Instance` 
->
-> Create a copy of the `Instance` and return copy.
+Supported constructor targets are `Part`, `Model`, `Folder`, `PointLight`, `SpotLight`, `LocalScript`, `Script`, `ModuleScript`, `RemoteEvent`, `BindableEvent`, `RemoteFunction`, `IntValue`, and `StringValue`.
 
-<br/>
+## Example
 
-### Destroy()
+```luau
+local Workspace = game:GetService("Workspace")
+local objective = Workspace:WaitForChild("Objective")
 
-> `nil` 
->
-> Destroy the `Instance` and children.
+objective:GetAttributeChangedSignal("Captured"):Connect(function()
+    local captured = objective:GetAttribute("Captured")
+    objective.Color = captured
+        and Color3.fromRGB(90, 190, 120)
+        or Color3.fromRGB(235, 80, 80)
+end)
 
-<br/>
-
-### GetChildren()
-
-> `{ Instance }` 
->
-> Return children of the `Instance`.
-
-<br/>
+for _, item in ipairs(Workspace:GetDescendants()) do
+    if item:IsA("Part") then
+        print(item.Name)
+    end
+end
+```

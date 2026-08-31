@@ -1,11 +1,19 @@
-### FindFirstChild(name: `String`)
+---
+title: FindFirstChild
+description: Finds a direct child by name.
+---
 
-> `Instance?`
->
-> Searches for a child of the instance with the specified name and returns it if one is found.
->
-> ```lua
-> local part = workspace:FindFirstChild("Part")
-> ```
->
-> If no child with the specified name is found, the method returns `nil`.
+```luau
+instance:FindFirstChild(name: string): Instance?
+```
+
+Returns the first direct child with the given name. It returns `nil` when no matching child exists and does not search deeper descendants.
+
+```luau
+local Workspace = game:GetService("Workspace")
+local door = Workspace:FindFirstChild("Door")
+
+if door then
+    door.Anchored = true
+end
+```

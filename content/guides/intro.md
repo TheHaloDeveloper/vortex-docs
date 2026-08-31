@@ -1,21 +1,16 @@
 ---
 title: Introduction
-description: Introduction to Vortex Studio and scripting.
+description: An introduction to scripting games in Vortex Studio.
 ---
 
-<!-- 
-Intro
-Revision 1
+Vortex Studio uses Luau for gameplay scripts. The engine API provides Instances, services, datatypes, events, tasks, tweens, and client/server communication.
 
-Written by Kindtracker on August 29th, 2026
--->
+```luau
+local Workspace = game:GetService("Workspace")
+local platform = Workspace:WaitForChild("Platform")
 
-# Welcome to Vortex Studio
+platform.Anchored = true
+platform.Color = Color3.fromRGB(92, 170, 255)
+```
 
-Vortex is a platform that lets you make everything from simple games to large, complex games using Luau.
-
-Vortex Engine provides APIs for building your game, creating parts, writing scripts, handling events, and more.
-
-This documentation will introduce you to the scripting API, and the features provided by Vortex Engine.
-
-If you're new to Vortex Studio, you may want to start with [Your First Script guide](./first-script.md).
+Start with [Your First Script](/guides/first-script/) if you have not written a Vortex script before. The [API Reference](/reference/) lists the members verified in the current build.

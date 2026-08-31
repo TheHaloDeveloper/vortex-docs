@@ -1,12 +1,18 @@
-### Clone()
+---
+title: Clone
+description: Creates a copy of an Instance and its descendants.
+---
 
-> `Instance`
->
-> Creates and returns a copy of the instance. The cloned instance contains the same properties and child objects as the original instance.
->
-> ```lua
-> local clone = part:Clone()
-> clone.Parent = workspace
-> ```
->
-> The original instance is not modified when a clone is created.
+```luau
+instance:Clone(): Instance
+```
+
+Returns a new copy of the Instance, including supported descendants. The clone has no parent until one is assigned. Engine-owned roots and other unsupported Instances cannot be cloned.
+
+```luau
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local effect = ReplicatedStorage:WaitForChild("Explosion"):Clone()
+
+effect.Parent = Workspace
+```

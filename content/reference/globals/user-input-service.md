@@ -1,94 +1,39 @@
 ---
 title: UserInputService
-description: User Input Service is used to detect a players device, and also used to detect inputs from the Player.
+description: Reports input state and input activity.
 ---
 
-## Methods
-### IsKeyDown
-Returns whether a certain is being held down.
+`UserInputService` is returned by `game:GetService("UserInputService")`.
 
+## Methods
+
+### IsKeyDown(keyCode: `Enum.KeyCode`): `boolean`
+
+Returns whether the given keyboard key is currently held.
+
+```luau
+local UserInputService = game:GetService("UserInputService")
+
+if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
+    print("Left Shift is held")
+end
 ```
-UserInputService:IsKeyDown(KeyCode: Enum.KeyCode): Boolean
-```
-#### Parameters
-```
-KeyCode: Enum.KeyCode
-The Enum.KeyCode of the key
-```
-#### Returns
-```
-Boolean
-Whether the specified key is being held down or not.
-```
-This method returns true if they are holding down the specified key, otherwise it returns false.
-#### Examples
+
+## Events
+
+| Event | Type | Description |
+| --- | --- | --- |
+| `InputBegan` | [`Signal`](/reference/datatypes/signal/) | Fires when an input begins. |
+| `InputEnded` | [`Signal`](/reference/datatypes/signal/) | Fires when an input ends. |
+
 ```luau
 local UserInputService = game:GetService("UserInputService")
 
 UserInputService.InputBegan:Connect(function()
-   if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
-  	 print("Left Shift")
-	 end
+    print("Input began")
 end)
 
-```
-
-## Events
-### InputBegan
-Fires whenever the Player interacts with an input device.
-```
-UserInputService.InputBegan(Input: InputObject, GameProcessedEvent: Boolean)
-```
-
-#### Parameters
-```
-Input: Input Object
-An Input object which contains information about the users input.
-```
-```
-GameProcessedEvent: Boolean
-Whether the Engine observed an action and acted on it. If a button was touched or clicked from this input, GameProcessedEvent will be true.
-```
-
-#### Examples
-```luau
-local UserInputService = game:GetService("UserInputService")
-
-UserInputService.InputBegan:Connect(function(Input, GameProccessedEvent)
-    if GameProccessedEvent then
-       print("Game Proccessed Event")
-    end
-    
-    if Input.KeyCode == Enum.KeyCode.R then
-        print("R")
-    end
-end)
-```
-### InputEnded
-Fires whenever the Player stops interacting with an Input device.
-```
-UserInputService.InputEnded(Input: InputObject, GameProcessedEvent: Boolean)
-```
-
-#### Parameters
-```
-Input: Input Object
-An Input object which contains information about the users input.
-```
-```
-GameProcessedEvent: Boolean
-Whether the Engine observed an action and acted on it. If a button was touched or clicked from this input, GameProcessedEvent will be true.
-```
-
-#### Examples
-```luau
-local UserInputService = game:GetService("UserInputService")
-
-UserInputService.InputEnded:Connect(function(Input, GameProccessedEvent)
-    if GameProccessedEvent then
-       print("Game Proccessed Event")
-    end
-    
-    print("Input Ended.")
+UserInputService.InputEnded:Connect(function()
+    print("Input ended")
 end)
 ```

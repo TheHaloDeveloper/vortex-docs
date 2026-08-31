@@ -1,14 +1,37 @@
 ---
 title: Instances
-description: Learn about Instances in Vortex Studio.
+description: Create objects and work with the Vortex object hierarchy.
 ---
 
-<!--
-Written by ElectroTato on the 30th of August, 2026
--->
+Instances are the objects in a Vortex game. Services, scene objects, scripts, values, and remotes all use the same base API.
 
-# Summary
+## Creating an Instance
 
-`Instances` are like the basic building blocks for every object in your game, there are several types of `Instances`, each having different [`Properties`](https://create.playvortex.io/guides/properties/) and unique quirks!
+`Instance.new(className)` creates a supported class. Set its properties, then assign `Parent` to place it in the hierarchy.
 
-You can create a new `Instance` using the [`Instance.new`](https://create.playvortex.io/reference/globals/instance-new/) method in a script, by passing in the `ClassName` of the `Instance` as the first argument.
+```luau
+local Workspace = game:GetService("Workspace")
+
+local platform = Instance.new("Part")
+platform.Name = "Platform"
+platform.Size = Vector3.new(8, 1, 8)
+platform.Anchored = true
+platform.Parent = Workspace
+```
+
+Engine-owned roots such as `Workspace` are services and cannot be created with `Instance.new`.
+
+## Finding objects
+
+| Method | Description |
+| --- | --- |
+| `GetChildren()` | Returns the Instance's direct children. |
+| `GetDescendants()` | Returns every descendant below the Instance. |
+| `FindFirstChild(name)` | Returns a direct child with that name, or `nil`. |
+| `WaitForChild(name, timeout?)` | Yields until a direct child appears or the timeout expires. |
+| `FindFirstChildOfClass(className)` | Returns the first direct child of that class, or `nil`. |
+| `IsA(className)` | Checks the Instance's class. |
+
+## Lifetime
+
+`Clone()` copies a supported Instance and its descendants. `Destroy()` removes an Instance and its descendants and disconnects their connections.

@@ -1,11 +1,18 @@
-### Destroy()
+---
+title: Destroy
+description: Removes an Instance and its descendants.
+---
 
-> `nil`
->
-> Removes the instance and its descendants from the game. Once an instance is destroyed, it can no longer be used normally.
->
-> ```lua
-> part:Destroy()
-> ```
->
-> `Destroy()` also disconnects connections associated with the instance and removes it from its parent.
+```luau
+instance:Destroy()
+```
+
+Removes the Instance from its parent, destroys its descendants, and disconnects connections associated with it.
+
+```luau
+local effect = game:GetService("Workspace"):FindFirstChild("ExpiredEffect")
+
+if effect then
+    effect:Destroy()
+end
+```

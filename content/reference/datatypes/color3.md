@@ -1,100 +1,41 @@
 ---
-
 title: Color3
-description: A color value comprised of red, green, and blue components.
+description: A color stored as red, green, and blue components.
 ---
 
-<!-- 
-Color3
-Revision 1
-
-Written by Kindtracker on August 28th, 2026
--->
-
-> [!NOTE]
-> There will be more things (methods, constructors, properties, etc.) in the future. This is based on leaks.
-
-## Summary
-
-<details>
-<summary><b>Properties</b></summary>
-Properties of a `Color3`.
-<br><br>
-
-* [R](#r): `Number`
-* [G](#g): `Number`
-* [B](#b): `Number`
-
-</details>
-
-<details>
-<summary><b>Constructors</b></summary>
-Constructors of a `Color3`.
-<br><br>
-
-* [new(R: `Number`, G: `Number`, B: `Number`)](#newr-number-g-number-b-number): `Color3`
-* [fromRGB(R: `Number`, G: `Number`, B: `Number`)](#fromrgbr-number-g-number-b-number): `Color3`
-* [fromHSV(H: `Number`, S: `Number`, V: `Number`)](#fromhsvh-number-s-number-v-number): `Color3`
-* [fromHex(hex: `String`)](#fromhexhex-string): `Color3`
-
-</details>
-
-## Properties
-
-### R
-
-> `Number`
->
-> The red value of the color.
-
-<br/>
-
-### G
-
-> `Number`
->
-> The green value of the color.
-
-<br/>
-
-### B
-
-> `Number`
->
-> The blue value of the color.
-
-<br/>
+`Color3` stores each color channel as a number from `0` to `1`.
 
 ## Constructors
 
-### new(R: `Number`, G: `Number`, B: `Number`)
+### Color3.new(r: `number?`, g: `number?`, b: `number?`): `Color3`
 
-> `Color3`
->
-> Returns a new `Color3` from the given values. Values range from `0` to `1`.
+Creates a color from normalized channel values. Missing values default to `0`.
 
-<br/>
+### Color3.fromRGB(r: `number?`, g: `number?`, b: `number?`): `Color3`
 
-### fromRGB(R: `Number`, G: `Number`, B: `Number`)
+Creates a color from channel values in the `0` to `255` range.
 
-> `Color3`
->
-> Returns a new `Color3` from the given values. Values range from `0` to `255`.
+```luau
+local blue = Color3.fromRGB(60, 130, 255)
+local darkBlue = Color3.new(0.1, 0.2, 0.5)
+```
 
-<br/>
+## Properties
 
-### fromHSV(H: `Number`, S: `Number`, V: `Number`)
+| Property | Type | Description |
+| --- | --- | --- |
+| `R` | `number` | Red channel. |
+| `G` | `number` | Green channel. |
+| `B` | `number` | Blue channel. |
 
-> `Color3`
->
-> Returns a new `Color3` from the given values. Values range from `0` to `1`.
+## Methods
 
-<br/>
+### Lerp(goal: `Color3`, alpha: `number`): `Color3`
 
-### fromHex(hex: `String`)
+Interpolates each channel toward `goal`.
 
-> `Color3`
->
-> Returns a new `Color3` from the given hexadecimal color value.
+```luau
+local purple = Color3.fromRGB(255, 0, 0):Lerp(Color3.fromRGB(0, 0, 255), 0.5)
+```
 
-<br/>
+`Color3` values can be compared with `==` and converted to a readable string with `tostring`.

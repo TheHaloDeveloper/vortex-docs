@@ -1,30 +1,28 @@
 ---
 title: Players
-description: A container that holds all players currently connected as Player objects.
+description: The service containing connected Player Instances.
 ---
 
 ## Summary
 
-A service that holds every currently connected clients, as [Player](https://create.playvortex.io/reference/classes/player/) instances, which contains information about a client.
-
-### Example
-
-```luau
--- client
-
-local Players = game:GetService("Players")
-
-local every_player = Players:GetPlayers() -- gets all children whose classes are `Player`
-local player = Players.LocalPlayer -- gets the current client
-```
+`Players` is an engine-owned service returned by `game:GetService("Players")`. Its children are [Player](/reference/classes/player/) Instances.
 
 ## Properties
 
-- `Name` - the name of the service;
-- `Parent` - probably the actual "game", that holds everything;
-- `LocalPlayer` - only accessible in the client-side, otherwise it'll be `nil`.
+| Member | Description |
+| --- | --- |
+| `LocalPlayer: Player?` | The Player for the current client. It is `nil` outside a client context. |
 
-## Methods
+Players inherits the common [Instance](/reference/classes/instance/) members, including `GetChildren()`.
 
-- `GetChildren(): { Instance }` - all of the children inside the service;
-- `GetPlayers(): { Players }` - all of the players currently connected;
+## Example
+
+```luau
+local Players = game:GetService("Players")
+
+for _, player in ipairs(Players:GetChildren()) do
+    if player:IsA("Player") then
+        print(player.Name)
+    end
+end
+```

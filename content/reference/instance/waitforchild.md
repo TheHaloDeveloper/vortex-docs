@@ -1,24 +1,19 @@
-### WaitForChild(name: `String`, timeout: `Number?`)
+---
+title: WaitForChild
+description: Waits for a direct child to appear.
+---
 
-> `Instance?`
->
-> Waits for a child with the specified name to exist, then returns that child.
->
-> If the child already exists, it is returned immediately. If the child does not exist, the function waits until it becomes available.
->
-> An optional `timeout` can be provided to limit how long the function waits. If the timeout expires before the child is found, `nil` is returned.
->
-> ```lua
-> local part = workspace:WaitForChild("Part")
-> print(part.Name)
-> ```
->
-> With a timeout:
->
-> ```lua
-> local part = workspace:WaitForChild("Part", 5)
->
-> if part then
->     print("Part found")
-> end
-> ```
+```luau
+instance:WaitForChild(name: string, timeout: number?): Instance?
+```
+
+Yields until a direct child with the given name exists. When `timeout` is supplied, the method returns `nil` if that many seconds pass first.
+
+```luau
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local status = ReplicatedStorage:WaitForChild("RoundStatus", 5)
+
+if status then
+    print(status.Value)
+end
+```

@@ -1,58 +1,48 @@
 ---
 title: Remote Events
-description: One way communication between the server and clients.
+description: Send one-way messages between a client and the server.
 ---
 
-# Remote Events
-A `RemoteEvent` fires one-way events between the server and clients. It doesn't wait for a response and has no return value. It's built for telling the other side what happened, not asking the other side for a result. For a call that needs a response, use [RemoteFunction](/guides/remote-functions/) instead.
+Remote events send a message without waiting for a return value. Use them for notifications and action requests. Use a [Remote Function](/guides/remote-functions/) when the caller needs a response.
 
-The primary parent container for remote events is `ReplicatedStorage`, as both the server and client can see and access it.
-> ⚠ **Security note:** never trust arguments a client sends via `FireServer` at
-> face value - a modified client can call it with anything. Re-validate
-> any arguments on the server before acting on it.
+> Never trust values sent by a client. Check them on the server before changing shared state.
+
+## Direction
+
+| Member | Direction |
+| --- | --- |
+| `remote:FireServer(...)` | Client to server |
+| `remote:FireClient(playerOrUserId, ...)` | Server to one client |
+| `remote:FireAllClients(...)` | Server to every client |
+| `FireServer(channel, ...)` | Client to a named server channel |
+| `OnRemoteEvent(channel, callback)` | Connects a callback to a named remote channel |
+
+Calls made from the wrong script context raise an error.
 
 ## Example
-In this example, pressing `E` changes a part named `ColorBlock` to a random color. Key presses can only be detected on the client, but the color change needs to happen on the server so every player sees the same result, which is what the remote event is for.
 
-## Server Script
-- placed in `ServerScriptService`
-- be sure to create an event named `ChangeColor` parented to `ReplicatedStorage`
-```lua
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+The client requests a colour change. The server checks the message before changing shared state.
 
-local changeColor = ReplicatedStorage.ChangeColor
-local colorBlock = workspace.ColorBlock
-
-changeColor.OnServerEvent:Connect(function(player)
-    colorBlock.Color = Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255))
-end)
+```luau
+-- LocalScript
+FireServer("ChangeColor", "blue")
 ```
 
-## Client Script
-- placed in `StarterPlayerScripts`
-```lua
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local UserInputService = game:GetService("UserInputService")
+```luau
+-- Script
+local block = game:GetService("Workspace"):WaitForChild("ColorBlock")
+local colors = {
+    blue = Color3.fromRGB(70, 130, 255),
+    red = Color3.fromRGB(235, 80, 80),
+}
 
-local changeColor = ReplicatedStorage.ChangeColor
-
-UserInputService.InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.E then
-        changeColor:FireServer()
+OnRemoteEvent("ChangeColor", function(colorName)
+    if type(colorName) ~= "string" or not colors[colorName] then
+        return
     end
+
+    block.Color = colors[colorName]
 end)
 ```
 
-## Methods
-
-| Method | Returns | Description |
-|---|---|---|
-| `FireServer(...)` | void | Called from a client. Sends arguments to the server. |
-| `FireClient(...)` | void | Called from the server. Sends arguments to chosen client. |
-| `FireAllClients(...)` | void | Called from the server. Sends arguments to every client. |
-
-## Events
-| Event | Parameters | Description |
-|---|---|---|
-| `OnServerEvent` | player, ... | Fires on the server when a client calls FireServer. |
-| `OnClientEvent` | ... | Fires on the client when the server calls FireClient / FireAllClients |
+Remote payloads can contain primitive values, `Vector3`, `Color3`, lists, and maps with supported primitive keys. This build rejects Instances and CFrames.

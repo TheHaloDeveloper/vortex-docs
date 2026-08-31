@@ -1,11 +1,18 @@
-### GetChildren()
+---
+title: GetChildren
+description: Returns the direct children of an Instance.
+---
 
-> `Array`
->
-> Returns an array containing all direct children of the instance.
->
-> ```lua
-> local children = workspace:GetChildren()
-> ```
->
-> Only direct children are returned. Objects nested inside other children are not included.
+```luau
+instance:GetChildren(): {Instance}
+```
+
+Returns a new array containing each direct child. Nested descendants are not included.
+
+```luau
+local folder = game:GetService("Workspace"):WaitForChild("Props")
+
+for _, child in ipairs(folder:GetChildren()) do
+    print(child.Name)
+end
+```

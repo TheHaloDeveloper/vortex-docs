@@ -1,19 +1,15 @@
 ---
 title: script
-description: Keyword representing the current script instance
+description: The Script, LocalScript, or ModuleScript currently running.
 ---
 
-<!-- 
-script
-Revision 1
+`script` refers to the Instance that owns the current source. It supports the same properties and methods as other Instances.
 
-Written by mezz-source on August 29th, 2026
--->
+```luau
+print(script.Name, script.ClassName)
 
-The `script` keyword can be used to access the instance of the current script.
-It can be used to index nearby instances or change the properties relating to itself.
-
-
-<!--
-stub until scripting releases
--->
+local settings = script:FindFirstChild("Settings")
+if settings then
+    print(settings.Name)
+end
+```

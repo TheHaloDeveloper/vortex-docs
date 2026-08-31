@@ -1,104 +1,48 @@
 ---
 title: Workspace
-description: Service that holds and renders every 3D player-interactable instance.
+description: The root of the scriptable scene hierarchy.
 ---
-
-<!-- 
-Instance
-Revision 1.1
-
-Written by TheJustDare on August 31th, 2026
--->
 
 ## Summary
 
-<details>
-<summary><b>Properties</b></summary>
+`Workspace` contains the Parts, Models, and other scene Instances used by the running game. It is an engine-owned service returned by `game:GetService("Workspace")`, not a supported `Instance.new` target.
 
-Properties of `Workspace`
-<br>
+Workspace does not add class-specific properties or methods in the current Luau bridge. Its useful API comes from [Instance](/reference/classes/instance/).
 
-* [Name](#name): `String`
-* [ClassName](#className): `String`
+## Members
 
-</details>
+| Member | Description |
+| --- | --- |
+| `Name: string` | The service name. |
+| `ClassName: string` | Read-only class name. |
+| `GetChildren(): {Instance}` | Returns the top-level scene Instances. |
+| `GetDescendants(): {Instance}` | Returns every Instance below Workspace. |
+| `FindFirstChild(name: string): Instance?` | Finds a top-level child by name. |
+| `WaitForChild(name: string, timeout?: number): Instance?` | Waits for a top-level child, with an optional timeout. |
+| `FindFirstChildOfClass(className: string): Instance?` | Finds a top-level child by class. |
+| `GetPropertyChangedSignal(property: string): Signal` | Returns a signal for a Workspace property. |
+| `SetAttribute(name: string, value)` | Sets or removes a Workspace attribute. |
+| `GetAttribute(name: string)` | Reads a Workspace attribute. |
+| `GetAttributes()` | Returns all Workspace attributes. |
+| `GetAttributeChangedSignal(name: string): Signal` | Returns a signal for one Workspace attribute. |
 
-<details>
-<summary><b>Methods</b></summary>
+No raycast method is exposed by the current verified bridge.
 
-Methods of `Workspace`
-<br>
+## Example
 
-* [FindFirstChild()](#findFirstChild): `Instance?`
-* [GetChildren()](#getchildren): `{ Instance }`
-* [WaitForChild()](#waitForChild): `Instance`
+```luau
+local Workspace = game:GetService("Workspace")
+local platform = Workspace:WaitForChild("Platform", 5)
 
-</details>
-
-## Properties
-
-### Name
-
-The name of the [Workspace](/content/reference/classes/workspace.md). \
-This property is read only and cannot be changed.
-
-<br>
-
-### ClassName
-
-The class name of the [Workspace](/content/reference/classes/workspace.md). \
-This property is read only and cannot be changed.
-
-<br>
-
-## Methods
-
-### FindFirstChild()
-
-Returns the first child found with the given name. \
-For `FindFirstChild()` to work, a name of a type of `string` has to be passed. \
-Optionally a second argument can be given, whether to search for the `Instance` recursively.
-
-#### Syntax
-`Instance:FindFirstChild(name: string, recursive: boolean): Instance?`
-
-```lua
-local part = workspace:FindFirstChild("Part")
-
-if part then
-    part.Position = Vector3.new(3, 1, 4)
+if platform and platform:IsA("Part") then
+    platform.Anchored = true
+    platform.Position = Vector3.new(0, 4, 0)
+    platform.Color = Color3.fromRGB(92, 170, 255)
 end
-```
 
-<br>
-
-### GetChildren()
-
-Returns an array with all children of the [Instance](/content//reference/classes/instance.md).
-
-#### Syntax
-`Instance:GetChildren(): { Instance }`
-
-```lua
-local model = workspace.Model
-local parts = model:GetChildren()
-
-for i, part in parts do
-    print(part.Name .. " is child number " .. i)
+for _, item in ipairs(Workspace:GetDescendants()) do
+    if item:IsA("Part") then
+        print(item.Name, item.Position)
+    end
 end
-```
-
-<br/>
-
-### WaitForChild()
-
-Returns the child of the [Instance](/content//reference/classes/instance.md) with the given name. \
-The current thread will yield if the child does not exist, until it does.
-
-#### Syntax
-`Instance:WaitForChild(name: string, timeOut: number): Instance`
-
-```lua
-local block = workspace:WaitForChild("Block")
-print(block .. " was added to the Workspace")
 ```

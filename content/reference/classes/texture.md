@@ -1,49 +1,15 @@
 ---
 title: Texture
-description: Textures allow for rendering special decals onto parts
+description: An editor object that draws a surface pattern on a Part face.
 ---
 
-<!-- 
-Texture
-Revision 1
-
-Written by KingTasaz on August 28th, 2026
--->
-
 ## Summary
-When a texture is added to a [`part`](./part.md), its `Face` and `name` get set automatically, so adding 6 textures to cover an entire part is very quick.
-<br><br>
 
-<details>
-<summary><b>Properties</b></summary>
-Properties of a Texture, in the order they appear on Vortex Studio.
-<br><br>
-<ul>
-<details>
-<summary><b>Texture</b></summary>
+`Texture` is available in the editor but is not a supported `Instance.new` target in the current Luau bridge. No scriptable Texture members are verified.
 
-- [Face](#face): [`Enum.Face`](../datatypes/enumitem.md)
-- [Texture](#texture): [`Enum.Texture`](../datatypes/enumitem.md)
+## Editor properties
 
-</details>
-
-</ul>
-</details>
-
-
-## Properties
-
-### Face
-> [`Enum.Face`](../datatypes/enumitem.md) \
-\
-Controls which face of the parent [`part`](./part.md) that the texture is displayed on.
-
-<br/>
-
-### Texture
-> [`Enum.Texture`](../datatypes/enumitem.md) \
-\
-Sets which texture to render onto the selected face.
-Currently the only options are `Inlets` or `Studs`. 
-
-<br/>
+| Property | Description |
+| --- | --- |
+| Face | Face of the parent Part on which the pattern is drawn. |
+| Texture | Surface pattern. The editor currently offers Inlets and Studs. |
