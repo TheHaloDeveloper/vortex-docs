@@ -83,11 +83,9 @@ Common methods of an `Instance`-like object.
 
 <br/>
 
-## Vortex Studio 0.3.4 method availability
+## Vortex Studio Method Availability
 
-The following matrix records whether each member was exposed as a function on
-the live object. It verifies availability, not every edge case of the method's
-behavior.
+The following matrix records whether each member is exposed as a function on the live object.
 
 | Runtime object | `FindFirstChild` | `FindFirstChildOfClass` | `WaitForChild` | `GetChildren` | `GetDescendants` | `Clone` | `Destroy` | `IsA` |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -100,18 +98,6 @@ behavior.
 | [`Player`](./player.md) | No | No | No | No | No | No | No | No |
 | [`Humanoid`](./humanoid.md) | No | No | No | No | No | No | No | No |
 
-This is why Roblox inheritance alone is not enough to determine the available
-Vortex API. A `Players` service can still provide its class-specific
-`GetPlayers()` method, and a `Humanoid` can provide `IsDead()`, even though the
-tested generic methods above are absent.
+A `Players` service can still provide its class-specific `GetPlayers()` method, and a `Humanoid` can provide `IsDead()`, even though the generic methods above are absent.
 
-## Introspection limitation
-
-Engine-backed members may be provided through metatable lookup. `pairs()` only
-enumerates direct table keys, so it can omit readable properties and other
-supported members. It can also reveal engine-owned keys that are not public
-API. Do not use `pairs()` as a capability check; test the named member and
-consult the concrete class reference.
-
-These observations were made in Vortex Studio 0.3.4 and may change in later
-versions.
+These observations were made in Vortex Studio 0.3.4 and may change in later versions.
