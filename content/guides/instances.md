@@ -9,8 +9,7 @@ Written by ElectroTato on the 30th of August, 2026
 
 # Summary
 
-`Instances` are the basic building blocks for objects in a game. Each concrete class has its own [`Properties`](https://create.playvortex.io/guides/properties/)
-and methods.
+`Instances` are the basic building blocks for objects in a game. Each concrete class has its own [`Properties`](https://create.playvortex.io/guides/properties/) and methods.
 
 You can create a new `Instance` using the [`Instance.new`](https://create.playvortex.io/reference/globals/instance-new/) method in a script, by passing in the `ClassName` of the `Instance` as the first argument.
 
