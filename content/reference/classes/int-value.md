@@ -1,34 +1,36 @@
 ---
 title: IntValue
-description: Stub
+description: A detached integer value container.
 ---
 
-Stores an Integer value 
+## Summary
 
-# Summary
-[IntValues](https://create.playvortex.io/reference/classes/int-value/) are a very simple way to store an integer outside of a script. You can get/set it's stored integer with `IntValue.Value`.
+`IntValue` is constructable in Vortex Studio 0.3.4 in both `Script` and
+`LocalScript`. It stores a numeric `Value` and does not need a parent to be
+read or written.
 
-# Properties
+## Properties
 
-## .Name
-  `String` 
-  
-The name of the [IntValue](https://create.playvortex.io/reference/classes/int-value/) , and label in the explorer.
+### Name
 
-## .Value
-`Integer`
+> `string`
 
-The `Integer` Stored inside [IntValue](https://create.playvortex.io/reference/classes/int-value/)
+The instance name. A new value is named `IntValue`.
 
-# Code Snippet
+### Value
 
-    local newVal = Instance.new("IntValue")
-    newVal.Parent = game.Workspace
+> `number`
 
-	newVal.Value = 9999
+A new `IntValue` starts at `0`. Assigning and reading integral values works:
 
-	print(newVal.Value)
+```lua
+local score = Instance.new("IntValue")
+score.Value = 42
+print(score.Value) -- 42
+```
 
-## Expected Output
+## Change notifications
 
-    9999
+`Changed` and `GetPropertyChangedSignal("Value")` are present and connectable,
+but changing `Value` did not invoke either callback in the tested 0.3.4
+runtime. Poll `Value` when a script must observe a change.

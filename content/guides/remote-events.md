@@ -56,3 +56,17 @@ end)
 |---|---|---|
 | `OnServerEvent` | player, ... | Fires on the server when a client calls FireServer. |
 | `OnClientEvent` | ... | Fires on the client when the server calls FireClient / FireAllClients |
+
+## Vortex Studio 0.3.4 notes
+
+- Create RemoteEvents in `ReplicatedStorage` through the editor before play.
+  Editor-authored remotes dispatch from `FireServer` to `OnServerEvent`;
+  script-created remotes were visible to clients but did not dispatch in the
+  tested runtime.
+- The first `OnServerEvent` value is currently a numeric connection id, not a
+  `Player`. The server can enumerate Players through `GetPlayers()`, but no
+  public mapping from this id to its Player, Character, or Humanoid is known.
+- Remote arguments cannot currently contain Instances, including `LocalPlayer`
+  or a Character.
+- `FireClient`, `FireAllClients`, and `OnClientEvent` are exposed, but their
+  delivery remains unconfirmed.

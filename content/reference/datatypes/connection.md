@@ -1,38 +1,60 @@
 ---
-title: Connections
-description: A variable that returns the connection between an event to a function.
+title: Connection
+description: Represents a callback connected to a Signal.
 ---
 
-## Example
-In this example, the player has three attempts to open a door by pressing `E`. The script checks for when the keybind is pressed, and once the player has run out of attempts, the connection is disconnected and the game stops listening for key presses.
+A `Connection` is returned by [`Signal:Connect`](/content/reference/datatypes/signal.md#connect)
+or [`Signal:Once`](/content/reference/datatypes/signal.md#once). It can be used
+to stop the callback from receiving future signal fires.
 
-## Client Script
-- placed in `StarterPlayerScripts`
-```lua
-local UserInputService = game:GetService("UserInputService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+## Summary
 
-local openDoor = ReplicatedStorage.OpenDoor
+<details>
+<summary><b>Properties</b></summary>
+Properties of a `Connection`.
+<br><br>
 
-local attempts = 0
-local connection = nil
+* [Connected](#connected): `Boolean`
 
-connection = UserInputService.InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.E then
-        if attempts == 3 then
-            connection:Disconnect()
-            return
-        end
-        openDoor:FireServer()
-        attempts += 1
-    end
-end)
-```
+</details>
+
+<details>
+<summary><b>Methods</b></summary>
+Methods of a `Connection`.
+<br><br>
+
+* [Disconnect](#disconnect)
+
+</details>
+
+## Properties
+
+### Connected
+
+> `Boolean`
+>
+> Whether the connection is currently active.
+
+<br/>
 
 ## Methods
-| Method | Returns | Description |
-|---|---|---|
-| `Disconnect()` | void | Stops the connection from firing and permanently detaches it from the event. |
 
-## Events
-A `Connection` has no events of its own. It's returned by calling `:Connect()` on an event.
+### Disconnect
+
+> `connection:Disconnect()`
+>
+> Disconnects the callback. Future signal fires no longer invoke it, and
+> `Connected` becomes `false`.
+
+## Testing Notes
+
+These observations are from Vortex Studio 0.3.4 and may differ in later
+releases.
+
+Connections are represented as tables. The lowercase `disconnect` alias is
+also exposed; this reference uses the canonical `Disconnect` name.
+
+In both Script and LocalScript, `Connected` began as `true`, a manually fired
+signal delivered its callback once, and `Disconnect()` changed `Connected` to
+`false` and prevented later delivery. The lowercase `disconnect()` alias has
+the same effect.

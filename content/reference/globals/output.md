@@ -1,26 +1,34 @@
 ---
 title: Output
-description: The Output window in Vortex is used to display messages, warnings, errors, and other information.
+description: Print and diagnose script output in Vortex Studio.
 ---
 
-# What appears in output?
+## print
 
-A plethora of things. Firstly, you'll see errors from your scripts (as shown below):
-```
-[Script] line 1: attempt to call a nil value
-stack traceback:
-	[string "script:4294966667"]:1: in ?
-```
-> [!NOTE]
-> To reproduce this error, create a server script and try using the "warn" function (doesn't exist at the time of writing) `warn("This function does not exist.")`
+`print` is available in both Script and LocalScript in Vortex Studio 0.3.4.
+It accepts multiple values and formats Vortex values such as `Vector3` for the
+Output panel. It returns `nil`.
 
-Secondly, you can see things you print (as shown below):
+```lua
+print("position", true, 42, Vector3.new(1, 2, 3))
 ```
-[Script] Hello, World!
+
+Output is labelled with the executing script type while the game is running.
+Use your own prefixes when several scripts emit related diagnostics.
+
+## Warnings and caught errors
+
+`warn` is unavailable. `error` and `assert` are available; when called inside
+`pcall`, they return `false` and an error string containing the generated
+script identifier, line number, and message.
+
+```lua
+local ok, message = pcall(function()
+    error("something went wrong")
+end)
+
+print(ok, message)
 ```
-> [!NOTE]
-> To reproduce this output, use the `print()` function.
 
-
-# Summary
-The Output is used to view print messages and warnings.
+This page only describes caught failures. An uncaught error ends the current
+script path and should be used deliberately when debugging.

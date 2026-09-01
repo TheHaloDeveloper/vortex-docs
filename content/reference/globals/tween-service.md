@@ -1,8 +1,19 @@
 ---
 title: TweenService
-description: Explains TweenService and provides code examples
+description: Global alias for the TweenService animation service.
 ---
 # TweenService
+
+Get the service through either global alias:
+
+```luau
+local tweenService = TweenService
+-- or
+local tweenService = game:GetService("TweenService")
+```
+
+See the [TweenService reference](/content/reference/classes/tween-service.md)
+for `Create` and the current Vortex Studio behavior notes.
 
 TweenService allows you to smoothly change supported properties of an object over a specified amount of time. You can also control how the property changes using different easing styles and directions.
 

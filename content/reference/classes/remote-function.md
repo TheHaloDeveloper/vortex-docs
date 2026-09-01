@@ -5,7 +5,7 @@ description: A function that is invoked and returns values from the server to th
 
 ## Summary
 
-Differently from [RemoteEvents](https://create.playvortex.io/reference/classes/remote-event/), `RemoteFunctions` allows data to be computed inside a function call, and returned with the computed values, which means they are more flexible and overall prefered over [RemoteEvents](https://create.playvortex.io/reference/classes/remote-event/). Although `InvokeAllClients` doesn't exist, since you'd need to yield until every player has returned a value (which isn't guarenteed).
+Differently from [RemoteEvents](https://create.playvortex.io/reference/classes/remote-event/), `RemoteFunctions` allows data to be computed inside a function call and returned with the computed values. `InvokeAllClients` does not exist, since yielding until every player returns a value is not guaranteed.
 
 ### Example
 
@@ -15,21 +15,21 @@ Differently from [RemoteEvents](https://create.playvortex.io/reference/classes/r
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
-local GetPiFromDigits = ReplicatedStorage:WaitForChild("GetPiFromDigits") -- WaitForChild is very important!
+local GetPiFromDigits = ReplicatedStorage:WaitForChild("GetPiFromDigits")
 
--- fire to a specific player
-local random_player = Players:GetChildren()[math.random(1, #Players:GetChildren())]
-local pi = GetPiFromDigits:InvokeClient(random_player, 5) -- calculate 5 digits of pi
+-- Roblox-style targeting example; see the Vortex notes below.
+local activePlayers = Players:GetPlayers()
+local random_player = activePlayers[math.random(1, #activePlayers)]
+local pi = GetPiFromDigits:InvokeClient(random_player, 5)
 
-print(random_player.Name.. " replied with: ".. pi);
+print(random_player.Name .. " replied with: " .. pi)
 ```
 
 ```luau
--- client
+-- LocalScript
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-local GetPiFromDigits = ReplicatedStorage:WaitForChild("GetPiFromDigits") -- WaitForChild is very important!
+local GetPiFromDigits = ReplicatedStorage:WaitForChild("GetPiFromDigits")
 
 function compute_pi(digits)
     -- magic
@@ -52,7 +52,7 @@ function compute_pi(digits)
         output.append(tostring(math.floor(num / 10)))
     end
 
-    local result = output[1].. "."
+    local result = output[1] .. "."
     for i = 2, #output, 1 do
         result ..= output[i]
     end
@@ -65,10 +65,27 @@ GetPiFromDigits.OnClientInvoke = compute_pi
 
 ## Methods
 
-- `InvokeClient(player: Player, arguments: Tuple) : Tuple` - Invokes data from the server to the client
-- `InvokeServer(arguments: Tuple) : Tuple` - Invokes data from the client to the server
+- `InvokeClient(player: Player, arguments: Tuple) : Tuple` - Invokes data from
+  the server to the client;
+- `InvokeServer(arguments: Tuple) : Tuple` - Invokes data from the client to
+  the server.
 
-## Events
+## Callbacks
 
-- `OnClientInvoke(arguments: Tuple) : Tuple` - Writable method that is called on invoking from the server to the client;
-- `OnServerInvoke(player: [Player](https://create.playvortex.io/reference/classes/player/), arguments: Tuple) : Tuple` - Writable method that is called when invoking from the client to the server;
+- `OnClientInvoke(arguments: Tuple) : Tuple` - Writable callback invoked from
+  the server to the client;
+- `OnServerInvoke(senderId: Number, arguments: Tuple) : Tuple` - Writable
+  callback invoked from the client to the server.
+
+## Vortex Studio 0.3.4 notes
+
+`InvokeServer` is exposed on the client and assigning `OnServerInvoke` succeeds
+in a Script for an editor-authored remote in `ReplicatedStorage`. However,
+`InvokeServer(LocalPlayer)` is rejected before delivery because Instances cannot
+currently be sent through remotes. A successful primitive request/response
+round trip has not yet been established.
+
+The server-side `Players:GetChildren()` route remains unavailable. In 0.3.4,
+`Players:GetPlayers()` does return visible Player objects in a server Script,
+so it provides the Player target shown above in principle. `OnClientInvoke` and
+`InvokeClient` delivery are still untested.

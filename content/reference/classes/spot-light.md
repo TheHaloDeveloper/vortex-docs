@@ -17,6 +17,19 @@ There is currently no on/off switch for lights, but setting either the color, br
 
 Under the `properties` tab, SpotLights visibly have Position, Rotation, and Size attributes. Position and Rotation are `read-only` and size has `no effect`. It is possible these values were left in by accident.
 
+## Runtime scripting limitation
+
+In Vortex Studio 0.3.4, `Instance.new("SpotLight")` succeeds in both Script
+and LocalScript, but produces a non-functional class shell. It exposes generic
+Instance methods and a connectable `Changed` signal, while the tested
+light-specific fields initially read as `nil`.
+
+`Brightness`, `Range`, `Angle`, `Enabled`, and `Shadows` are not settable.
+`Color` accepts and retains a `Color3` value, but assigning `Parent` to a
+temporary Part succeeds without establishing parentage or adding a child.
+Consequently, there is no confirmed script route for configuring or attaching
+a rendered SpotLight in the current runtime.
+
 <details>
 <summary><b>Properties</b></summary>
 Properties of a SpotLight, in the order they appear on Vortex Studio.

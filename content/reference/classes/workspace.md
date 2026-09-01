@@ -14,91 +14,91 @@ Written by TheJustDare on August 31th, 2026
 
 <details>
 <summary><b>Properties</b></summary>
+Properties of a Workspace, in the order they appear on Vortex Studio
+<br><br>
 
-Properties of `Workspace`
-<br>
-
-* [Name](#name): `String`
-* [ClassName](#className): `String`
-
+- [ClassName](#classname): `String`
+- [Name](#name): `String`
 </details>
 
 <details>
 <summary><b>Methods</b></summary>
+Methods of a `Workspace`.
+<br><br>
 
-Methods of `Workspace`
-<br>
-
-* [FindFirstChild()](#findFirstChild): `Instance?`
-* [GetChildren()](#getchildren): `{ Instance }`
-* [WaitForChild()](#waitForChild): `Instance`
+- [FindFirstChild](#findfirstchild): [`Instance`](/content/reference/classes/instance.md) | `nil`
+- [GetChildren](#getchildren): `{ Instance }`
+- [WaitForChild](#waitforchild): [`Instance`](/content/reference/classes/instance.md)
 
 </details>
 
 ## Properties
 
-### Name
-
-The name of the [Workspace](/content/reference/classes/workspace.md). \
-This property is read only and cannot be changed.
-
-<br>
-
 ### ClassName
+> `String` \
+\
+The runtime class name of the service.
 
-The class name of the [Workspace](/content/reference/classes/workspace.md). \
-This property is read only and cannot be changed.
+<br/>
 
-<br>
+
+### Name
+> `String` \
+\
+The service name shown by the runtime.
+
+<br/>
 
 ## Methods
 
 ### FindFirstChild()
+> [`Instance`](/content/reference/classes/instance.md) | `nil` \
+\
+`workspace:FindFirstChild(name: String)` \
+\
+Returns the first direct child with the supplied `name`, or `nil` when none is
+found.
 
-Returns the first child found with the given name. \
-For `FindFirstChild()` to work, a name of a type of `string` has to be passed. \
-Optionally a second argument can be given, whether to search for the `Instance` recursively.
+#### Parameters
 
-#### Syntax
-`Instance:FindFirstChild(name: string, recursive: boolean): Instance?`
-
-```lua
-local part = workspace:FindFirstChild("Part")
-
-if part then
-    part.Position = Vector3.new(3, 1, 4)
-end
-```
-
-<br>
-
-### GetChildren()
-
-Returns an array with all children of the [Instance](/content//reference/classes/instance.md).
-
-#### Syntax
-`Instance:GetChildren(): { Instance }`
-
-```lua
-local model = workspace.Model
-local parts = model:GetChildren()
-
-for i, part in parts do
-    print(part.Name .. " is child number " .. i)
-end
-```
+- `name`: `String` — the child name to find.
 
 <br/>
 
+
+### GetChildren()
+> `{ Instance }` \
+\
+Returns the direct children of `Workspace`.
+
+<br/>
+
+
 ### WaitForChild()
+> [`Instance`](/content/reference/classes/instance.md) \
+\
+`workspace:WaitForChild(name: String)` \
+\
+Waits for and returns a direct child with the supplied `name`.
 
-Returns the child of the [Instance](/content//reference/classes/instance.md) with the given name. \
-The current thread will yield if the child does not exist, until it does.
+#### Parameters
 
-#### Syntax
-`Instance:WaitForChild(name: string, timeOut: number): Instance`
+- `name`: `String` — the child name to wait for.
 
-```lua
-local block = workspace:WaitForChild("Block")
-print(block .. " was added to the Workspace")
-```
+
+<br/>
+
+## Testing Notes
+
+The hierarchy observations below were revalidated in Vortex Studio 0.3.4 and
+may differ in later releases.
+
+`Raycast` is not exposed in either Script or LocalScript in Vortex Studio
+0.3.4. A temporary `Part` can be parented to `Workspace`,
+and `WaitForChild` resolves it. `FindFirstChild` returns `nil` and
+`GetChildren` omits it.
+
+For existing authored children, repeated `GetChildren()` calls can return fresh
+Lua wrapper tables for the same underlying Instance. Do not use a returned
+wrapper as a persistent table key across frames; use a unique authored name or
+another stable identifier instead.

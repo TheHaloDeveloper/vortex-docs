@@ -14,6 +14,13 @@ Written by KingTasaz on August 28th, 2026
 > [!NOTE]
 > `Lighting` is a service and cannot be `created` or `destroyed`.
 
+## Runtime availability
+
+In Vortex Studio 0.3.4, `game:GetService("Lighting")` fails with
+`"Lighting" is not a valid service` in both Script and LocalScript. The
+editor-facing Lighting controls documented below therefore do not currently
+have a confirmed runtime scripting surface.
+
 There are two main controls under Lighting's properties:
 - `Ambient` is the general lighting that every object receives regardless of its position or rotation.
 - `Sun` is the light placed on object faces that are in direct view of the sun. If shadows are enabled, then parts of a face can be blocked from the sun.

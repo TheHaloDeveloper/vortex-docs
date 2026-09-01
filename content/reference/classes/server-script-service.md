@@ -1,9 +1,17 @@
 ---
 title: ServerScriptService
-description: Stores Server-side Scripts
+description: The service surface for editor-authored server Scripts.
 ---
+
 ## Summary
 
-ServerScriptService is a secure, server-side container used to store and execute critical, game-wide logic. Because it lives strictly on the cloud server, its contents are never replicated to the client device, therefore your source code private and secure. Also ServerScriptService can have only localscripts placed in it
+## Runtime support
 
-<!-- Edited by breadworkz on 2026/08/30 5:55 PM ADT -->
+`game:GetService("ServerScriptService")` is available in both Script and
+LocalScript contexts in Vortex Studio 0.3.4. It exposes `FindFirstChild`,
+`GetChildren`, and `WaitForChild`.
+
+Runtime-created Scripts do not become observable children when assigned to
+this service: parent equality and `FindFirstChild` both fail, and
+`GetChildren()` does not include the temporary Script. Place server Scripts in
+the editor instead of trying to create or attach them from code.
