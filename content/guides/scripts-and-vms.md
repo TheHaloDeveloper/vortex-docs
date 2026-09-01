@@ -25,6 +25,22 @@ part.Parent = game.Workspace
 * `LocalScript`
 * `Script`
 
+### Script placement
+
+An editor-authored `Script` placed directly under a `Part` in `Workspace` ran
+during a Vortex Studio 0.3.4 playtest. Inside that script, `script.Parent`
+resolved to the containing Part:
+
+```lua
+local part = script.Parent
+print(part.Name, part.ClassName)
+```
+
+This confirms that a server Script does not have to be a direct child of
+`ServerScriptService` to execute. Runtime-created Script instances are a
+different case: their `Source` is not settable, so creating and parenting one
+does not create executable code.
+
 ### Luau Virtual Machine
 
 > The Luau Virtual Machine (VM) is responsible for executing compiled Luau code at runtime.
