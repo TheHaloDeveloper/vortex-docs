@@ -48,3 +48,23 @@ Properties of an `EnumItem`.
 > A reference to the parent `Enum` of the `EnumItem`.
 
 <br/>
+
+## Example
+
+Enum items are named values. Compare the item itself in game logic, and use
+its properties when displaying or inspecting it:
+
+```luau
+local key = Enum.KeyCode.R
+
+print(key.Name)     -- R
+print(key.Value)    -- 114 in Vortex Studio 0.3.8
+print(key.EnumType) -- Enum.KeyCode
+
+if key == Enum.KeyCode.R then
+    print("The values match")
+end
+```
+
+Avoid depending on a numeric `Value` when an enum item is available. The named
+item is clearer and does not require the number to remain unchanged.

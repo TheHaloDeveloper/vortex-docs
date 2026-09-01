@@ -18,7 +18,7 @@ Methods of an `Enum`.
 <br><br>
 
 * [GetEnumItems()](#getenumitems): `EnumItem[]`
-* [FromName(name: `String`)](#fromnamename-string): `EnumItem`
+* [FromName(name: `String`)](#fromnamename-string): `EnumItem | nil`
 * [FromValue(value: `Number`)](#fromvaluevalue-number): `EnumItem`
 
 </details>
@@ -35,7 +35,7 @@ Methods of an `Enum`.
 
 ### FromName(name: `String`)
 
-> `EnumItem`
+> `EnumItem | nil`
 >
 > Finds an `EnumItem` by name.
 
@@ -48,3 +48,37 @@ Methods of an `Enum`.
 > Finds an `EnumItem` by value.
 
 <br/>
+
+## Examples
+
+Use an enum group to look up a named item:
+
+```luau
+local jumpKey = Enum.KeyCode:FromName("Space")
+
+if jumpKey == Enum.KeyCode.Space then
+    print("Space is the jump key")
+end
+```
+
+An unknown name returns `nil`, so check user-supplied names before using the
+result:
+
+```luau
+local key = Enum.KeyCode:FromName("NotAKey")
+
+if key == nil then
+    print("Unknown key name")
+end
+```
+
+`GetEnumItems()` is useful when building a list of allowed choices:
+
+```luau
+for _, material in ipairs(Enum.Material:GetEnumItems()) do
+    print(material.Name)
+end
+```
+
+In Vortex Studio 0.3.8, `FromName("R")` returned `Enum.KeyCode.R` and an
+unknown name returned `nil`.
