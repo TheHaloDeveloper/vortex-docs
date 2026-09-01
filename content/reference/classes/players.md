@@ -5,26 +5,39 @@ description: A container that holds all players currently connected as Player ob
 
 ## Summary
 
-A service that holds every currently connected clients, as [Player](https://create.playvortex.io/reference/classes/player/) instances, which contains information about a client.
+A service representing connected clients as
+[Player](https://create.playvortex.io/reference/classes/player/) instances.
 
 ### Example
 
 ```luau
--- client
+-- LocalScript
 
 local Players = game:GetService("Players")
 
-local every_player = Players:GetPlayers() -- gets all children whose classes are `Player`
-local player = Players.LocalPlayer -- gets the current client
+local everyPlayer = Players:GetPlayers()
+local player = Players.LocalPlayer
 ```
 
 ## Properties
 
 - `Name` - the name of the service;
-- `Parent` - probably the actual "game", that holds everything;
-- `LocalPlayer` - only accessible in the client-side, otherwise it'll be `nil`.
+- `ClassName` - the runtime class name;
+- `LocalPlayer` - available in a `LocalScript`; otherwise `nil`.
 
 ## Methods
 
-- `GetChildren(): { Instance }` - all of the children inside the service;
-- `GetPlayers(): { Players }` - all of the players currently connected;
+- `GetPlayers(): { Player }` - returns the currently visible player list.
+
+`GetChildren` is not exposed by the current Vortex Players service.
+
+## Vortex Studio 0.3.4 notes
+
+`GetPlayers()` returns the current player in a `LocalScript`. In a confirmed
+server `Script`, it also returned a list containing the live `Player` object;
+that object's `Character` is readable. `LocalPlayer` remains `nil` on the
+server.
+
+The numeric connection id passed as the first `OnServerEvent` argument still
+has no known public mapping back to a particular Player. Numeric/string service
+indexing and the tested player lookup methods do not provide that mapping.

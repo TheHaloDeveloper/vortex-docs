@@ -35,6 +35,19 @@ Properties of a `Vector3`.
 </details>
 
 <details>
+<summary><b>Constants</b></summary>
+Constants of a `Vector3`.
+<br><br>
+
+* [zero](#zero): `Vector3`
+* [one](#one): `Vector3`
+* [xAxis](#xaxis): `Vector3`
+* [yAxis](#yaxis): `Vector3`
+* [zAxis](#zaxis): `Vector3`
+
+</details>
+
+<details>
 <summary><b>Constructors</b></summary>
 Constructors of a `Vector3`.
 <br><br>
@@ -48,23 +61,9 @@ Constructors of a `Vector3`.
 Methods of a `Vector3`.
 <br><br>
 
-* [Dot(other: `Vector3`)](#dotother-vector3): `Number`
-* [Cross(other: `Vector3`)](#crossother-vector3): `Vector3`
-* [Lerp(other: `Vector3`, alpha: `Number`)](#lerpother-vector3-alpha-number): `Vector3`
-
-</details>
-
-<details>
-<summary><b>Operators</b></summary>
-Operators supported by `Vector3`.
-<br><br>
-
-* [Vector3 + Vector3](#vector3--vector3): `Vector3`
-* [Vector3 - Vector3](#vector3---vector3): `Vector3`
-* [Vector3 * Vector3 | Number](#vector3--vector3--number--vector3--vector3--number): `Vector3`
-* [Vector3 / Vector3 | Number](#vector3--number--vector3--vector3): `Vector3`
-* [-Vector3](#-vector3): `Vector3`
-* [Vector3 == Vector3](#vector3--vector3-1): `Boolean`
+* [Cross](#cross): `Vector3`
+* [Dot](#dot): `Number`
+* [Lerp](#lerp): `Vector3`
 * [tostring(Vector3)](#tostringvector3): `String`
 
 </details>
@@ -148,7 +147,59 @@ Operators supported by `Vector3`.
 
 > `Vector3`
 >
-> The current vector with a magnitude of 1.
+> The normalized vector.
+
+<br/>
+
+## Constants
+
+### zero
+
+> `Vector3`
+>
+> `Vector3.zero`
+>
+> The vector `(0, 0, 0)`.
+
+<br/>
+
+### one
+
+> `Vector3`
+>
+> `Vector3.one`
+>
+> The vector `(1, 1, 1)`.
+
+<br/>
+
+### xAxis
+
+> `Vector3`
+>
+> `Vector3.xAxis`
+>
+> The unit vector along the X axis, `(1, 0, 0)`.
+
+<br/>
+
+### yAxis
+
+> `Vector3`
+>
+> `Vector3.yAxis`
+>
+> The unit vector along the Y axis, `(0, 1, 0)`.
+
+<br/>
+
+### zAxis
+
+> `Vector3`
+>
+> `Vector3.zAxis`
+>
+> The unit vector along the Z axis, `(0, 0, 1)`.
 
 <br/>
 

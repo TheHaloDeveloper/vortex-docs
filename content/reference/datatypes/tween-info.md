@@ -85,6 +85,8 @@ Properties of a `TweenInfo`.
 > 
 > Note that if repeat count is `-1` it will repeat forever.
 
+> Set `repeatCount` to `-1` to repeat forever.
+
 <br/>
 
 ### Reverses 
@@ -101,3 +103,30 @@ Properties of a `TweenInfo`.
 >
 > Time before the tween begins, in seconds.
 <br/>
+
+## Constructors
+
+### new
+
+> `TweenInfo`
+>
+> `TweenInfo.new(time: Number, easingStyle: Enum.EasingStyle, easingDirection: Enum.EasingDirection, repeatCount: Number, reverses: Boolean, delayTime: Number)`
+>
+> Creates a TweenInfo value that configures a Tween.
+
+#### Parameters
+
+- `time`: `Number` — the duration in seconds.
+- `easingStyle`: `Enum.EasingStyle` — the easing curve.
+- `easingDirection`: `Enum.EasingDirection` — the easing direction.
+- `repeatCount`: `Number` — the number of repeats; `-1` repeats forever.
+- `reverses`: `Boolean` — whether each repeat reverses direction.
+- `delayTime`: `Number` — the delay before playback begins, in seconds.
+
+## Testing Notes
+
+`TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)`
+returned a TweenInfo table in both `Script` and `LocalScript` in Vortex Studio
+0.3.4. Runtime availability may differ in later releases.
+
+`repeatCount = -1` is treated as an infinite repeat count.

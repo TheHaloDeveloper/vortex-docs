@@ -62,6 +62,7 @@ For larger changes, open an issue first so we can discuss them.
 - Keep code blocks copy/paste-friendly (show full commands).
 - When adding CLI examples, include the expected output where helpful.
 - Avoid project-specific assumptions; where necessary, document environmental details (OS, versions).
+- All paths must be relative.
 
 ## File structure and assets
 
@@ -88,5 +89,6 @@ Before requesting review, ensure:
 - Links and images render correctly.
 - Any necessary screenshots or examples are included.
 - If the change affects a live site, the preview/build has been tested locally.
+- Ensure all paths are relative.
 ------------------------------------------------------------
 Thanks for taking the time to contribute to Vortex Docs!

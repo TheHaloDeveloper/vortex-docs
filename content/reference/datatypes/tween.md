@@ -9,7 +9,7 @@ Written by CNK (Vortex IG. CNK) on Aug 30th, 2026 based on actual code.
 
 ## Summary
 
-> If you are looking to construct a tween reference [TweenService](/reference/classes/tween-service/). Then come back here after your tween has been created.
+> If you are looking to construct a tween, reference [TweenService](/reference/classes/tween-service/). Then come back here after your tween has been created.
 
 <details>
 <summary><b>Properties</b></summary>
