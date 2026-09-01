@@ -5,9 +5,9 @@ description: Learn how to make your first script in Vortex Studio.
 
 <!-- 
 Your first script
-Revision 1
+Revision 2
 
-Written by Kindtracker on August 29th, 2026
+Written by RatMilk on September 1st, 2026
 -->
 
 Let's make Hello world script, create a script in ServerScriptService.
@@ -16,11 +16,7 @@ You will see:
 print("Hello, world!")
 ```
 Then playtest the game, you will see "Hello, world!" in the output. Now, let's spawn a part in Workspace.
-First we need to get Workspace using the game's service functions
-```lua
-local workspace = game:GetService("Workspace")
-```
-Now we have workspace. Next, we need to create a part
+First we need to create a part using the `Instance.new()` functions
 ```lua
 local part = Instance.new("Part")
 ```
