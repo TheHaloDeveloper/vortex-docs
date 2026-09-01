@@ -14,9 +14,9 @@ vortex-docs
 ```
 
 ## Documentation Status
-The documentation is actively being expanded by contributors as more Vortex Scripting API is documented.
+The documentation is actively being expanded by contributors as more of the Vortex Scripting API is documented.
 
-Some parts of Vortex may not have complete documentation yet. If you find something that is undocmented or incorrect, feel free to contribute it or create an issue.
+Some parts of Vortex may not have complete documentation yet. If you find something that is undocumented or incorrect, feel free to contribute it or create an issue.
 
 ## Contributing
 Vortex Documentation is open to contributions! If you want to document something that's part of the Vortex Scripting API but isn't currently covered, you can create an issue or open a pull request.
