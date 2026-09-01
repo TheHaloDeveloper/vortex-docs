@@ -18,4 +18,4 @@ Vortex Engine provides APIs for building your game, creating parts, writing scri
 
 This documentation will introduce you to the scripting API, and the features provided by Vortex Engine.
 
-If you're new to Vortex Studio, you may want to start with [Your First Script guide](/content/guides/first-script.md).
+If you're new to Vortex Studio, you may want to start with [Your First Script guide](./first-script.md).

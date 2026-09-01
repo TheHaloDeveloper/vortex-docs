@@ -1,19 +1,7 @@
 ---
 title: CFrame
 description: A data type that represents both a 3D position and orientation.
----------------------------------------
-
-<link rel="stylesheet" href="/styles/test.css">
-
-<!-- 
-CFrame
-Revision 1
-
-Written by n1run on August 29th, 2026
--->
-
-> [!NOTE] 
-> CFrames do not exist in Vortex right now, so all of this information is taken from Roblox's CFrame.
+---
 
 ## Summary
 
@@ -24,15 +12,18 @@ Properties of a `CFrame`.
 
 * [Position](#position): `Vector3`
 * [Rotation](#rotation): `CFrame`
-* [X](#x): `Number`
-* [Y](#y): `Number`
-* [Z](#z): `Number`
-* [LookVector](#lookvector): `Vector3`
-* [RightVector](#rightvector): `Vector3`
-* [UpVector](#upvector): `Vector3`
-* [XVector](#xvector): `Vector3`
-* [YVector](#yvector): `Vector3`
-* [ZVector](#zvector): `Vector3`
+* [X](#x), [Y](#y), [Z](#z): `Number`
+* [LookVector](#lookvector), [RightVector](#rightvector), [UpVector](#upvector): `Vector3`
+* [XVector](#xvector), [YVector](#yvector), [ZVector](#zvector): `Vector3`
+
+</details>
+
+<details>
+<summary><b>Constants</b></summary>
+Constants of a `CFrame`.
+<br><br>
+
+* [identity](#identity): `CFrame`
 
 </details>
 
@@ -41,11 +32,34 @@ Properties of a `CFrame`.
 Constructors of a `CFrame`.
 <br><br>
 
-* [new()](#new): `CFrame`
-* [new(Position: `Vector3`)](#newposition-vector3): `CFrame`
-* [new(X: `Number`, Y: `Number`, Z: `Number`)](#newx-number-y-number-z-number): `CFrame`
-* [Angles(RotationX: `Number`, RotationY: `Number`, RotationZ: `Number`)](#anglesrotationx-number-rotationy-number-rotationz-number): `CFrame`
-* [lookAt(Position: `Vector3`, Target: `Vector3`)](#lookatposition-vector3-target-vector3): `CFrame`
+* [new](#new): `CFrame`
+* [Angles](#angles): `CFrame`
+* [fromAxisAngle](#fromaxisangle): `CFrame`
+* [fromEulerAnglesXYZ](#fromeuleranglesxyz): `CFrame`
+* [fromEulerAnglesYXZ](#fromeuleranglesyxz): `CFrame`
+* [fromMatrix](#frommatrix): `CFrame`
+* [fromOrientation](#fromorientation): `CFrame`
+* [lookAt](#lookat): `CFrame`
+
+</details>
+
+<details>
+<summary><b>Methods</b></summary>
+Methods of a `CFrame`.
+<br><br>
+
+* [GetComponents](#getcomponents): `...Number`
+* [Inverse](#inverse): `CFrame`
+* [Lerp](#lerp): `CFrame`
+* [PointToObjectSpace](#pointtoobjectspace): `Vector3`
+* [PointToWorldSpace](#pointtoworldspace): `Vector3`
+* [ToEulerAnglesXYZ](#toeuleranglesxyz): `Number, Number, Number`
+* [ToEulerAnglesYXZ](#toeuleranglesyxz): `Number, Number, Number`
+* [ToObjectSpace](#toobjectspace): `CFrame`
+* [ToOrientation](#toorientation): `Number, Number, Number`
+* [ToWorldSpace](#toworldspace): `CFrame`
+* [VectorToObjectSpace](#vectortoobjectspace): `Vector3`
+* [VectorToWorldSpace](#vectortoworldspace): `Vector3`
 
 </details>
 
@@ -55,7 +69,7 @@ Constructors of a `CFrame`.
 
 > `Vector3`
 >
-> The 3D position component of the CFrame.
+> The position component of the CFrame.
 
 <br/>
 
@@ -63,55 +77,55 @@ Constructors of a `CFrame`.
 
 > `CFrame`
 >
-> The 3D rotation component of the CFrame, with the position components reset to zero.
+> The rotation component of the CFrame, with its position reset to the origin.
 
 <br/>
 
 ### X
 
-> `Number` 
+> `Number`
 >
-> The X-axis coordinate of the CFrame's position component.
+> The X coordinate of the CFrame position.
 
 <br/>
 
 ### Y
 
-> `Number` 
+> `Number`
 >
-> The Y-axis coordinate of the CFrame's position component.
+> The Y coordinate of the CFrame position.
 
 <br/>
 
 ### Z
 
-> `Number` 
+> `Number`
 >
-> The Z-axis coordinate of the CFrame's position component.
+> The Z coordinate of the CFrame position.
 
 <br/>
 
 ### LookVector
 
-> `Vector3` 
+> `Vector3`
 >
-> A normalized vector pointing in the forward direction of the CFrame.
+> The normalized forward direction of the CFrame.
 
 <br/>
 
 ### RightVector
 
-> `Vector3` 
+> `Vector3`
 >
-> A normalized vector pointing in the right direction of the CFrame.
+> The normalized right direction of the CFrame.
 
 <br/>
 
 ### UpVector
 
-> `Vector3` 
+> `Vector3`
 >
-> A normalized vector pointing out of the top side of the CFrame.
+> The normalized up direction of the CFrame.
 
 <br/>
 
@@ -119,7 +133,7 @@ Constructors of a `CFrame`.
 
 > `Vector3`
 >
-> The X component of the CFrame's rotation matrix. Equivalent to RightVector.
+> The X basis vector of the rotation matrix. Equivalent to `RightVector`.
 
 <br/>
 
@@ -127,7 +141,7 @@ Constructors of a `CFrame`.
 
 > `Vector3`
 >
-> The Y component of the CFrame's rotation matrix. Equivalent to UpVector.
+> The Y basis vector of the rotation matrix. Equivalent to `UpVector`.
 
 <br/>
 
@@ -135,48 +149,328 @@ Constructors of a `CFrame`.
 
 > `Vector3`
 >
-> The Z component of the CFrame's rotation matrix. Equivalent to the negated LookVector (-LookVector).
+> The Z basis vector of the rotation matrix. Equivalent to `-LookVector`.
+
+<br/>
+
+## Constants
+
+### identity
+
+> `CFrame`
+>
+> `CFrame.identity`
+>
+> The CFrame at `(0, 0, 0)` with no rotation.
 
 <br/>
 
 ## Constructors
 
-### new()
+### new
 
 > `CFrame`
 >
-> Returns a blank `CFrame` located at the world origin with no rotation.
+> `CFrame.new()`
+>
+> `CFrame.new(position: Vector3)`
+>
+> `CFrame.new(x: Number, y: Number, z: Number)`
+>
+> Creates a CFrame at the origin, from a position vector, or from three position coordinates.
+
+#### Parameters
+
+- `position`: `Vector3` — the position of the CFrame.
+- `x`: `Number` — the X position.
+- `y`: `Number` — the Y position.
+- `z`: `Number` — the Z position.
 
 <br/>
 
-### new(Position: `Vector3`)
+### Angles
 
 > `CFrame`
 >
-> Returns a new `CFrame` from a given `Vector3` position with no rotation.
+> `CFrame.Angles(rotationX: Number, rotationY: Number, rotationZ: Number)`
+>
+> Creates a CFrame rotated by the supplied angles in radians.
+
+#### Parameters
+
+- `rotationX`: `Number` — the X-axis rotation in radians.
+- `rotationY`: `Number` — the Y-axis rotation in radians.
+- `rotationZ`: `Number` — the Z-axis rotation in radians.
 
 <br/>
 
-### new(X: `Number`, Y: `Number`, Z: `Number`)
+### fromAxisAngle
 
 > `CFrame`
 >
-> Returns a new `CFrame` from the given spatial coordinates with no rotation.
+> `CFrame.fromAxisAngle(axis: Vector3, angle: Number)`
+>
+> Creates a CFrame rotated around `axis` by `angle` radians.
+
+#### Parameters
+
+- `axis`: `Vector3` — the axis of rotation.
+- `angle`: `Number` — the rotation angle in radians.
 
 <br/>
 
-### Angles(RotationX: `Number`, RotationY: `Number`, RotationZ: `Number`)
+### fromEulerAnglesXYZ
 
 > `CFrame`
 >
-> Returns a new `CFrame` rotated around the X, Y and Z axes by the given angles specified in radians.
+> `CFrame.fromEulerAnglesXYZ(rotationX: Number, rotationY: Number, rotationZ: Number)`
+>
+> Creates a CFrame using Euler rotations in XYZ order.
+
+#### Parameters
+
+- `rotationX`: `Number` — the X-axis rotation in radians.
+- `rotationY`: `Number` — the Y-axis rotation in radians.
+- `rotationZ`: `Number` — the Z-axis rotation in radians.
 
 <br/>
 
-### lookAt(Position: `Vector3`, Target: `Vector3`)
+### fromEulerAnglesYXZ
 
 > `CFrame`
 >
-> Returns a new `CFrame` located at the `Position` coordinates and rotated to point directly toward the `Target` coordinates.
+> `CFrame.fromEulerAnglesYXZ(rotationX: Number, rotationY: Number, rotationZ: Number)`
+>
+> Creates a CFrame using Euler rotations in YXZ order.
+
+#### Parameters
+
+- `rotationX`: `Number` — the X-axis rotation in radians.
+- `rotationY`: `Number` — the Y-axis rotation in radians.
+- `rotationZ`: `Number` — the Z-axis rotation in radians.
 
 <br/>
+
+### fromMatrix
+
+> `CFrame`
+>
+> `CFrame.fromMatrix(position: Vector3, vX: Vector3, vY: Vector3, vZ: Vector3)`
+>
+> Creates a CFrame from a position and its three rotation basis vectors.
+
+#### Parameters
+
+- `position`: `Vector3` — the position of the CFrame.
+- `vX`: `Vector3` — the X basis vector.
+- `vY`: `Vector3` — the Y basis vector.
+- `vZ`: `Vector3` — the Z basis vector.
+
+<br/>
+
+### fromOrientation
+
+> `CFrame`
+>
+> `CFrame.fromOrientation(rotationX: Number, rotationY: Number, rotationZ: Number)`
+>
+> Creates a CFrame from X, Y, and Z orientation angles in radians.
+
+#### Parameters
+
+- `rotationX`: `Number` — the X-axis rotation in radians.
+- `rotationY`: `Number` — the Y-axis rotation in radians.
+- `rotationZ`: `Number` — the Z-axis rotation in radians.
+
+<br/>
+
+### lookAt
+
+> `CFrame`
+>
+> `CFrame.lookAt(position: Vector3, target: Vector3)`
+>
+> Creates a CFrame at `position` oriented toward `target`.
+
+#### Parameters
+
+- `position`: `Vector3` — the position of the CFrame.
+- `target`: `Vector3` — the point toward which the CFrame faces.
+
+<br/>
+
+## Methods
+
+### GetComponents
+
+> `...Number`
+>
+> `cframe:GetComponents()`
+>
+> Returns the position and rotation-matrix components of the CFrame.
+
+<br/>
+
+### Inverse
+
+> `CFrame`
+>
+> `cframe:Inverse()`
+>
+> Returns the inverse transformation of `cframe`.
+
+<br/>
+
+### Lerp
+
+> `CFrame`
+>
+> `cframe:Lerp(goal: CFrame, alpha: Number)`
+>
+> Interpolates between `cframe` and `goal`.
+
+#### Parameters
+
+- `goal`: `CFrame` — the target transformation.
+- `alpha`: `Number` — the interpolation amount, from `0` to `1`.
+
+<br/>
+
+### PointToObjectSpace
+
+> `Vector3`
+>
+> `cframe:PointToObjectSpace(point: Vector3)`
+>
+> Converts a world-space point to the CFrame's object space.
+
+#### Parameters
+
+- `point`: `Vector3` — the world-space point.
+
+<br/>
+
+### PointToWorldSpace
+
+> `Vector3`
+>
+> `cframe:PointToWorldSpace(point: Vector3)`
+>
+> Converts an object-space point to world space.
+
+#### Parameters
+
+- `point`: `Vector3` — the object-space point.
+
+<br/>
+
+### ToEulerAnglesXYZ
+
+> `Number, Number, Number`
+>
+> `cframe:ToEulerAnglesXYZ()`
+>
+> Returns the CFrame rotation as X, Y, and Z Euler angles in radians.
+
+<br/>
+
+### ToEulerAnglesYXZ
+
+> `Number, Number, Number`
+>
+> `cframe:ToEulerAnglesYXZ()`
+>
+> Returns the CFrame rotation as X, Y, and Z Euler angles in radians, using YXZ order.
+
+<br/>
+
+### ToObjectSpace
+
+> `CFrame`
+>
+> `cframe:ToObjectSpace(other: CFrame)`
+>
+> Converts `other` into `cframe`'s object space.
+
+#### Parameters
+
+- `other`: `CFrame` — the world-space transformation.
+
+<br/>
+
+### ToOrientation
+
+> `Number, Number, Number`
+>
+> `cframe:ToOrientation()`
+>
+> Returns the CFrame rotation as X, Y, and Z orientation angles in radians.
+
+<br/>
+
+### ToWorldSpace
+
+> `CFrame`
+>
+> `cframe:ToWorldSpace(other: CFrame)`
+>
+> Converts `other` from `cframe`'s object space to world space.
+
+#### Parameters
+
+- `other`: `CFrame` — the object-space transformation.
+
+<br/>
+
+### VectorToObjectSpace
+
+> `Vector3`
+>
+> `cframe:VectorToObjectSpace(vector: Vector3)`
+>
+> Converts a world-space direction vector to object space without applying position.
+
+#### Parameters
+
+- `vector`: `Vector3` — the world-space direction vector.
+
+<br/>
+
+### VectorToWorldSpace
+
+> `Vector3`
+>
+> `cframe:VectorToWorldSpace(vector: Vector3)`
+>
+> Converts an object-space direction vector to world space without applying position.
+
+#### Parameters
+
+- `vector`: `Vector3` — the object-space direction vector.
+
+<br/>
+
+## Operators
+
+The following expressions completed successfully in both `Script` and `LocalScript`:
+
+```lua
+cframe + vector3
+cframe - vector3
+cframe * otherCFrame
+cframe * vector3
+```
+
+Addition and subtraction translate the CFrame. Multiplication composes two
+CFrames or transforms a `Vector3` point.
+
+## Testing Notes
+
+These observations were revalidated in both Script and LocalScript in Vortex
+Studio 0.3.4.
+
+`CFrame.fromMatrix` requires all three basis vectors. Calling it without `vZ`
+fails because the current implementation indexes the missing argument.
+
+The lowercase aliases `components`, `toEulerAnglesXYZ`, and
+`toEulerAnglesYXZ` are also exposed; this reference uses the canonical names.

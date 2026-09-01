@@ -11,7 +11,10 @@ Written by KingTasaz on August 28th, 2026
 -->
 
 ## Summary
-When a texture is added to a [`part`](/content/reference/classes/part.md), its `Face` and `name` get set automatically, so adding 6 textures to cover an entire part is very quick.
+This page describes the editor-facing Texture concept. Texture scripting is not
+currently available in the Vortex runtime; see the testing notes below. When a
+texture is added to an editor-authored [`part`](./part.md), its `Face` and name
+are set automatically, so six textures can cover the entire part quickly.
 <br><br>
 
 <details>
@@ -22,8 +25,8 @@ Properties of a Texture, in the order they appear on Vortex Studio.
 <details>
 <summary><b>Texture</b></summary>
 
-- [Face](#face): [`Enum.Face`](/content/reference/datatypes/enumitem.md)
-- [Texture](#texture): [`Enum.Texture`](/content/reference/datatypes/enumitem.md)
+- [Face](#face): [`Enum.Face`](../datatypes/enumitem.md)
+- [Texture](#texture): [`Enum.Texture`](../datatypes/enumitem.md)
 
 </details>
 
@@ -34,16 +37,26 @@ Properties of a Texture, in the order they appear on Vortex Studio.
 ## Properties
 
 ### Face
-> [`Enum.Face`](/content/reference/datatypes/enumitem.md) \
+> [`Enum.Face`](../datatypes/enumitem.md) \
 \
-Controls which face of the parent [`part`](/content/reference/classes/part.md) that the texture is displayed on.
+Controls which face of the parent [`part`](./part.md) that the texture is displayed on.
 
 <br/>
 
 ### Texture
-> [`Enum.Texture`](/content/reference/datatypes/enumitem.md) \
+> [`Enum.Texture`](../datatypes/enumitem.md) \
 \
 Sets which texture to render onto the selected face.
 Currently the only options are `Inlets` or `Studs`. 
 
 <br/>
+
+## Testing Notes
+
+In Vortex Studio 0.3.4, `Instance.new("Texture")`,
+`Instance.new("Decal")`, and `Instance.new("SurfaceAppearance")` all fail in
+both Script and LocalScript. A script-created `Part` also has no readable
+`Texture`, `TextureID`, `SurfaceAppearance`, or `Decal` field.
+
+Editor-authored texture behavior was not established by this probe, but there
+is currently no confirmed script API for creating or changing textures.

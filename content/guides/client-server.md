@@ -22,3 +22,16 @@ Client-side code is run from [LocalScripts](https://create.playvortex.io/referen
 Whenever handling `Client → Server` remotes, make sure to properly validate the data given by the client. A general rule of thumb is to let the client signal intent, not make any decisions about actual state itself. E.g.:
   - Bad: Player clicks a buy button. On their client, they subtract their own money, give themselves the item, the inform the server of the transaction that occurred.
   - Good: Player clicks a buy button. Client informs the server of its intent. Server validates if player has enough money and, if they do, changes their money and gives them the item.
+
+## Vortex Studio 0.3.4 notes
+
+Client-to-server intent is currently the confirmed remote direction, but the
+server receives a numeric connection id rather than a `Player` object. A server
+Script can enumerate active Players through `Players:GetPlayers()` and read
+their Characters, but there is no known public way to map that sender id to one
+of those Players. Server logic can process an allowed request, but cannot yet
+reliably use the normal Roblox `player.Character` targeting pattern for the
+specific caller.
+
+Server visibility is not the same as authority: in a confirmed server Script,
+writing the visible character Humanoid's `Health` is still rejected.
