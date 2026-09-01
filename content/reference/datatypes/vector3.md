@@ -70,47 +70,6 @@ Methods of a `Vector3`.
 
 ## Properties
 
-
-### zero
-
-> Constant `Vector3`
->
-> A zero vector (0,0,0).
-
-<br/>
-
-### one
-
-> Constant `Vector3`
->
-> A ones vector (1,1,1).
-
-<br/>
-
-### xAxis
-
-> Constant `Vector3`
->
-> A unit vector that points in the +X direction (1,0,0).
-
-<br/>
-
-### yAxis
-
-> Constant `Vector3`
->
-> A unit vector that points in the +Y direction (0,1,0).
-
-<br/>
-
-### zAxis
-
-> Constant `Vector3`
->
-> A unit vector that points in the +Z direction (0,0,1).
-
-<br/>
-
 ### X
 
 > `Number` 
