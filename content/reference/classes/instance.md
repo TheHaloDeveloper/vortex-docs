@@ -21,7 +21,7 @@ Properties of a `Instance`.
 <br><br>
 
 * [Name](#name): `String`
-* [Parent](#parent): `Instance`
+* [Parent](#parent): `Instance | nil`
 
 </details>
 
@@ -48,9 +48,9 @@ Methods of a `Instance`.
 
 ### Parent
 
-> `String` 
+> `Instance | nil`
 >
-> The name of the `Instance`.
+> The instance's hierarchical parent, or `nil` when it has no parent.
 
 <br/>
 

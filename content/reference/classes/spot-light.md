@@ -11,11 +11,24 @@ Written by KingTasaz on August 28th, 2026
 -->
 
 ## Summary
-A `spotlight` must be the child of a [`part`](/content/reference/classes/part.md), and takes the position of its parent as its own.
+A `spotlight` must be the child of a [`part`](./part.md), and takes the position of its parent as its own.
 
 There is currently no on/off switch for lights, but setting either the color, brightness, angle, or range to 0 will have the desired effect.
 
 Under the `properties` tab, SpotLights visibly have Position, Rotation, and Size attributes. Position and Rotation are `read-only` and size has `no effect`. It is possible these values were left in by accident.
+
+## Runtime scripting limitation
+
+In Vortex Studio 0.3.4, `Instance.new("SpotLight")` succeeds in both Script
+and LocalScript, but produces a non-functional class shell. It exposes generic
+Instance methods and a connectable `Changed` signal, while the tested
+light-specific fields initially read as `nil`.
+
+`Brightness`, `Range`, `Angle`, `Enabled`, and `Shadows` are not settable.
+`Color` accepts and retains a `Color3` value, but assigning `Parent` to a
+temporary Part succeeds without establishing parentage or adding a child.
+Consequently, there is no confirmed script route for configuring or attaching
+a rendered SpotLight in the current runtime.
 
 <details>
 <summary><b>Properties</b></summary>
@@ -25,11 +38,11 @@ Properties of a SpotLight, in the order they appear on Vortex Studio.
 <details>
 <summary><b>Appearance</b></summary>
 
-- [Color](#color): [`Color3`](/content/reference/datatypes/color3.md)
+- [Color](#color): [`Color3`](../datatypes/color3.md)
 - [Brightness](#brightness): `Float`
 - [Range](#range): `Float`
 - [Angle](#angle): `Float`
-- [Face](#face): [`Enum.Face`](/content/reference/datatypes/enumitem.md)
+- [Face](#face): [`Enum.Face`](../datatypes/enumitem.md)
 
 </details>
 
@@ -61,7 +74,7 @@ The emission brightness of the light. Does not affect range.
 <br/>
 
 ### Color
-> [`Color3`](/content/reference/datatypes/color3.md) \
+> [`Color3`](../datatypes/color3.md) \
 \
 Determines the color of the emitted light.
 Darker colors have the same effect as turning off the light.
@@ -70,9 +83,9 @@ Darker colors have the same effect as turning off the light.
 
 
 ### Face
-> [`Enum.Face`](/content/reference/datatypes/enumitem.md) \
+> [`Enum.Face`](../datatypes/enumitem.md) \
 \
-Controls which face of the parent [`part`](/content/reference/classes/part.md) that the light is emitted from.
+Controls which face of the parent [`part`](./part.md) that the light is emitted from.
 
 <br/>
 
