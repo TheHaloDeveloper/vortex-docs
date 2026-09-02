@@ -64,10 +64,10 @@ part.Anchored = true
 part.Parent = workspace
 ```
 
-You can instead supply that parent as the second argument:
+Instance.new() also accepts the parent as an optional second argument:
 
 ```lua
-local part = Instance.new("Part", workspace)
+local part = Instance.new("Part", Workspace)
 part.Name = "Platform"
 part.Size = Vector3.new(8, 1, 8)
 part.Position = Vector3.new(0, 10, 0)
