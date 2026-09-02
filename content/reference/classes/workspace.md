@@ -20,14 +20,14 @@ Written by TheJustDare on August 31th, 2026
 
 **Properties**
 
-* [ClassName](/content/reference/classes/instance.md/#className): `String`
-* [Name](/content/reference/classes/instance.md/#name): `String`
+* [ClassName](#classname): `String`
+* [Name](/content/reference/classes/instance.md#name): `String`
 
 **Methods**
 
-* [FindFirstChild()](/content/reference/classes/instance.md/#findFirstChild): `Instance?`
-* [GetChildren()](/content/reference/classes/instance.md/#getchildren): `{ Instance }`
-* [WaitForChild()](/content/reference/classes/instance.md/#waitForChild): `Instance` 
+* [FindFirstChild()](/content/reference/classes/instance.md#findfirstchild): `Instance?`
+* [GetChildren()](/content/reference/classes/instance.md#getchildren): `{ Instance }`
+* [WaitForChild()](/content/reference/classes/instance.md#waitforchild): `Instance` 
 
 <br>
 
