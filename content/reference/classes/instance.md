@@ -5,20 +5,18 @@ description: Instance is the base class for all classes in Vortex engine
 
 <!-- 
 Instance
-Revision 1
+Revision 1.1
 
-Written by Kindtracker on August 28th, 2026
+Written by TheJustDare on August 30th, 2026
 -->
-
-> [!NOTE] 
-> There will be more things (methods, constructors, properties, etc) in the future. This is based on leaks and common sense.
 
 ## Summary
 
 <details>
 <summary><b>Properties</b></summary>
-Properties of a `Instance`.
-<br><br>
+
+Properties of a `Instance`
+<br>
 
 * [Name](#name): `String`
 * [Parent](#parent): `Instance | nil`
@@ -27,12 +25,23 @@ Properties of a `Instance`.
 
 <details>
 <summary><b>Methods</b></summary>
-Methods of a `Instance`.
-<br><br>
+
+Methods of a `Instance`
+<br>
 
 * [Clone()](#clone): `Instance`
-* [Destroy()](#destroy): `nil`
+* [Destroy()](#destroy): `()`
+* [FindFirstChild()](#findFirstChild): `Instance?`
+* [FindFirstChildOfClass()](#findFirstChildOfClass): `Instance?`
+* [GetAttribute()](#getAttribute): `any`
+* [GetAttributeChangedSignal()](#getAttributeChangedSignal): `Signal`
+* [GetAttributes()](#getAttributes): `{ [string]: any }`
 * [GetChildren()](#getchildren): `{ Instance }`
+* [GetDescendants()](#getDescendants): `{ Instance }`
+* [GetPropertyChangedSignal()](#getPropertyChangedSignal): `Signal`
+* [IsA](#isA): `boolean`
+* [SetAttribute()](#setAttribute): `()`
+* [WaitForChild()](#waitForChild): `Instance`
 
 </details>
 
@@ -40,42 +49,266 @@ Methods of a `Instance`.
 
 ### Name
 
-> `String` 
->
-> The name of the `Instance`.
+The name of the `Instance`. \
+Names can be used to organize the game hierarchy aswell as access an object using different methods.
 
-<br/>
+```lua
+local baseplate = workspace.Baseplate
+local spawnLocation = baseplate:FindFirstChild("SpawnLocation")
+local house = workspace["House"]
+```
+
+<br>
 
 ### Parent
 
-> `Instance | nil`
->
-> The instance's hierarchical parent, or `nil` when it has no parent.
+The container which the `Instance` is parented to. \
+An `Instance` is a **child** or is **parented** to an object when its `Parent` property is set to that object.
 
-<br/>
+```lua
+local part = Instance.new("Part")
+part.Size = Vector3.new(5, 5, 5)
+part.Parent = workspace
+```
+
+<br>
 
 ## Methods
 
 ### Clone()
 
-> `Instance` 
->
-> Create a copy of the `Instance` and return copy.
+Create a copy of a `Instance` and all of it's descendants.
 
-<br/>
+#### Syntax
+`Instance:Clone(): Instance` 
+
+```lua
+local model = workspace:FindFirstChild("Model")
+
+local newModel = model:Clone()
+newModel.Parent = workspace
+```
+
+<br>
 
 ### Destroy()
 
-> `nil` 
->
-> Destroy the `Instance` and children.
+Sets the `Parent` property of the `Instance` to nil and calls `Destroy()` on all of its descendants.
 
-<br/>
+#### Syntax
+`Instance:Destroy(): ()`
+
+```lua
+local part = workspace.Part
+part:Destroy()
+
+print(part.Name) -- Returns "Part"
+
+part = nil -- It is recommended to set any references to nil to avoid performance issues
+```
+
+It is important to add once `Destroy()` has been called the `Parent` property of the `Instance` cannot be changed.
+
+<br>
+
+### FindFirstChild()
+
+Returns the first child found with the given name. \
+For `FindFirstChild()` to work, a name of a type of `string` has to be passed. \
+\
+An optional second parameter can be given, whether to search for the `Instance` recursively.
+
+#### Syntax
+`Instance:FindFirstChild(name: string, recursive: boolean): Instance?`
+
+```lua
+local part = workspace:FindFirstChild("Part")
+
+if part then
+    part.Position = Vector3.new(3, 1, 4)
+end
+```
+
+<br>
+
+### FindFirstChildOfClass()
+
+Returns the first child of a `className` equal to the given class name.
+
+#### Syntax
+`Instance:FindFirstChildOfClass(className: string): Instance?`
+
+```lua
+local light = workspace:FindFirstChildOfClass("PointLight")
+
+if light then
+    light.Brightness = 10
+end
+```
+
+<br>
+
+### GetAttribute()
+
+Returns the value which has been assigned to a given attribute name.
+
+#### Syntax
+`Instance:GetAttribute(attribute: string): any`
+
+```lua
+local part = workspace.Part
+part:SetAttribute("Points", 5)
+
+local points = part:GetAttribute("Points")
+
+print(points) -- Returns 5
+```
+
+<br>
+
+### GetAttributeChangedSignal()
+
+Returns a [Signal](/content/reference/datatypes/signal.md) that fires when the value of a given attribute changes.
+
+#### Syntax
+`Instance:GetAttributeChangedSignal(attribute: string): Signal`
+
+```lua
+local part = workspace.Part
+
+part:GetAttributeChangedSignal("Points"):Connect(function()
+    print("The amount of points has changed")
+end)
+
+part:SetAttribute("Points", 5)
+```
+
+<br>
+
+### GetAttributes()
+
+Returns a dictionary of the `Instance` attributes.
+
+#### Syntax
+`Instance:GetAttributes(): { [string]: any }`
+
+```lua
+local part = workspace.Part
+local attributes = part:GetAttributes()
+
+for name, value in attributes do
+    print(name .. " has the value of " .. value)
+end
+```
+
+<br>
 
 ### GetChildren()
 
-> `{ Instance }` 
->
-> Return children of the `Instance`.
+Returns an array containing all children of the `Instance`.
 
-<br/>
+#### Syntax
+`Instance:GetChildren(): { Instance }`
+
+```lua
+local model = workspace.Model
+local parts = model:GetChildren()
+
+for i, part in parts do
+    print(part.Name .. " is child number " .. i)
+end
+```
+
+<br>
+
+### GetDescendants()
+
+Returns an array containing all of the descendants of the `Instance`.
+
+#### Syntax
+`Instance:GetDescendants(): { Instance }`
+
+```lua
+local model = workspace.Model
+local objects = model:GetDescendants()
+
+for i, object in objects do
+    if object:IsA("Part") then
+        part.Size = Vector3.new(1, 2, 3)
+    end
+end
+```
+
+<br>
+
+### GetPropertyChangedSignal()
+
+Returns a [Signal](/content/reference/datatypes/signal.md) that fires when the value of a given property changes.
+
+#### Syntax
+`Instance:GetPropertyChangedSignal(property: string): Signal`
+
+```lua
+local part = workspace.Part
+
+part:GetPropertyChangedSignal("Size"):Connect(function()
+    print("The size has changed")
+end)
+
+part.Size = Vector3.new(1, 6, 1)
+```
+
+<br>
+
+### IsA()
+
+Returns `true` if the class of the `Instance` matches the given class name.
+
+#### Syntax
+`Instance:IsA(className: string): boolean`
+
+```lua
+local model = workspace.Model
+local parts = model:GetChildren()
+
+for i, part in parts do
+    if part:IsA("Part") then
+        part.Size = Vector3.new(1, 1, 2)
+    end
+end
+```
+
+<br>
+
+### SetAttribute()
+
+Sets the value of a given attribute to a given value.
+
+#### Syntax
+`Instance:SetAttribute(attribute: string, value: any): ()`
+
+```lua
+local part = workspace.Part
+local points = part:GetAttribute("Points")
+
+part:SetAttribute("Points", points + 1)
+```
+
+<br>
+
+### WaitForChild()
+
+Returns the child of the `Instance` with the given name. \
+The current thread will yield if the child does not exist, until it does. \
+\
+An optional second parameter can be given, after how much time in seconds should the current thread yield.
+
+#### Syntax
+`Instance:WaitForChild(name: string, timeOut: number): Instance`
+
+```lua
+local part = workspace:WaitForChild("Part")
+print(part .. " was added to the Workspace")
+```
+
+<br>

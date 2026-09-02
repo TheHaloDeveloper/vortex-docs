@@ -1,12 +1,15 @@
 ---
 title: Debris
-description: Access the Debris cleanup service.
+description: Keyword representing the Debris service
 ---
 
-`Debris` is available through `game:GetService("Debris")` in both Script and
-LocalScript. See the [Debris service reference](/content/reference/classes/debris.md)
-for its methods and current runtime limits.
+<!-- 
+Debris
+Revision 1.0
 
-`Debris:AddItem(instance, 0)` removed an unparented temporary Part within two
-scheduler ticks in Vortex Studio 0.3.4. `AddItem` and `SetMaxItems` are both
-exposed.
+Written by TheJustDare on September 1st, 2026
+-->
+
+The `Debris` keyword represents the [Debris](/content/reference/classes/debris.md) service, which allows successful destruction of passed [Instances](/content/reference/classes/instance.md) within a given time frame.
+
+It can be used to remove [Instances](/content/reference/classes/instance.md) without yielding the current thread. Its primary use is to free up system memory and remove objects that may no longer be needed.
