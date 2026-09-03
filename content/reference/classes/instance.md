@@ -18,7 +18,7 @@ Written by TheJustDare on August 30th, 2026
 Properties of a `Instance`
 <br>
 
-* [Name](#name): `String`
+* [Name](#name): `string`
 * [Parent](#parent): `Instance | nil`
 
 </details>
@@ -168,7 +168,7 @@ print(points) -- Returns 5
 
 ### GetAttributeChangedSignal()
 
-Returns a [Signal](/content/reference/datatypes/signal.md) that fires when the value of a given attribute changes.
+Returns a [Signal](https://create.playvortex.io/reference/datatypes/signal) that fires when the value of a given attribute changes.
 
 #### Syntax
 `Instance:GetAttributeChangedSignal(attribute: string): Signal`
@@ -243,7 +243,7 @@ end
 
 ### GetPropertyChangedSignal()
 
-Returns a [Signal](/content/reference/datatypes/signal.md) that fires when the value of a given property changes.
+Returns a [Signal](https://create.playvortex.io/reference/datatypes/signal) that fires when the value of a given property changes.
 
 #### Syntax
 `Instance:GetPropertyChangedSignal(property: string): Signal`

@@ -20,14 +20,14 @@ Written by TheJustDare on August 31th, 2026
 
 **Properties**
 
-* [ClassName](#classname): `String`
-* [Name](/content/reference/classes/instance.md#name): `String`
+* [ClassName](#classname): `string`
+* [Name](#name): `string`
 
 **Methods**
 
-* [FindFirstChild()](/content/reference/classes/instance.md#findfirstchild): `Instance?`
-* [GetChildren()](/content/reference/classes/instance.md#getchildren): `{ Instance }`
-* [WaitForChild()](/content/reference/classes/instance.md#waitforchild): `Instance` 
+* [FindFirstChild()](https://create.playvortex.io/reference/classes/instance#findfirstchild): `Instance?`
+* [GetChildren()](https://create.playvortex.io/reference/classes/instance#getchildren): `{ Instance }`
+* [WaitForChild()](https://create.playvortex.io/reference/classes/instance#waitforchild): `Instance` 
 
 <br>
 
