@@ -15,7 +15,7 @@ Written by TheJustDare on August 31th, 2026
 <details>
 <summary><b>Inherited Members</b></summary>
 
-**5** inherited from [Instance](/content/reference/classes/instance.md)
+**5** inherited from [Instance](https://create.playvortex.io//reference/classes/instance)
 <br>
 
 **Properties**

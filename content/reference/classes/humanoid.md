@@ -3,6 +3,13 @@ title: Humanoid
 description: Represents the humanoid controller in a Player Character.
 ---
 
+<!-- 
+Debris
+Revision 1.1
+
+Written by MtcLuna05 on September 1st, 2026
+-->
+
 The local player's humanoid is available as
 ```lua
 local Players = game:GetService("Players")
@@ -13,7 +20,7 @@ local humanoid = character.Humanoid
 ```
 
 The character's root transform is exposed separately as a
-[`HumanoidRootPart`](./humanoid-root-part.md).
+[HumanoidRootPart](https://create.playvortex.io/reference/classes/humanoid-root-part).
 
 ## Summary
 
@@ -23,8 +30,8 @@ The character's root transform is exposed separately as a
 Properties of a `Humanoid`
 <br>
 
-* [ClassName](#className): `String`
-* [Name](#name): `String`
+* [ClassName](#className): `string`
+* [Name](#name): `string`
 * [Health](#health): `number`
 * [JumpHeight](#jumpHeight): `number`
 * [MaxHealth](#maxHealth): `number`
@@ -39,7 +46,7 @@ Methods of a `Humanoid`
 <br>
 
 * [IsDead()](#isDead): `boolean`
-* [GetState()](#getState): `String`
+* [GetState()](#getState): `string`
 * [TakeDamage()](#takeDamage): `()`
 
 </details>
@@ -114,6 +121,7 @@ humanoid.Died:Connect(function()
 	end
 end)
 ```
+
 <br>
 
 ### GetState()
@@ -122,7 +130,7 @@ Returns one of **4** different states based on the current `Humanoid` action. \
 These actions can include `Walking`, `Jumping`, `Freefall` and `Landed`.
 
 #### Syntax
-`Humanoid:GetState(): String`
+`Humanoid:GetState(): string`
 
 For this example to work, this code has to be placed inside a `Localscript`.
 
@@ -145,15 +153,15 @@ end
 Subtracts the given value from `Health` property of the `Humanoid`. \
 Passing negative numbers will **not work** and will result in an error. \
 \
-This method only works on a standard [script](/content/reference/classes/script.md), attempting to call it on the client will result in an error.
+This method only works on a standard [script](https://create.playvortex.io//reference/classes/script), attempting to call it on the client will result in an error.
 
 #### Syntax
 `Humanoid:TakeDamage(amount: number): ()`
 
 ```lua
 local Players = game:GetService("Players")
+local player = Players:GetPlayers()[1]
 
-local player = Players[1]
 local character = player.Character
 local humanoid = character.Humanoid
 
@@ -166,25 +174,47 @@ humanoid:TakeDamage(50)
 
 ### Died
 
-> [`Signal`](/content/reference/datatypes/signal.md)
->
-> `humanoid.Died`
->
-> Signals that the Humanoid died.
+Fires a [Signal](https://create.playvortex.io/reference/datatypes/signal) when the `Humanoid` dies.
 
-<br/>
+#### Syntax
+
+`Humanoid.Died(): Signal`
+
+```lua
+local Players = game:GetService("Players")
+local player = Players:GetPlayers()[1]
+
+local character = player.Character
+local humanoid = character.Humanoid
+
+humanoid.Died:Connect(function()
+    print(player.Name .. " has died")
+end)
+```
+
+<br>
 
 ### HealthChanged
 
-> [`Signal`](/content/reference/datatypes/signal.md)
->
-> `humanoid.HealthChanged`
->
-> Signals that the Humanoid health changed.
+Fires a [Signal](https://create.playvortex.io/reference/datatypes/signal) when the `Health` or `MaxHealth` of the `Humanoid` changes.
 
-#### Parameters
+#### Syntax
 
-- `health`: `Number` — the updated health value.
+`Humanoid.Died(health: number): Signal`
+
+```lua
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local character = player.Character
+local humanoid = character.Humanoid
+
+humanoid.HealthChanged:Connect(function(health)
+    print("Humanoid's health changed to " .. health)
+end)
+```
+
+<br>
 
 ## Testing Notes
 
