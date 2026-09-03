@@ -8,10 +8,11 @@ Vector3
 Revision 1
 
 Written by Kindtracker on August 28th, 2026
--->
 
-> [!NOTE] 
-> There will be more things (methods, constructors, properties, etc.) in the future.
+Revision 2
+
+Written by CNK (Vortex IG. CNK) on Aug 30th, 2026 based on actual code.
+-->
 
 ## Summary
 
@@ -20,6 +21,11 @@ Written by Kindtracker on August 28th, 2026
 Properties of a `Vector3`.
 <br><br>
 
+* [zero](#zero): `Vector3`
+* [one](#one): `Vector3`
+* [xAxis](#xaxis): `Vector3`
+* [yAxis](#yaxis): `Vector3`
+* [zAxis](#zaxis): `Vector3`
 * [X](#x): `Number`
 * [Y](#y): `Number`
 * [Z](#z): `Number`
@@ -58,6 +64,7 @@ Methods of a `Vector3`.
 * [Cross](#cross): `Vector3`
 * [Dot](#dot): `Number`
 * [Lerp](#lerp): `Vector3`
+* [tostring(Vector3)](#tostringvector3): `String`
 
 </details>
 
@@ -91,7 +98,7 @@ Methods of a `Vector3`.
 
 > `Number`
 >
-> The vector magnitude.
+> The magnitude (aka. length) of the vector.
 
 <br/>
 
@@ -165,80 +172,84 @@ Methods of a `Vector3`.
 
 <br/>
 
-## Verified runtime compatibility
-
-In Vortex Studio 0.3.4, `Vector3.new`, unary negation, and the constants
-`zero`, `one`, `xAxis`, `yAxis`, and `zAxis` were confirmed in both `Script`
-and `LocalScript`. `Vector3.new(3, 4, 12)` has magnitude `13` and unit vector
-approximately `(0.230769, 0.307692, 0.923077)` in both contexts.
-
 ## Methods
 
-### Cross()
+### Dot(other: `Vector3`)
 
 > `Vector3`
 >
-> `vector:Cross(other: Vector3)`
->
-> Returns the cross product of `vector` and `other`.
-
-#### Parameters
-
-- `other`: `Vector3` — the vector to cross with.
+> Returns the dot product of two vectors. 
 
 <br/>
 
-### Dot()
-
-> `Number`
->
-> `vector:Dot(other: Vector3)`
->
-> Returns the dot product of `vector` and `other`.
-
-#### Parameters
-
-- `other`: `Vector3` — the vector to dot with.
-
-<br/>
-
-### Lerp()
+### Cross(other: `Vector3`)
 
 > `Vector3`
 >
-> `vector:Lerp(other: Vector3, alpha: Number)`
+> Returns the cross product of two vectors. 
+
+### Lerp(other: `Vector3`, alpha: `Number`)
+
+> `Vector3`
 >
-> Returns a linear interpolation between `vector` and `other`.
-
-#### Parameters
-
-- `other`: `Vector3` — the target vector.
-- `alpha`: `Number` — the interpolation amount, from `0` to `1`.
-
-<br/>
+> Returns an interpolated vector between `self` and `other`. 
+> 
+> When alpha is `0.0` it returns `self`; when `alpha` is `0.5` it returns the vector directly between `self` and `other`; when `alpha` is `1.0` it returns `other`.
 
 ## Operators
 
-The following expressions completed successfully:
+### `Vector3` + `Vector3`
 
-```lua
-Vector3.new(1, 2, 3) + Vector3.new(1, 2, 3)
-Vector3.new(1, 2, 3) - Vector3.new(1, 2, 3)
-Vector3.new(1, 2, 3) * 2
-Vector3.new(1, 2, 3) / 2
--Vector3.new(1, -2, 3)
-```
+> `Vector3`
+>
+> Adds the components of two vectors.
 
-The tested results were `(5, 7, 9)`, `(3, 3, 3)`, `(2, 4, 6)`, and `(4, 3, 2)`
-respectively; unary negation returned `(-1, 2, -3)`.
+<br/>
 
-The probes observed `Vector3.new(1, 0, 0):Cross(Vector3.new(0, 1, 0))`
-returning `(0, 0, 1)`, `Vector3.new(1, 2, 3):Dot(Vector3.new(4, 5, 6))`
-returning `32`, and interpolation from `(0, 0, 0)` to `(8, 4, 2)` at `0.25`
-returning `(2, 1, 0.5)`.
+### `Vector3` - `Vector3`
 
-## Testing Notes
+> `Vector3`
+>
+> Subtracts the components of two vectors.
 
-The detailed Vector3 behavior above was revalidated in Vortex Studio 0.3.4 in
-both Script and LocalScript. `Vector3.FromAxis` and `Vector3.FromNormalId`
-remain unavailable (`nil`).
+<br/>
+
+### `Vector3` * `Vector3 | Number`
+
+> `Vector3`
+>
+> Multiplies component-wise if both operands are `Vector3`, or scales every component if one operand is a `Number`.
+
+<br/>
+
+### `Vector3` / `Vector3 | Number`
+
+> `Vector3`
+>
+> Divides component-wise if both operands are `Vector3`, or scales every component if the denominator is a `Number`.
+
+<br/>
+
+### -Vector3
+
+> `Vector3`
+>
+> Returns the negation of the vector.
+
+<br/>
+
+### Vector3 == Vector3
+
+> `Boolean`
+>
+> Returns whether two vectors have equal `X`, `Y`, and `Z` components.
+
+<br/>
+
+### tostring(Vector3)
+
+> `String`
+>
+> Formats the vector as `"X, Y, Z"` with 3 decimal places, e.g. `"1.000, 2.000, 3.000"`.
+
+<br/>

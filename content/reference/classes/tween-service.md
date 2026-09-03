@@ -3,34 +3,44 @@ title: TweenService
 description: Creates Tween objects for instance-property animation.
 ---
 
-`TweenService` is available through `game:GetService("TweenService")`.
+<!-- 
+TweenService
+
+Written by CNK on August 30th, 2026.
+-->
 
 ## Summary
+
+Service that is used to create a tween. A tween is a smooth interpolation between two states over a period of time. 
+
+`TweenService` is available through `game:GetService("TweenService")`.
 
 <details>
 <summary><b>Methods</b></summary>
 Methods of `TweenService`.
 <br><br>
 
-* [Create](#create): [`Tween`](/content/reference/datatypes/tween.md)
+* [Create(instance: `Instance`, tweenInfo: `TweenInfo`, goals: `{[string]: any}`)](#createinstance-instance-tweeninfo-tweeninfo-goals-stringany): `Tween`
 
 </details>
 
 ## Methods
 
-### Create
+### Create(instance: `Instance`, tweenInfo: `TweenInfo?`, goals: `{[string]: any}`)
 
 > [`Tween`](/content/reference/datatypes/tween.md)
->
-> `TweenService:Create(instance: Instance, tweenInfo: TweenInfo, propertyTable: table)`
->
-> Creates a Tween targeting the supplied properties of `instance`.
-
-#### Parameters
-
-- `instance`: `Instance` — the object whose properties the Tween targets.
-- `tweenInfo`: `TweenInfo` — the animation configuration.
-- `propertyTable`: `table` — property names mapped to their target values.
+> 
+> Returns a tween based on the given instance, tween information and goals. This can be activated with `Tween:Play()`. 
+> 
+> An example of the `goals` table:
+> ```luau
+> -- This table uses interpolatable property names as the keys
+> -- and then the values are the desired value of that property.
+> local goals = {
+>   Position = part.Position + Vector3.new(0, 10, 0),
+>   Color = Color3.fromRGB(255, 100, 0),
+> }
+> ```
 
 ## Testing Notes
 
