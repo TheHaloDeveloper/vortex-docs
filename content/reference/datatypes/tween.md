@@ -1,17 +1,22 @@
 ---
 title: Tween
-description: Represents an animation created by TweenService.
+description: An object used to smoothly change properties of an instance over a period of time. Tweens can be used to animate properties such as position, size, transparency, color, and other supported values. Constructed with `TweenService`.
 ---
 
-A `Tween` is created with [`TweenService:Create`](/content/reference/classes/tween-service.md#create).
+<!--
+Written by CNK (Vortex IG. CNK) on Aug 30th, 2026 based on actual code.
+-->
 
 ## Summary
+
+> If you are looking to construct a tween, reference [TweenService](/reference/classes/tween-service/). Then come back here after your tween has been created.
 
 <details>
 <summary><b>Properties</b></summary>
 Properties of a `Tween`.
 <br><br>
 
+* [Instance](#instance): `Instance`
 * [PlaybackState](#playbackstate): `Enum.PlaybackState`
 
 </details>
@@ -21,78 +26,82 @@ Properties of a `Tween`.
 Methods of a `Tween`.
 <br><br>
 
-* [Play](#play)
-* [Pause](#pause)
-* [Cancel](#cancel)
+* [Play()](#play): `nil`
+* [Pause()](#pause): `nil`
+* [Cancel()](#cancel): `nil`
 
 </details>
-
 <details>
-<summary><b>Signals</b></summary>
-Signals of a `Tween`.
+<summary><b>Events</b></summary>
 <br><br>
 
-* [Completed](#completed): [`Signal`](/content/reference/datatypes/signal.md)
+* [Completed](#completedplaybackstate-enumplaybackstate)
 
 </details>
 
 ## Properties
 
+
+### Instance
+
+> `Instance`
+>
+> The object which the tween would act upon.
+
+<br/>
+
 ### PlaybackState
 
 > `Enum.PlaybackState`
 >
-> The current state of the Tween.
+> The current state of the tween.
+> 
+> #### Examples:
+> * `Enum.PlaybackState.Playing` - When the tween is active.
+> * `Enum.PlaybackState.Cancelled` - If the tween was cancelled before it finished.
+> * Reference `Enum.PlaybackState` for more states.
 
 <br/>
 
 ## Methods
 
-### Play
 
-> `tween:Play()`
->
-> Starts or resumes the Tween.
+### Play()
 
-<br/>
 
-### Pause
-
-> `tween:Pause()`
->
-> Pauses the Tween.
+> Triggers the tween to start/continue playing.
 
 <br/>
 
-### Cancel
+### Pause()
 
-> `tween:Cancel()`
+> Pauses the tween where it is at and will continue once `Tween:Play()` is called again.
+
+<br/>
+
+### Cancel()
+
+> Stops the tween where it is at and resets the tween to the start position.
+
+<br/>
+
+## Events
+
+### .Completed(playbackState: `Enum.PlaybackState`)
+
+> Fires when the tween finishes, whether it completed naturally or was
+> stopped early with [`Cancel()`](#cancel).
 >
-> Cancels the Tween.
-
-## Signals
-
-### Completed
-
-> [`Signal`](/content/reference/datatypes/signal.md)
+> The connected function receives one argument: the resulting
+> `Enum.PlaybackState`, either `Completed` or `Cancelled`.
 >
-> `tween.Completed`
->
-> Fires when the Tween completes or is cancelled.
+> ```luau
+> -- Example of the `Completed` signal being used.
+> myTween.Completed:Connect(function(playbackState)
+>     if playbackState == Enum.PlaybackState.Completed then
+>         print("Tween finished naturally")
+>     end
+> end)
+> ```
 
-#### Parameters
-
-- `playbackState`: `Enum.PlaybackState` — the state that ended playback.
-
-## Testing Notes
-
-These observations are from Vortex Studio 0.3.4.
-
-`Play`, `Pause`, `Cancel`, `Completed`, and `PlaybackState` are exposed in both
-`Script` and `LocalScript`.
-
-For a Tween with a `0.1` second duration, `Play()` set `PlaybackState` to
-`Enum.PlaybackState.Playing`, but the target property did not change and
-`Completed` did not fire after waiting more than `0.2` seconds. `Cancel()` set
-the state to `Enum.PlaybackState.Cancelled` and fired `Completed` once with
-that same state.
+<br/>
