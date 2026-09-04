@@ -31,7 +31,7 @@ Methods of `Debris`
 
 ### AddItem()
 
-Schedules removal of a given [Instance](https://create.playvortex.io/reference/classes/instance/) within the specified time in seconds. \
+Schedules removal of a given [Instance](./instance.md) within the specified time in seconds. \
 For the `AddItem()` method to execute, a number has to be given as the second parameter. \
 \
 Any number can be passed as the lifetime, including negative numbers.
@@ -51,7 +51,7 @@ Debris:AddItem(part, 5)
 
 ### SetMaxItems()
 
-Sets the maximum number of tracked [Instances](https://create.playvortex.io/reference/classes/instance) to be removed at once. \
+Sets the maximum number of tracked [Instances](./instance.md) to be removed at once. \
 \
 If the set number is exceeded, the next objects will be automatically destroyed until the amount is less than or equal to the number.
 

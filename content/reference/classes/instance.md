@@ -11,7 +11,7 @@ Written by TheJustDare on August 30th, 2026
 -->
 
 > [!IMPORTANT]
-> Vortex Studio 0.3.4 does not expose one uniform Instance method set on every
+> Vortex Studio 0.4.0 does not expose one uniform Instance method set on every
 > engine-backed value. The members below describe ordinary Instance-like
 > objects. Use the concrete class reference and the availability matrix on this
 > page before calling a method.
@@ -176,7 +176,7 @@ print(points) -- Returns 5
 
 ### GetAttributeChangedSignal()
 
-Returns a [Signal](https://create.playvortex.io/reference/datatypes/signal) that fires when the value of a given attribute changes.
+Returns a [Signal](../datatypes/signal) that fires when the value of a given attribute changes.
 
 #### Syntax
 `Instance:GetAttributeChangedSignal(attribute: string): Signal`
@@ -251,7 +251,7 @@ end
 
 ### GetPropertyChangedSignal()
 
-Returns a [Signal](https://create.playvortex.io/reference/datatypes/signal) that fires when the value of a given property changes.
+Returns a [Signal](../datatypes/signal.md) that fires when the value of a given property changes.
 
 #### Syntax
 `Instance:GetPropertyChangedSignal(property: string): Signal`

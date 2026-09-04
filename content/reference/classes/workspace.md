@@ -15,7 +15,7 @@ Written by TheJustDare on August 31th, 2026
 <details>
 <summary><b>Inherited Members</b></summary>
 
-**5** inherited from [Instance](https://create.playvortex.io//reference/classes/instance)
+**5** inherited from [Instance](./instance.md)
 <br>
 
 **Properties**
@@ -25,9 +25,9 @@ Written by TheJustDare on August 31th, 2026
 
 **Methods**
 
-* [FindFirstChild()](https://create.playvortex.io/reference/classes/instance#findfirstchild): `Instance?`
-* [GetChildren()](https://create.playvortex.io/reference/classes/instance#getchildren): `{ Instance }`
-* [WaitForChild()](https://create.playvortex.io/reference/classes/instance#waitforchild): `Instance` 
+* [FindFirstChild()](./instance.md#findfirstchild): `Instance?`
+* [GetChildren()](./instance.md#getchildren): `{ Instance }`
+* [WaitForChild()](./instance.md#waitforchild): `Instance` 
 
 <br>
 

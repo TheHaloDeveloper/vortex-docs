@@ -20,7 +20,7 @@ local humanoid = character.Humanoid
 ```
 
 The character's root transform is exposed separately as a
-[HumanoidRootPart](https://create.playvortex.io/reference/classes/humanoid-root-part).
+[HumanoidRootPart](./humanoid-root-part.md).
 
 ## Summary
 
@@ -153,7 +153,7 @@ end
 Subtracts the given value from `Health` property of the `Humanoid`. \
 Passing negative numbers will **not work** and will result in an error. \
 \
-This method only works on a standard [script](https://create.playvortex.io//reference/classes/script), attempting to call it on the client will result in an error.
+This method only works on a standard [script](./script.md), attempting to call it on the client will result in an error.
 
 #### Syntax
 `Humanoid:TakeDamage(amount: number): ()`
@@ -174,7 +174,7 @@ humanoid:TakeDamage(50)
 
 ### Died
 
-Fires a [Signal](https://create.playvortex.io/reference/datatypes/signal) when the `Humanoid` dies.
+Fires a [Signal](../datatypes/signal.md) when the `Humanoid` dies.
 
 #### Syntax
 
@@ -196,7 +196,7 @@ end)
 
 ### HealthChanged
 
-Fires a [Signal](https://create.playvortex.io/reference/datatypes/signal) when the `Health` or `MaxHealth` of the `Humanoid` changes.
+Fires a [Signal](../datatypes/signal.md) when the `Health` or `MaxHealth` of the `Humanoid` changes.
 
 #### Syntax
 
