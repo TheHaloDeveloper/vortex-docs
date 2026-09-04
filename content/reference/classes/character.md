@@ -74,6 +74,14 @@ local armature = scene["Armature.001"]
 local visualRoot = armature.HumanoidRootPart
 local torso = visualRoot.Torso
 local rightLeg = torso["Right Leg"]
+local body = scene.Body
+
+local VisualTorso = body["R7Body.Material.001"]
+local VisualHead = body["R7Body.Material.002"]
+local VisualRightArm = body["R7Body.Material.004"]
+local VisualLeftArm = body["R7Body.Material.005"]
+local VisualRightLeg = body["R7Body.Material.007"]
+local VisualLeftLeg = body["R7Body.Material.008"]
 ```
 
 Names containing dots or spaces require bracket syntax. `HumanoidRootPart`,
@@ -91,6 +99,9 @@ visual-node surface, and attachment details.
 The tested visual `HumanoidRootPart` and `Torso` also discard an `Orientation`
 write without error: the value remains `nil` on readback. They are not a
 rotation-control route.
+
+The tested `R7Body.Material` does not have working properties (Position, size, etc.),
+the only working property is :Destroy() from testing.
 
 ## Lifecycle limitation
 
