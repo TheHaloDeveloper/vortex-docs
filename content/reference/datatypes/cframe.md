@@ -450,6 +450,25 @@ Methods of a `CFrame`.
 
 <br/>
 
+## Position and rotation example
+
+A CFrame stores position and rotation together. Angles use radians, so
+`math.rad` makes degree values easier to read:
+
+```luau
+local position = CFrame.new(0, 5, 0)
+local quarterTurn = CFrame.Angles(0, math.rad(90), 0)
+local transform = position * quarterTurn
+
+local part = workspace:FindFirstChild("MyPart")
+if part then
+    part.CFrame = transform
+end
+```
+
+Multiplication composes transforms. In this example, the Part is placed five
+studs above the origin and rotated 90 degrees around the Y axis.
+
 ## Operators
 
 The following expressions completed successfully in both `Script` and `LocalScript`:
@@ -474,3 +493,6 @@ fails because the current implementation indexes the missing argument.
 
 The lowercase aliases `components`, `toEulerAnglesXYZ`, and
 `toEulerAnglesYXZ` are also exposed; this reference uses the canonical names.
+
+The position-and-rotation example was revalidated in Vortex Studio 0.3.8. It
+produced position `(0, 5, 0)` and a LookVector of approximately `(-1, 0, 0)`.

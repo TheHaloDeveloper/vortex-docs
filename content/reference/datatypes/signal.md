@@ -33,14 +33,16 @@ Written by TheJustDare on August 30th, 2026
 Connects the given function and creates a new [Connection](./connection.md).
 
 ```lua
-local part = workspace.Part
-part:SetAttribute("Points", 5)
+local part = workspace:FindFirstChild("Baseplate")
+if not part then
+    return
+end
 
-part:GetAttributeChangedSignal("Points"):Connect(function()
-    local newPoints = part:GetAttribute("Points")
-
-    print(newPoints) -- Returns 5
+local connection = part.Changed:Connect(function(message)
+    print(message)
 end)
+
+part.Changed:Fire("changed")
 ```
 
 <br>
@@ -50,7 +52,12 @@ end)
 Synchronously invokes connected callbacks with the supplied arguments.
 
 ```lua
-local signal = Signal.new("Example")
+local part = workspace:FindFirstChild("Baseplate")
+if not part then
+    return
+end
+
+local signal = part.Changed
 signal:Connect(function(message)
     print(message)
 end)
@@ -65,16 +72,17 @@ Connects the given function and creates a new [Connection](./connection.md). \
 `Once` will run the function only **once**, unlike the other methods.
 
 ```lua
-local part = workspace.Part
-part.Name = "Block"
+local part = workspace:FindFirstChild("Baseplate")
+if not part then
+    return
+end
 
-part:GetPropertyChangedSignal("Name"):Once(function()
-    print("The part's name has been changed!")
+part.Changed:Once(function(message)
+    print(message)
 end)
 
-task.wait(1)
-
-part.Name = "Cube"
+part.Changed:Fire("first")
+part.Changed:Fire("second") -- the callback does not run again
 ```
 
 ### Wait()
@@ -83,7 +91,9 @@ Yields the current thread until the `Signal` fires. `Wait()` returns arguments p
 
 ### new()
 
-`Signal.new(name: String)` creates a standalone signal that can be connected to and fired.
+`Signal.new` was available in the earlier 0.3.4 tests, but the global `Signal`
+was `nil` in a Vortex Studio 0.3.8 server Script. Use an engine-owned signal,
+such as `Part.Changed`, in the current release.
 
 ## Vortex Studio 0.3.4 notes
 
@@ -102,3 +112,8 @@ deliver callbacks in 0.3.4.
 In 0.3.4, lowercase `connect` and `fire` work on `Part.Changed`, and
 `Signal.new` creates a standalone signal whose `Connect` callback receives a
 manually fired argument. This was confirmed in both Script and LocalScript.
+
+In Vortex Studio 0.3.8, an engine-owned `Part.Changed` signal still exposed
+`Connect`, `Fire`, `Once`, and `Wait`. A manual `Fire("yes")` reached a connected
+callback once; after `Disconnect()`, a second fire did not reach it. The global
+`Signal` constructor was `nil` in the tested server Script.
