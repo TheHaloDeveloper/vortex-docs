@@ -60,7 +60,7 @@ An Input object which contains information about the user's input.
 
 ```
 GameProcessedEvent: Boolean
-Whether the Engine observed an action and acted on it. If a button was touched or clicked from this input, GameProcessedEvent will be true.
+Whether the Engine observed this input and acted on it.
 ```
 
 #### Examples
@@ -73,9 +73,18 @@ UserInputService.InputBegan:Connect(function(Input, GameProcessedEvent)
         print("Game Processed Event")
     end
 
+	-- This will fire in any case where the user presses 'R'.
+	-- Even if it was pressed inside the chat window
+	-- or the settings menu.
     if Input.KeyCode == Enum.KeyCode.R then
         print("R")
     end
+
+	-- Usually for gameplay-related inputs, it's common to
+	-- check it hasn't been handled by another part of the Engine.
+	if Input.KeyCode == Enum.KeyCode.R and not GameProccessedEvent then
+		print("R*")
+	end
 end)
 ```
 

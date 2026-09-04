@@ -1,6 +1,6 @@
 ---
 title: Humanoid
-description: Represents the humanoid controller in a Player Character.
+description: A class that enables character-like functionality for Models.
 ---
 
 The current player's humanoid is available as

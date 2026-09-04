@@ -3,15 +3,45 @@ title: RemoteEvent
 description: An event that sends information between client and server.
 ---
 
+<!-- 
+RemoteEvent
+Revision 1
+
+Written by clride and Prouddani on August 30th, 2026
+-->
+
 ## Summary
+A `RemoteEvent` is an Instance that facilitates one-way communication between Client and Server through events.
+For two-way communication, see [RemoteFunction](https://create.playvortex.io/reference/classes/remote-function/).
 
-Can be used to communicate from the server to a client (or all of them) and
-vice-versa.
 
-For more additional information, see
-[RemoteFunction](https://create.playvortex.io/reference/classes/remote-function/).
+## Methods
+### .FireServer(`...any`)
+> Send any number of arguments over this event to the server
 
-### Example
+### .FireClient(client: `Player`, `...any`)
+
+> Send any number of arguments over this event to the client.
+
+### .FireClientAllClients(`...any`)
+
+> Send any number of arguments over this event to every connected client.
+
+
+## Events
+
+### .OnServerEvent(client: `Player`, `...any`)
+
+> Receive an event sent by a client to the server.
+> `Connect` receives the `Player` that called the event as its first argument and then each argument sent by `FireServer`.
+
+## .OnClientEvent(`...any`)
+
+> Receive an event sent by a server to a client.
+> `Connect` receives each argument sent by the server.
+
+
+## Example
 
 ```luau
 -- server
@@ -49,20 +79,6 @@ end
 MyRemote.OnClientEvent:Connect(received_msg)
 ```
 
-## Methods
-
-- `FireAllClients(arguments: Tuple) : ()` - Fires data to all clients;
-- `FireClient(player: Player, arguments: Tuple) : ()` - Fires data from the
-  server to a client;
-- `FireServer(arguments: Tuple) : ()` - Fires data from the client to the
-  server.
-
-## Events
-
-- `OnClientEvent(arguments: Tuple) : Signal` - Fired when the client receives
-  data from the server;
-- `OnServerEvent(senderId: Number, arguments: Tuple) : Signal` - Fired when
-  the server receives data from the client.
 
 ## Vortex Studio 0.3.4 notes
 
