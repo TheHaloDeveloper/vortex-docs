@@ -38,7 +38,10 @@ You can use any valid object that supports the properties you want to tween. You
     local tweenInfo = TweenInfo.new(
         2,
         Enum.EasingStyle.Linear,
-        Enum.EasingDirection.Out
+        Enum.EasingDirection.Out,
+        -1,
+        false,
+        0
     )
 
 `TweenInfo` defines how the tween behaves.
@@ -48,6 +51,10 @@ The values above specify:
 - `2` — The duration of the tween in seconds.
 - `Enum.EasingStyle.Linear` — The easing style used by the tween.
 - `Enum.EasingDirection.Out` — The easing direction.
+- `-1` — How many times the tween repeats, setting the value to -1 will make the tween repeat forever.
+- `false` — If the tween reverses or not.
+- `0` — The delay time for the tween.
+
 
 You can find the available easing styles and directions on the [Enum](https://create.playvortex.io/reference/globals/enum/) page.
 
