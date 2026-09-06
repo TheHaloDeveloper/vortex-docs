@@ -3,43 +3,62 @@ title: Humanoid
 description: Represents the humanoid controller in a Player Character.
 ---
 
-The current player's humanoid is available as
-`game:GetService("Players").LocalPlayer.Character.Humanoid` in a `LocalScript`.
-In Vortex Studio 0.3.4, a server `Script` can also reach a visible player's
-character through `game:GetService("Players"):GetPlayers()[1].Character`.
+<!-- 
+Debris
+Revision 1.1
+
+Written by MtcLuna05 on September 1st, 2026
+-->
+
+The local player's humanoid is available as
+```lua
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer -- or Players:GetPlayers()[1] on a standard script
+
+local character = player.Character
+local humanoid = character.Humanoid
+```
+
 The character's root transform is exposed separately as a
-[`HumanoidRootPart`](./humanoid-root-part.md).
+[HumanoidRootPart](./humanoid-root-part.md).
 
 ## Summary
 
 <details>
 <summary><b>Properties</b></summary>
-Properties of a `Humanoid`.
-<br><br>
 
-* [ClassName](#classname): `String`
-* [Name](#name): `String`
-* [Health](#health): `Number`
-* [MaxHealth](#maxhealth): `Number`
+Properties of a `Humanoid`
+<br>
+
+* [ClassName](#className): `string`
+* [Name](#name): `string`
+* [Health](#health): `number`
+* [JumpHeight](#jumpHeight): `number`
+* [MaxHealth](#maxHealth): `number`
+* [WalkSpeed](#walkSpeed): `number`
 
 </details>
 
 <details>
 <summary><b>Methods</b></summary>
-Methods of a `Humanoid`.
-<br><br>
 
-* [IsDead](#isdead): `Boolean`
+Methods of a `Humanoid`
+<br>
+
+* [IsDead()](#isDead): `boolean`
+* [GetState()](#getState): `string`
+* [TakeDamage()](#takeDamage): `()`
 
 </details>
 
 <details>
-<summary><b>Signals</b></summary>
-Signals of a `Humanoid`.
-<br><br>
+<summary><b>Events</b></summary>
 
-* [Died](#died): [`Signal`](/content/reference/datatypes/signal.md)
-* [HealthChanged](#healthchanged): [`Signal`](/content/reference/datatypes/signal.md)
+Events of a `Humanoid`
+<br>
+
+* [Died](#died): `Signal`
+* [HealthChanged](#healthChanged): `Signal`
 
 </details>
 
@@ -47,69 +66,155 @@ Signals of a `Humanoid`.
 
 ### ClassName
 
-> `String`
->
-> The Humanoid class name, `"Humanoid"`.
+The class name of the `Humanoid`. \
+This property is read only and cannot be changed.
 
-<br/>
+<br>
 
 ### Name
 
-> `String`
->
-> The Humanoid name.
+The name of the `Humanoid`. \
+This property is read only and cannot be changed.
 
-<br/>
+<br>
 
 ### Health
 
-> `Number`
->
-> The current health value.
+The current health value of the `Humanoid`. 
 
-<br/>
+<br>
+
+### JumpHeight
+
+The jump height of the `Humanoid` in studs. \
+The default value is set to **7 studs**.
 
 ### MaxHealth
 
-> `Number`
->
-> The maximum health value.
+The maximum health value the `Humanoid` can have. \
+The default value is set to a **100** max health.
 
-<br/>
+<br>
 
 ## Methods
 
-### IsDead
+### IsDead()
 
-> `Boolean`
->
-> `humanoid:IsDead()`
->
-> Returns whether the Humanoid is dead.
+Returns `true` if the `Humanoid` is dead.
 
-## Signals
+#### Syntax
+
+`Humanoid:IsDead(): boolean`
+
+For this example to work, this code has to be placed inside a `Localscript`.
+
+```lua
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local character = player.Character
+local humanoid = character.Humanoid
+
+humanoid.Died:Connect(function()
+    if humanoid:IsDead() then
+   	    print(player.Name .. " has died")
+	end
+end)
+```
+
+<br>
+
+### GetState()
+
+Returns one of **4** different states based on the current `Humanoid` action. \
+These actions can include `Walking`, `Jumping`, `Freefall` and `Landed`.
+
+#### Syntax
+`Humanoid:GetState(): string`
+
+For this example to work, this code has to be placed inside a `Localscript`.
+
+```lua
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local character = player.Character
+local humanoid = character.Humanoid
+
+if humanoid:GetState() == "Freefall" then
+    print("The Humanoid is now falling")
+end
+```
+
+<br>
+
+### TakeDamage()
+
+Subtracts the given value from `Health` property of the `Humanoid`. \
+Passing negative numbers will **not work** and will result in an error. \
+\
+This method only works on a standard [script](./script.md), attempting to call it on the client will result in an error.
+
+#### Syntax
+`Humanoid:TakeDamage(amount: number): ()`
+
+```lua
+local Players = game:GetService("Players")
+local player = Players:GetPlayers()[1]
+
+local character = player.Character
+local humanoid = character.Humanoid
+
+humanoid:TakeDamage(50)
+```
+
+<br>
+
+## Events
 
 ### Died
 
-> [`Signal`](/content/reference/datatypes/signal.md)
->
-> `humanoid.Died`
->
-> Signals that the Humanoid died.
+Fires a [Signal](../datatypes/signal.md) when the `Humanoid` dies.
 
-<br/>
+#### Syntax
+
+`Humanoid.Died(): Signal`
+
+```lua
+local Players = game:GetService("Players")
+local player = Players:GetPlayers()[1]
+
+local character = player.Character
+local humanoid = character.Humanoid
+
+humanoid.Died:Connect(function()
+    print(player.Name .. " has died")
+end)
+```
+
+<br>
 
 ### HealthChanged
 
-> [`Signal`](/content/reference/datatypes/signal.md)
->
-> `humanoid.HealthChanged`
->
-> Signals that the Humanoid health changed.
+Fires a [Signal](../datatypes/signal.md) when the `Health` or `MaxHealth` of the `Humanoid` changes.
 
-#### Parameters
+#### Syntax
 
-- `health`: `Number` — the updated health value.
+`Humanoid.Died(health: number): Signal`
+
+```lua
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local character = player.Character
+local humanoid = character.Humanoid
+
+humanoid.HealthChanged:Connect(function(health)
+    print("Humanoid's health changed to " .. health)
+end)
+```
+
+<br>
 
 ## Testing Notes
 

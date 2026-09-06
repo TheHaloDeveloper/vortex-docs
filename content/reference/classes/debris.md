@@ -5,7 +5,7 @@ description: A service that allows removal of instances without yielding
 
 <!--
 Debris
-Revision 1
+Revision 1.1
 
 Written by TheJustDare on August 30th, 2026
 -->
@@ -14,17 +14,30 @@ Written by TheJustDare on August 30th, 2026
 
 <details>
 <summary><b>Methods</b></summary>
-Methods of `Debris`.
-<br><br>
 
-* [AddItem](#additem)
-* [SetMaxItems](#setmaxitems)
+Methods of `Debris`
+<br>
+
+* [AddItem()](#additem): `()`
+* [SetMaxItems()](#setmaxitems): `()`
 
 </details>
 
 ## Overview
 
 `Debris` is a service that allows removal of instances without yielding for objects that may lose utility after a set period of time.
+
+## Methods
+
+### AddItem()
+
+Schedules removal of a given [Instance](./instance.md) within the specified time in seconds. \
+For the `AddItem()` method to execute, a number has to be given as the second parameter. \
+\
+Any number can be passed as the lifetime, including negative numbers.
+
+#### Syntax
+`Debris:AddItem(instance: Instance, lifetime: number): ()`
 
 ```lua
 local Debris = game:GetService("Debris")
@@ -34,38 +47,31 @@ part.Parent = workspace
 
 Debris:AddItem(part, 5)
 ```
+<br>
 
-## Methods
+### SetMaxItems()
 
-### AddItem
+Sets the maximum number of tracked [Instances](./instance.md) to be removed at once. \
+\
+If the set number is exceeded, the next objects will be automatically destroyed until the amount is less than or equal to the number.
 
-> `Debris:AddItem(instance: Instance, lifetime: Number)`
->
-> Schedules `instance` for removal after `lifetime` seconds without yielding.
+#### Syntax
+`Debris:SetMaxItems(maxItems: number): ()`
 
-#### Parameters
+```lua
+local Debris = game:GetService("Debris")
+local parts = workspace.Parts
 
-- `instance`: `Instance` — the instance to remove.
-- `lifetime`: `Number` — the delay before removal, in seconds.
+Debris:SetMaxItems(5)
 
-<br/>
+for i, part in parts:GetChildren() do
+    Debris:AddItem(part, 1)
 
-### SetMaxItems
+    task.wait(0.5)
+end
+```
 
-> `Debris:SetMaxItems(maxItems: Number)`
->
-> Sets the service's maximum tracked-item count.
+> [Warning!]
+> As of v0.4.0 this method **does not** work. If you try to work with this method nothing will happen.
 
-#### Parameters
 
-- `maxItems`: `Number` — the maximum number of tracked items.
-
-## Testing Notes
-
-The exposed method surface was revalidated in Vortex Studio 0.3.4; detailed
-method behavior may differ in later releases.
-
-`AddItem` and `SetMaxItems` are exposed in both `Script` and `LocalScript`.
-Calling `Debris:AddItem(part, 0)` removed an unparented temporary `Part` within
-two scheduler ticks. The held Lua reference then reported `ClassName` as
-`Instance` and an empty `Name`.
