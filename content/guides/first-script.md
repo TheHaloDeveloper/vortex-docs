@@ -1,6 +1,5 @@
----
 title: Your First Script
-description: Learn how to make your first script in Vortex Studio.
+description: Learn how to make a simple part that changes color randomly
 ---
 
 <!-- 
@@ -8,31 +7,35 @@ Your first script
 Revision 2
 
 Written by Kindtracker on August 29th, 2026
+Revisioned by RedSnicker on September 7th 2026
 -->
 
-Let's make Hello world script, create a script in ServerScriptService.
-You will see:
-```lua
-print("Hello, world!")
-```
-Then playtest the game, you will see "Hello, world!" in the output. Now, let's spawn a part in Workspace.
+In this guide we're gonna learn how to make a simple part that changes color randomly in Vortex Studio.
+Inside your game, create a script in `ServerScriptService`
 
+First. we need to create a new part and save it in a variable for later use.
 ```lua
 local part = Instance.new("Part")
 ```
-We need to put it in Workspace
+
+Then lets set its position and size. and then move it over to the workspace so its visible.
+For this we'll use [Vector3](/reference/datatypes/vector3)
 ```lua
 part.Parent = workspace
+part.Position = Vector3.new(5,5,5)
+part.Size = Vector3.new(8,8,8)
 ```
-We made a part! Let's change position, size, name, and color of it!
+If we play the game now, we can see a big cube next to the spawn point.
+
+Now lets make the cube change color randomly every 1 second.
 ```lua
-part.Name = "MyPart"
-part.Size = Vector3.new(2, 2, 2)
-part.Position = Vector3.new(0, 10, 0)
-part.Color = Color3.fromRGB(192, 32, 12)
-part.Anchored = false
+while true do
+    task.wait(1) -- Wait 1 second
+    local R = math.random(0,255)
+    local G = math.random(0,255)
+    local B = math.random(0,255)
+    part.Color = Color3.fromRGB(R, G, B)
+end
 ```
-Playtest your game and you will see a part named "MyPart" with a size of `2, 2, 2`, a red color, and not anchored.
 
-`workspace` is a built-in shortcut for the Workspace service. However, other services don't have built-in shortcuts, so you need to use `game:GetService(serviceName: string)` to access them.
-
+Congrats! now you have a part that changes color randomly every second!

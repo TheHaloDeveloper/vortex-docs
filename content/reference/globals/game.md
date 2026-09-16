@@ -8,6 +8,16 @@ Game
 Revision 2
 
 Written by Kindtracker on August 29th, 2026
+
+---
+
+Revision 2 - ReplicatedStorage and ServerScriptService
+
+Written by LumiMakesStuff (lumi on Vortex) August 30th, 2026
+
+---
+Revision 3 - Tweenservice added, Updated the references to be correct
+Written by redsnicker
 Edited by MtcLuna05 on August 30th, 2026
 -->
 
@@ -51,16 +61,14 @@ Callbacks of `game`.
 Services of `game`.
 <br><br>
 
-* [Workspace](../classes/workspace.md)
-* [Players](../classes/players.md)
-* [ReplicatedStorage](../classes/replicated-storage.md)
-* [StarterPlayerScripts](../classes/starter-player-scripts.md)
-* [ServerScriptService](../classes/server-script-service.md)
-* [Lighting](../classes/lighting.md) (editor-facing; not exposed by `game:GetService` in 0.3.4)
-* [Debris](../classes/debris.md)
-* [RunService](./runservice.md)
-* [TweenService](../classes/tween-service.md)
-* [UserInputService](./user-input-service.md)
+* [Workspace](../globals/workspace)
+* [Players](../globals/players)
+* [ReplicatedStorage](../globals/replicated-storage)
+* [StarterPlayerScripts](../classes/starter-player-scripts)
+* [ServerScriptService](../classes/server-script-service)
+* [TweenService](../globals/tween-service)
+* [RunService](../globals/runservice)
+* [Lighting](../globals/lighting)
 
 </details>
 

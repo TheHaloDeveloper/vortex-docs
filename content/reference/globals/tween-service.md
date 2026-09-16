@@ -34,20 +34,7 @@ This gets TweenService and finds a part named `TweenPart` inside the `Workspace`
 You can use any valid object that supports the properties you want to tween. You can also create an object using [Instance.new](https://create.playvortex.io/reference/globals/instance-new/).
 
 ### Creating TweenInfo
-
-    local tweenInfo = TweenInfo.new(
-        2,
-        Enum.EasingStyle.Linear,
-        Enum.EasingDirection.Out
-    )
-
-`TweenInfo` defines how the tween behaves.
-
-The values above specify:
-
-- `2` — The duration of the tween in seconds.
-- `Enum.EasingStyle.Linear` — The easing style used by the tween.
-- `Enum.EasingDirection.Out` — The easing direction.
+You can find out how to create tween infos [Here](https://create.playvortex.io/reference/globals/tween-info/)
 
 You can find the available easing styles and directions on the [Enum](https://create.playvortex.io/reference/globals/enum/) page.
 
