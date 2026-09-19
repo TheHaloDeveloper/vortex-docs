@@ -16,20 +16,20 @@ Instance:SetAttribute(Attribute: string, Value: Variant)
 
 ```
 Attribute: string
-The Name of the attribute being set.
+The name of the attribute being set.
 ```
 ```
 Value: Variant
-The Value to set the specified Attribute to.
+The value to set the specified attribute to.
 ```
 
 #### Returns
 ```
 ()
 ```
-The SetAttribute Method is used for modifying an attributes value or creating a new attribute value if there is no attribute. If the value given is nil, the attribute will be removed.
+The SetAttribute method is used for modifying an attribute's value or creating a new attribute if it does not already exist. If the value given is nil, the attribute will be removed.
 #### Examples
-In the code snippet below, it sets the `"Id"` Attribute of the Part to `1`.
+In the code snippet below, it sets the `"Id"` attribute of the Part to `1`.
 ```luau
 local Part = workspace:WaitForChild("Part")
 Part:SetAttribute("Id", 1)
@@ -45,16 +45,16 @@ Instance:GetAttribute(Attribute: string): Variant
 
 ```
 Attribute: string
-The Name of the attribute being retrieved.
+The name of the attribute being retrieved.
 ```
 #### Returns
 ```
 Variant
-The Value which has been given to the Attribute name. If no value is given to the Attribute name then nil is returned.
+The value assigned to the specified attribute. If no value has been assigned to the attribute, nil is returned.
 ```
-The GetAttribute Method is used for retrieving the Value set to the Attribute name.
+The GetAttribute method is used for retrieving the value assigned to the specified attribute.
 #### Examples
-In the code snippet below it retrieves the Id Attribute and then prints it.
+In the code snippet below, it retrieves the Id attribute and then prints it.
 ```luau
 local Part = workspace:WaitForChild("Part")
 local Id = Part:GetAttribute("Id")
@@ -63,7 +63,7 @@ print(Id)
 
 ___________________
 ### GetAttributes
-GetAttributes returns a dictionary of the attributes in an Instance.
+GetAttributes returns a dictionary containing the attributes of an Instance.
 
 ___________________
 ### GetAttributeChangedSignal
@@ -100,18 +100,18 @@ table keyed by attribute name.
 ## Vortex Studio 0.3.4 notes
 
 `SetAttribute`, `GetAttribute`, `GetAttributes`, and removal through
-`SetAttribute(name, nil)` are confirmed on `Part` instances. `GetAttributes`
+`SetAttribute(name, nil)` are confirmed to work on  `Part` instances. `GetAttributes`
 returns a table containing the current values.
 
 `GetAttributeChangedSignal` returns a connectable signal, but setting or
-removing a Part attribute did not deliver the callback in the tested runtime.
-Do not rely on that signal for game logic until delivery is established.
+removing a Part attribute did not trigger the callback in the tested runtime.
+Do not rely on that signal for game logic until callback delivery is confirmed.
 
-`Player` instances are not attribute-capable in 0.3.4: `GetAttribute`,
+`Player` instances do not support attributes in 0.3.4: `GetAttribute`,
 `GetAttributes`, `SetAttribute`, and `GetAttributeChangedSignal` all read as
 `nil` in both client and server contexts.
 
-The current player's `Character` Model is an important exception to the
+The current player's `Character` model is an important exception to the
 client/server boundary: a confirmed server Script set a temporary Character
 attribute to `42`, then `25`; a LocalScript observed both values by polling
 `LocalPlayer.Character:GetAttribute`. Server-to-client Character attribute
@@ -119,7 +119,7 @@ replication is therefore confirmed. Use polling rather than
 `GetAttributeChangedSignal`, whose callback delivery remains unconfirmed.
 
 Client-to-server Character attribute replication is also confirmed for value
-changes: a LocalScript set `42`, then `25`, and a server Script observed both
+changes: a LocalScript set the value to `42`, then `25`, and a server Script observed both
 transitions through `Players:GetPlayers()[1].Character:GetAttribute`. Do not
 treat these attributes as trusted client input; a client can write values that
 the server sees.

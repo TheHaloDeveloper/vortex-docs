@@ -1,6 +1,6 @@
 ---
 title: Events
-description: Connect and consume runtime signals in Vortex.
+description: Connect to and handle runtime signals in Vortex.
 ---
 
 ## Signals
@@ -22,11 +22,11 @@ connection:Disconnect()
 
 ## Delivery limits
 
-Manual `Signal:Fire(...)` delivery works for standalone and supported signals.
+Manual `Signal:Fire(...)` delivery works for standalone signals and other supported signals.
 Some instance change signals are only partially implemented: they can be
-connected but do not fire when the corresponding property or attribute is
-written. `Part.Changed`, user input, Humanoid health signals, and remote-event
+connected, but do not fire when the corresponding property or attribute is
+changed. `Part.Changed`, user input, Humanoid health-related signals, and remote-event
 signals each need to be treated according to their documented runtime behavior.
 
-Do not use a connectable signal as proof that a producer exists. Confirm that
+Do not treat a connectable signal as proof that a producer exists. Confirm that
 the specific event delivers in the context where your code runs.
