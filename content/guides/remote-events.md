@@ -4,19 +4,19 @@ description: One way communication between the server and clients.
 ---
 
 # Remote Events
-A `RemoteEvent` fires one-way events between the server and clients. It doesn't wait for a response and has no return value. It's built for telling the other side what happened, not asking the other side for a result. For a call that needs a response, use [RemoteFunction](./remote-functions.md) instead.
+A `RemoteEvent` enables one-way communication between the server and clients. It doesn't wait for a response and has no return value. It's built for telling the other side what happened, not asking the other side for a result. For a call that needs a response, use [RemoteFunction](./remote-functions.md) instead.
 
 The primary parent container for remote events is `ReplicatedStorage`, as both the server and client can see and access it.
 > ⚠ **Security note:** never trust arguments a client sends via `FireServer` at
 > face value - a modified client can call it with anything. Re-validate
-> any arguments on the server before acting on it.
+> any arguments on the server before acting on them.
 
 ## Example
 In this example, pressing `E` changes a part named `ColorBlock` to a random color. Key presses can only be detected on the client, but the color change needs to happen on the server so every player sees the same result, which is what the remote event is for.
 
 ## Server Script
 - placed in `ServerScriptService`
-- be sure to create an event named `ChangeColor` parented to `ReplicatedStorage`
+- Be sure to create an event named `ChangeColor` parented to `ReplicatedStorage`
 ```lua
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
@@ -48,14 +48,14 @@ end)
 | Method | Returns | Description |
 |---|---|---|
 | `FireServer(...)` | void | Called from a client. Sends arguments to the server. |
-| `FireClient(...)` | void | Called from the server. Sends arguments to chosen client. |
+| `FireClient(...)` | void | Called from the server. Sends arguments to the chosen client. |
 | `FireAllClients(...)` | void | Called from the server. Sends arguments to every client. |
 
 ## Events
 | Event | Parameters | Description |
 |---|---|---|
 | `OnServerEvent` | player, ... | Fires on the server when a client calls FireServer. |
-| `OnClientEvent` | ... | Fires on the client when the server calls FireClient / FireAllClients |
+| `OnClientEvent` | ... | Fires on the client when the server calls FireClient or FireAllClients |
 
 ## Vortex Studio 0.3.4 notes
 
@@ -63,9 +63,9 @@ end)
   Editor-authored remotes dispatch from `FireServer` to `OnServerEvent`;
   script-created remotes were visible to clients but did not dispatch in the
   tested runtime.
-- The first `OnServerEvent` value is currently a numeric connection id, not a
+- The first `OnServerEvent` value is currently a numeric connection ID, not a
   `Player`. The server can enumerate Players through `GetPlayers()`, but no
-  public mapping from this id to its Player, Character, or Humanoid is known.
+  public mapping from this ID to the corresponding Player, Character, or Humanoid is known.
 - Remote arguments cannot currently contain Instances, including `LocalPlayer`
   or a Character.
 - `FireClient`, `FireAllClients`, and `OnClientEvent` are exposed, but their

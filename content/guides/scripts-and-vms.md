@@ -20,7 +20,7 @@ part.Parent = game.Workspace
 
 > The source code stored within a script is not executed directly by the script container. Instead, the engine passes the source code to the Luau runtime, where it is compiled and executed by the Luau Virtual Machine (VM).
 
-> Currently supported script types:
+> The currently supported script types are:
 
 * `LocalScript`
 * `Script`
@@ -43,4 +43,4 @@ part.Parent = game.Workspace
 
 > Vortex uses **Bevy** as its underlying engine layer.
 
-> Vortex exposes engine functionality to Luau through its scripting APIs, allowing scripts to interact with game objects and engine systems.
+> Vortex exposes engine functionality to Luau through its scripting APIs, allowing scripts to interact with game objects and other engine systems.
