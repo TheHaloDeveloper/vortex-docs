@@ -1,6 +1,6 @@
 ---
 title: RaycastResult
-description: A three-dimensional vector
+description: Stores result from a raycast operation.
 ---
 
 <!-- 
