@@ -18,6 +18,7 @@ A reference for the keyboard shortcuts and mouse controls in Vortex Studio's edi
 | Shortcut | Action |
 | --- | --- |
 | `Ctrl` + `Z` | Undo |
+| `Ctrl` + `Y` ***or*** `Ctrl` + `Shift` + `Z` | Redo |
 | `Ctrl` + `C` | Copy selected |
 | `Ctrl` + `V` | Paste copied parts |
 | `Ctrl` + `D` | Duplicate selected nodes/parts |
