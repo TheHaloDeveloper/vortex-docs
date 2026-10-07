@@ -55,7 +55,7 @@ A model's position is automatically set to the mathematical average of all its c
 <br/>
 
 ## Images
-<img src="../../../images/modelCenterExample1.png" alt="Model w/ Move Tool" width="400"/>
+<img src="../../../images/examples/modelCenterExample1.png" alt="Model w/ Move Tool" width="400"/>
 
 ## Testing Notes
 
